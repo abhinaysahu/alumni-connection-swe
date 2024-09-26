@@ -7,7 +7,6 @@ import Footer from './components/Footer.jsx';
 import Contact from "./pages/Contact.jsx";
 import {Route, Routes} from "react-router-dom";
 import About from './pages/About.jsx';
-import {Routes,Route} from "react-router-dom";
 import Home from './pages/Home.jsx';
 
 function App() {
@@ -21,6 +20,7 @@ function App() {
           <Route path='/' element={<Home/>}></Route>
           <Route path='/about' element={<About/>}></Route>
           <Route path='/faqs' element={<FAQ/>}></Route>
+          <Route path='/contact' element={<Contact/>}></Route>
         </Routes>
         <Footer></Footer>
         </div>
