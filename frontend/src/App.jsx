@@ -4,6 +4,8 @@ import Header from "./components/Header.jsx";
 import FAQ from "./pages/FAQ.jsx";
 import Navbar from './components/Navbar.jsx';
 import Footer from './components/Footer.jsx';
+import Contact from "./pages/Contact.jsx";
+import {Route, Routes} from "react-router-dom";
 import About from './pages/About.jsx';
 import {Routes,Route} from "react-router-dom";
 import Home from './pages/Home.jsx';
