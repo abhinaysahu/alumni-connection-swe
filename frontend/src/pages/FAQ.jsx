@@ -4,7 +4,7 @@ import { Accordion } from "flowbite-react";
 export default function FAQ() {
     return<>
             <Header name={"FAQs"}></Header>
-            <div id={"faq-section"}>
+            <div  className="flex-grow" id={"faq-section"}>
                 <Accordion className={"m-20"}>
                     <Accordion.Panel>
                         <Accordion.Title>What is SWE?</Accordion.Title>
