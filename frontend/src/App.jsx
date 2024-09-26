@@ -6,20 +6,25 @@ import Navbar from './components/Navbar.jsx';
 import Footer from './components/Footer.jsx';
 import Contact from "./pages/Contact.jsx";
 import {Route, Routes} from "react-router-dom";
+import About from './pages/About.jsx';
+import Home from './pages/Home.jsx';
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div>
+    <>
+        <div className="min-h-screen flex flex-col">
         <Navbar></Navbar>
         <Routes>
-            <Route path={"/faq"} element={<FAQ/>} />
-            <Route path={"/contact"} element={<Contact/>} />
-            <Route path={"/about"} element={<FAQ/>} />
+          <Route path='/' element={<Home/>}></Route>
+          <Route path='/about' element={<About/>}></Route>
+          <Route path='/faqs' element={<FAQ/>}></Route>
+          <Route path='/contact' element={<Contact/>}></Route>
         </Routes>
         <Footer></Footer>
-    </div>
+        </div>
+    </>
   )
 }
 
