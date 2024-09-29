@@ -3,7 +3,7 @@ import { Label, TextInput, Textarea, Button } from "flowbite-react";
 
 export default function Contact() {
     return <div >
-        <Header name={"Contact"}/>
+        <Header name={"Contactdssss"}/>
 
         <div id={"main-container"} className={"mx-[2rem] lg:mx-[12rem] mt-10 flex-grow md:mx-[3rem]"}>
             <div className={"font-semibold text-4xl"}>Get in Touch</div>
