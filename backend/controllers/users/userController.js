@@ -1,6 +1,7 @@
 const db = require("../../config");
 const {generateUniqueId} = require("../../utills/generateId");
 const User = require("../../models/userModel");
+const bcrypt = require('bcryptjs');
 
 const addNewUser = async (req, res) => {
   try {
@@ -14,6 +15,8 @@ const addNewUser = async (req, res) => {
     const userID = generateUniqueId();
     data["userId"] = userID;
     data["userStatus"] = "Pending";
+    const encryptedPassword = await bcrypt.hash(data["password"], 10);
+    data["password"] = encryptedPassword;
     await db.collection("User").doc(userID).set(data);
 
     res.status(200).send("User creation request sent successfully");
