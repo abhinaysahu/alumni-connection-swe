@@ -8,6 +8,7 @@ import Contact from "./pages/Contact.jsx";
 import {Route, Routes} from "react-router-dom";
 import About from './pages/About.jsx';
 import Home from './pages/Home.jsx';
+import Signup from './pages/Signup.jsx';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -15,14 +16,16 @@ function App() {
   return (
     <>
         <div className="min-h-screen flex flex-col">
-        <Navbar></Navbar>
+        {/* <Navbar></Navbar> */}
         <Routes>
           <Route path='/' element={<Home/>}></Route>
           <Route path='/about' element={<About/>}></Route>
           <Route path='/faqs' element={<FAQ/>}></Route>
           <Route path='/contact' element={<Contact/>}></Route>
+          <Route path='/signup' element={<Signup/>}></Route>
         </Routes>
-        <Footer></Footer>
+        {/* <Footer></Footer> */}
+       
         </div>
     </>
   )
