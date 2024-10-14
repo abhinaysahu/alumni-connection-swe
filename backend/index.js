@@ -5,6 +5,10 @@ const usersRouter = require("./routes/user/userRoute");
 const postRouter = require("./routes/post/postRoute");
 const app = express();
 
+if(process.env.NODE_ENV !== 'production') {
+  require('dotenv').config({ path: `./config/config.env` });
+}
+
 app.use(express.json());
 app.use(cors());
 app.use("/jobs", jobRouter);
