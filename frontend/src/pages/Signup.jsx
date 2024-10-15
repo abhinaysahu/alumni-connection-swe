@@ -1,3 +1,4 @@
+import Sign_Right from "../components/Sign_Right";
 import SignupForm from "../components/SignupForm";
 
 export  default function(){
