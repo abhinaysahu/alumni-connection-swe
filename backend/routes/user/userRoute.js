@@ -8,6 +8,6 @@ router.get('/getUser/:userId', getUserDetailsByID);
 router.get('/getAllUsers/', getAllUsersDetails);
 router.post('/updateUser/:userId', updateUserDetails);
 router.get('/userRequests', getUserRequests);
-router.get('/login', login)
+router.post('/login', login)
 
 module.exports = router;

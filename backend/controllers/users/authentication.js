@@ -11,15 +11,15 @@ exports.login = async (req, res) => {
 
         let user = await collectionRef.where("email" ,"==" , email).get();
 
-        if(!user){
-            return res.status(404).json({
+        console.log(user);
+        if(user.docs.length === 0){
+            return res.status(401).json({
                 success: false,
                 msg: "User not found"
             })
         }
         user = user.docs[0];
         user = user.data();
-        console.log(user);
 
         const passwordMatched = await bcrypt.compare(password, user.password);
 
