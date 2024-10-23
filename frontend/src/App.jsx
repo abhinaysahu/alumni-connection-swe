@@ -11,15 +11,18 @@ import Home from './pages/Home.jsx';
 import Signup from './pages/Signup.jsx';
 import Signin from './pages/Signin.jsx';
 import PostJob from './pages/postJob.jsx';
+import UserCard from "./components/UserCard.jsx";
+import NewUserRequests from "./pages/NewUserRequests.jsx";
 
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
         <div className="min-h-screen flex flex-col">
-        {/* <Navbar></Navbar> */}
+         {/*<Navbar></Navbar>*/}
+            <NewUserRequests></NewUserRequests>
+         {/*   <UserCard name={"Aman Sheoran"} roll={"234CA007"} batch={"2026"} company={"DE Shaw"} contact={"8930460660"} email={"amansheo@gmail.com"} jobTitle={"SDE"} linkedin={"https://www.linkedin.com/in/amansheoran/"}></UserCard>*/}
         <Routes>
           <Route path='/' element={<Home/>}></Route>
           <Route path='/about' element={<About/>}></Route>
@@ -29,11 +32,11 @@ function App() {
           <Route path='/signin' element={<Signin/>}></Route>
           <Route path='/postjob' element={<PostJob/>}></Route>
         </Routes>
-        {/* <Footer></Footer> */}
+         <Footer></Footer>
        
         </div>
     </>
   )
 }
 
-export default App
+export default App;
