@@ -1,39 +1,39 @@
-import { useState } from 'react'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
 import Header from "./components/Header.jsx";
 import FAQ from "./pages/FAQ.jsx";
-import Navbar from './components/Navbar.jsx';
-import Footer from './components/Footer.jsx';
+import Navbar from "./components/Navbar.jsx";
+import Footer from "./components/Footer.jsx";
 import Contact from "./pages/Contact.jsx";
-import {Route, Routes} from "react-router-dom";
-import About from './pages/About.jsx';
-import Home from './pages/Home.jsx';
-import Signup from './pages/Signup.jsx';
-import Signin from './pages/Signin.jsx';
-import PostJob from './pages/postJob.jsx';
-
+import { Route, Routes } from "react-router-dom";
+import About from "./pages/About.jsx";
+import Home from "./pages/Home.jsx";
+import Signup from "./pages/Signup.jsx";
+import Signin from "./pages/Signin.jsx";
+import PostJob from "./pages/postJob.jsx";
+import ProfileSettings from "./pages/ProfileSettings.jsx";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
     <>
-        <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col">
         {/* <Navbar></Navbar> */}
         <Routes>
-          <Route path='/' element={<Home/>}></Route>
-          <Route path='/about' element={<About/>}></Route>
-          <Route path='/faqs' element={<FAQ/>}></Route>
-          <Route path='/contact' element={<Contact/>}></Route>
-          <Route path='/signup' element={<Signup/>}></Route>
-          <Route path='/signin' element={<Signin/>}></Route>
-          <Route path='/postjob' element={<PostJob/>}></Route>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/about" element={<About />}></Route>
+          <Route path="/faqs" element={<FAQ />}></Route>
+          <Route path="/contact" element={<Contact />}></Route>
+          <Route path="/signup" element={<Signup />}></Route>
+          <Route path="/signin" element={<Signin />}></Route>
+          <Route path="/postjob" element={<PostJob />}></Route>
+          <Route path="/profilesettings" element={<ProfileSettings />}></Route>
         </Routes>
         {/* <Footer></Footer> */}
-       
-        </div>
+      </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
