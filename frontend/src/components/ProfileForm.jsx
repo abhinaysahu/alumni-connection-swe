@@ -80,14 +80,7 @@ export default function ProfileForm() {
         <div className="mb-2 block">
           <Label htmlFor="bio" value="Bio" />
         </div>
-        <Textarea
-          id="bio"
-          placeholder=""
-          rows={4}
-          {...register("bio", {
-            required: "this is required",
-          })}
-        />
+        <Textarea id="bio" placeholder="" rows={4} {...register("bio")} />
       </div>
 
       {/* Status */}
@@ -124,7 +117,7 @@ export default function ProfileForm() {
         <p>{errors.skills?.message}</p>
       </div>
       <div className="col-start-1 col-end-2 row-start-6 row-end-7 mt-3">
-        <Button type="submit">Sign up</Button>
+        <Button type="submit">Update</Button>
       </div>
     </form>
   );

@@ -18,7 +18,7 @@ export default function ProfileSettings() {
           </div>
 
           <div className="flex  h-[82vh] justify-center mt-5">
-            <div className=" w-2/3 h-4/5 rounded-md bg-slate-50 ">
+            <div className=" w-2/3 h-[90%] rounded-md bg-slate-50 ">
               <div className="h-12 w-full bg-slate-900 text-white rounded-t-lg pl-10 flex items-center font-bold">
                 Profile Info
               </div>
