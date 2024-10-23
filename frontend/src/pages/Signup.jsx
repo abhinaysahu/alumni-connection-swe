@@ -2,7 +2,7 @@ import Sign_Right from "../components/Sign_Right";
 import SignupForm from "../components/SignupForm";
 
 export  default function(){
-  return   <div className="flex grow">
+  return   <div className="flex  mb-5 w-full">
   {/* Left half */}
   <div className="w-1/2 ">
     {/* Content for the left half */}
