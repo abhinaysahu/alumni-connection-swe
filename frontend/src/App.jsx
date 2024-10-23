@@ -10,6 +10,8 @@ import About from './pages/About.jsx';
 import Home from './pages/Home.jsx';
 import Signup from './pages/Signup.jsx';
 import Signin from './pages/Signin.jsx';
+import PostJob from './pages/postJob.jsx';
+
 
 function App() {
   const [count, setCount] = useState(0)
@@ -25,6 +27,7 @@ function App() {
           <Route path='/contact' element={<Contact/>}></Route>
           <Route path='/signup' element={<Signup/>}></Route>
           <Route path='/signin' element={<Signin/>}></Route>
+          <Route path='/postjob' element={<PostJob/>}></Route>
         </Routes>
         {/* <Footer></Footer> */}
        
