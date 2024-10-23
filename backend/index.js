@@ -6,7 +6,7 @@ const postRouter = require("./routes/post/postRoute");
 const app = express();
 
 const corsOptions = {
-  origin: 'http://localhost:5173', // Allow only this origin
+  origin: ['http://localhost:5173', 'http://localhost:5174'], // Allow only this origin
   // or use an array for multiple origins:
   // origin: ['http://example1.com', 'http://example2.com'],
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods

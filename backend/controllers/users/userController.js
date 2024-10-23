@@ -169,10 +169,32 @@ const getUserRequests = async (req, res) => {
   }
 }
 
+const acceptUserRequest = async (req, res) => {
+  const id = req.params.id;
+
+  const docRef = db.collection("User").doc(id);
+
+  await docRef.update({
+    userStatus: "Approved",
+  })
+
+}
+
+const declineUserRequest = async (req, res) => {
+  const id = req.params.id;
+
+  const docRef = db.collection("User").doc(id);
+
+  await docRef.delete();
+
+}
+
 module.exports = {
   addNewUser,
   getUserDetailsByID,
   getAllUsersDetails,
   updateUserDetails,
-  getUserRequests
+  getUserRequests,
+  acceptUserRequest,
+  declineUserRequest
 }
