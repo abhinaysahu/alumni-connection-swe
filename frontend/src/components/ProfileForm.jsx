@@ -89,14 +89,15 @@ export default function ProfileForm() {
           <Label htmlFor="status" value="Status" />
         </div>
         <Select
-          id="status"
+          id="currentWorkingStatus"
           required
-          {...register("status", {
+          {...register("currentWorkingStatus", {
             required: "this is required",
           })}
         >
           <option>Student</option>
-          <option>Alumni</option>
+          <option>Working</option>
+          <option>Not working</option>
         </Select>
       </div>
 
