@@ -4,7 +4,7 @@ import nitklogo from "../assets/nitk.svg";
 export default function Navbar() {
   return (
     <>
-      <nav className="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
+      <nav className="   bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600  mb-100">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2">
           {/* Logo */}
           <img src={nitklogo} className="h-16" alt="nitk logo" />

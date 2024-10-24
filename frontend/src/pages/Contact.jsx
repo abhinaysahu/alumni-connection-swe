@@ -2,10 +2,10 @@ import Header from "../components/Header.jsx";
 import { Label, TextInput, Textarea, Button } from "flowbite-react";
 
 export default function Contact() {
-    return <div >
+    return <div  className="">
         <Header name={"Contact"}/>
 
-        <div id={"main-container"} className={"mx-[2rem] lg:mx-[12rem] mt-10 flex-grow md:mx-[3rem]"}>
+        <div id={"main-container"} className={"mx-[2rem] lg:mx-[8rem] mt-10 flex-grow md:mx-[3rem]"}>
             <div className={"font-semibold text-4xl"}>Get in Touch</div>
             <p className={"mt-7 text-gray-500"}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi debitis adipisci repellat ex accusamus quia quaerat magnam? Voluptas officiis tempora error officia beatae nemo tempore, dolorem doloribus aliquam sequi blanditiis?</p>
             <div id={"form-container"}>
