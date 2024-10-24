@@ -3,10 +3,11 @@ const{ addNewUser, getUserDetailsByID, getAllUsersDetails, updateUserDetails, ge
     declineUserRequest
 } = require('../../controllers/users/userController');
 const { login } = require('../../controllers/users/authentication');
+const {authenticate} = require("../../middlewares/auth");
 const router = express.Router();
 
 router.post('/addUser', addNewUser);
-router.get('/getUser/:userId', getUserDetailsByID);
+router.get('/getUser/:userId', authenticate, getUserDetailsByID);
 router.get('/getAllUsers/', getAllUsersDetails);
 router.post('/updateUser/:userId', updateUserDetails);
 router.post('/userRequests', getUserRequests);

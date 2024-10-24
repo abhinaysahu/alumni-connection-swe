@@ -20,11 +20,11 @@ function App() {
   return (
     <>
         <div className="min-h-screen flex flex-col">
-         {/*<Navbar></Navbar>*/}
-            <NewUserRequests></NewUserRequests>
+         <Navbar></Navbar>
          {/*   <UserCard name={"Aman Sheoran"} roll={"234CA007"} batch={"2026"} company={"DE Shaw"} contact={"8930460660"} email={"amansheo@gmail.com"} jobTitle={"SDE"} linkedin={"https://www.linkedin.com/in/amansheoran/"}></UserCard>*/}
         <Routes>
           <Route path='/' element={<Home/>}></Route>
+          <Route path='/admin' element={<NewUserRequests/>}></Route>
           <Route path='/about' element={<About/>}></Route>
           <Route path='/faqs' element={<FAQ/>}></Route>
           <Route path='/contact' element={<Contact/>}></Route>

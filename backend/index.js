@@ -3,6 +3,7 @@ const cors = require("cors");
 const jobRouter = require("./routes/job/jobRoute");
 const usersRouter = require("./routes/user/userRoute");
 const postRouter = require("./routes/post/postRoute");
+const cookieParser = require("cookie-parser");
 const app = express();
 
 const corsOptions = {
@@ -21,6 +22,7 @@ if(process.env.NODE_ENV !== 'production') {
 }
 
 app.use(express.json());
+app.use(cookieParser());
 app.use(cors(corsOptions));
 app.use("/jobs", jobRouter);
 app.use("/users", usersRouter);

@@ -1,6 +1,6 @@
 export default function Footer(){
     return <>
-<footer class=" bottom-0 left-0 z-20 w-full p-4 bg-blue-700 border-t border-gray-200 shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800 dark:border-gray-600">
+<footer class="fixed bottom-0 left-0 z-20 w-full p-4 bg-blue-700 border-t border-gray-200 shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800 dark:border-gray-600">
     <span class="text-sm text-white sm:text-center dark:text-gray-400"><a href="https://nitk.ac.in/" class="hover:underline">MCA 2026 </a>. All Rights Reserved.
     </span>
     <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-white dark:text-gray-400 sm:mt-0">

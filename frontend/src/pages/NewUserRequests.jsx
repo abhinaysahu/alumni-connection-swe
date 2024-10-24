@@ -36,9 +36,9 @@ export default function NewUserRequests() {
 
     return <>
         <div id={"heading"} className={"text-5xl font-bold m-10"}>Pending Requests</div>
-        <div className={"flex justify-around m-10"}>
+        <div className={"flex justify-around m-10 flex-nowrap"}>
             {requests.map((request) => (
-                <UserCard userId={request.userId} name={request.name}  batch={request.passoutYear} company={request.currPos} contact={request.contactNo} email={"amansheo@gmail.com"} jobTitle={request.currentCompany} linkedin={request.linkedinUrl} onDelete={handleDelete}></UserCard>
+                <UserCard userId={request.userId} name={request.name}  batch={request.passoutYear} company={request.currPos} contact={request.contactNo} email={request.email} jobTitle={request.currentCompany} linkedin={request.linkedinUrl} onDelete={handleDelete}></UserCard>
             ))}
         </div>
     </>

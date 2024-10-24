@@ -21,6 +21,13 @@ exports.login = async (req, res) => {
         user = user.docs[0];
         user = user.data();
 
+        if(user.userStatus !== "Approved"){
+            return res.status(401).json({
+                success: false,
+                msg: "Wait for admin to approve your account"
+            })
+        }
+
         const passwordMatched = await bcrypt.compare(password, user.password);
 
         if(passwordMatched){
