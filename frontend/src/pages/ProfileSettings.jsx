@@ -4,8 +4,8 @@ import ProfileForm from "../components/ProfileForm";
 
 export default function ProfileSettings() {
   return (
-    <div className="flex gap-2 h-full">
-      <div className="bg-slate-50 flex-auto w-2/12 pt-12 ">
+    <div className="flex gap-2 h-full  ">
+      <div className="bg-slate-50 flex-auto w-[10%] pt-12 ">
         <SideMenu />
       </div>
       <div className="bg-slate-50 flex-auto w-9/12 h-screen">

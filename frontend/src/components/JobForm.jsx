@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 export default function JobForm() {
     const { register, handleSubmit, formState: { errors } } = useForm();
     return (
-        <form className=" w-9/10 grid grid-cols-2 grid-rows-8 gap-1 m-2" onSubmit={handleSubmit((data) => {
+        <form className=" pb-2 w-9/10 grid grid-cols-2  gap-1 m-2" onSubmit={handleSubmit((data) => {
             console.log(data);
         })}
         >
@@ -87,7 +87,7 @@ export default function JobForm() {
                 <div className="mb-2 block">
                     <Label htmlFor="description" value="Description" />
                 </div>
-                <Textarea id="comment" placeholder="" rows={6} {...register("description", {
+                <Textarea id="comment" placeholder="" rows={4} {...register("description", {
                         required: "this is required",
                     })}  />
             </div>
@@ -102,7 +102,7 @@ export default function JobForm() {
                     })}  />
             </div>
                     <div className="col-start-1 col-end-2 row-start-8 row-end-9 mt-3"> 
-            <Button  type="submit">Sign up</Button>
+            <Button  type="submit">Post </Button>
             </div>   
         </form>
 
