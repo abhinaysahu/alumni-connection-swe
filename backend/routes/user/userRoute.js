@@ -2,7 +2,7 @@ const express = require('express');
 const{ addNewUser, getUserDetailsByID, getAllUsersDetails, updateUserDetails, getUserRequests, acceptUserRequest,
     declineUserRequest
 } = require('../../controllers/users/userController');
-const { login } = require('../../controllers/users/authentication');
+const { login, checkToken} = require('../../controllers/users/authentication');
 const {authenticate} = require("../../middlewares/auth");
 const router = express.Router();
 
@@ -14,5 +14,6 @@ router.post('/userRequests', getUserRequests);
 router.post('/login', login)
 router.put('/accept/:id', acceptUserRequest)
 router.put('/decline/:id', declineUserRequest)
+router.get('/auth/check', checkToken)
 
 module.exports = router;

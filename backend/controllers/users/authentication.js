@@ -11,7 +11,6 @@ exports.login = async (req, res) => {
 
         let user = await collectionRef.where("email" ,"==" , email).get();
 
-        console.log(user);
         if(user.docs.length === 0){
             return res.status(401).json({
                 success: false,
@@ -41,6 +40,8 @@ exports.login = async (req, res) => {
                 secure : true,
                 sameSite: "none"
             }
+
+            console.log("success");
 
             return res.status(201).cookie('token',token,options).json({
                 success: true,
@@ -75,5 +76,21 @@ exports.logout = async (req, res) => {
             success: false,
             msg: err.message
         })
+    }
+}
+
+exports.checkToken = async (req, res) => {
+    const token = req.cookies.token;
+
+    if (!token) {
+        return res.status(401).json({ authenticated: false });
+    }
+
+    try {
+        // Verify the token (e.g., using jwt.verify)
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        return res.status(200).json({ authenticated: true });
+    } catch (err) {
+        return res.status(500).json({authenticated: false});
     }
 }
