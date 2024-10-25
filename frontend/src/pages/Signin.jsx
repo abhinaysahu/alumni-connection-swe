@@ -1,3 +1,4 @@
+import Sign_Right from "../components/Sign_Right";
 import SinginForm from "../components/SigninForm";
 
 export default function (){
@@ -16,6 +17,7 @@ export default function (){
 
   {/* Right half */}
   <div className="w-1/2 ">
+    <Sign_Right />
   {/* Add background image with blend mode */} 
   </div>
 </div>
