@@ -43,7 +43,7 @@ exports.login = async (req, res) => {
 
             console.log("success");
 
-            return res.status(201).cookie('token',token,options).json({
+            return res.status(200).cookie('token',token,options).json({
                 success: true,
                 msg: "Logged in",
                 user,
@@ -80,7 +80,8 @@ exports.logout = async (req, res) => {
 }
 
 exports.checkToken = async (req, res) => {
-    const token = req.cookies.token;
+    const {token} = req.cookies;
+    // console.log("Token"+  token);
 
     if (!token) {
         return res.status(401).json({ authenticated: false });

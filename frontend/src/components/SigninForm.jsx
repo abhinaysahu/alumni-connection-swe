@@ -1,14 +1,17 @@
-import React ,{ useState } from "react";
+import React, {useContext, useState} from "react";
 import { Button, Checkbox, Label, TextInput } from "flowbite-react";
 import {useForm} from "react-hook-form";
 import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
+import {authContext} from "../auth.jsx";
 
 
 export default function SinginForm(){
   const {register,handleSubmit,formState:{errors} }  = useForm();
   const navigate = useNavigate();
   const [loginError, setLoginError] = useState('');
+  const {isAuthenticated, setIsAuthenticated} = useContext(authContext);
+  // const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   return (
       <>
@@ -19,9 +22,13 @@ export default function SinginForm(){
             password: data.password
           }, {withCredentials: true});  // This is important
 
+          // console.log("Before delay")
+          // await delay(1000);
+          // console.log("After delay")
           // If login is successful, redirect to dashboard
           setLoginError('');  //clear any existing errors
-          navigate("/about")
+          setIsAuthenticated(true);
+          navigate("/")
         } catch (error) {
           console.error('Login failed:', error);
           // Set error message based on the response

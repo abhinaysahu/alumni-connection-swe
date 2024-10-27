@@ -45,20 +45,6 @@ export default function SideMenu() {
             <Sidebar.Item  className={isActive("/myjobs") ? "text-white bg-blue-700 hover:bg-blue-700" : "text-gray-900 hover:bg-blue-400"} href="/myjobs" icon={()=>(<FaSuitcase className={(isActive("/myjobs")? "text-white":"") + "w-5 h-4" }/>)}>
               My Jobs
             </Sidebar.Item>
-            <Sidebar.Item  className={isActive("/createevent") ? "text-white bg-blue-700 hover:bg-blue-700" : "text-gray-900 hover:bg-blue-400"} href="createevent"  icon={() => (
-                    <MdCreateNewFolder
-                      className={(isActive("/createevent") ? "text-white" : "") + "w-5 h-5"}
-                    />
-                  )}>
-              Create an event
-            </Sidebar.Item>
-            <Sidebar.Item  className={isActive("/myevents") ? "text-white bg-blue-700 hover:bg-blue-700" : "text-gray-900 hover:bg-blue-400"} href="#"  icon={() => (
-                    <MdEventNote
-                      className={(isActive("/myevents") ? "text-white" : "") + "w-5 h-5"}
-                    />
-                  )}>
-              My Events
-            </Sidebar.Item>
             <Sidebar.Item  className={isActive("/profilesettings") ? "text-white bg-blue-700 hover:bg-blue-700" : "text-gray-900 hover:bg-blue-400"} href="/profilesettings"  icon={() => (
                     <IoMdSettings
                       className={(isActive("/profilesettings") ? "text-white" : "") + "w-5 h-5"}
