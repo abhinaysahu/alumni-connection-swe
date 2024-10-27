@@ -15,6 +15,7 @@ import UserCard from "./components/UserCard.jsx";
 import NewUserRequests from "./pages/NewUserRequests.jsx";
 import ProfileSettings from "./pages/ProfileSettings.jsx";
 import ChangePassword from "./pages/ChangePassword.jsx";
+import MyJobs from "./pages/MyJobs.jsx";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route path="/postjob" element={<PostJob />}></Route>
           <Route path="/profilesettings" element={<ProfileSettings />}></Route>
           <Route path="/changepassword" element={<ChangePassword />}></Route>
+          <Route path='/myjobs' element={<MyJobs/>}></Route>
         </Routes>
         <Footer></Footer>
       </div>
