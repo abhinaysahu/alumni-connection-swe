@@ -9,7 +9,7 @@ export default function PostJob() {
 
         <div className="flex gap-2 h-full  ">
 
-            <div className="bg-slate-50 flex-auto w-[10vw] pt-10 ">
+            <div className="bg-slate-50 flex-auto w-[10%] pt-10 ">
                 <SideMenu />
             </div>
             <div className=" bg-slate-50 flex-auto w-9/12">
