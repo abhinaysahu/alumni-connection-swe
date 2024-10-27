@@ -14,6 +14,7 @@ import PostJob from './pages/postJob.jsx';
 import UserCard from "./components/UserCard.jsx";
 import NewUserRequests from "./pages/NewUserRequests.jsx";
 import ProfileSettings from './pages/ProfileSettings.jsx';
+import MyJobs from "./pages/MyJobs.jsx";
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
           <Route path='/signin' element={<Signin/>}></Route>
           <Route path='/postjob' element={<PostJob/>}></Route>
           <Route path='/profilesettings' element={<ProfileSettings/>}></Route>
+          <Route path='/myjobs' element={<MyJobs/>}></Route>
         </Routes>
          <Footer></Footer>
        
