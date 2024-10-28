@@ -32,7 +32,7 @@ export default function NewUserRequests() {
         }catch (e) {
 
         }
-    })
+    }, [])
 
     return <>
         <div id={"heading"} className={"text-5xl font-bold m-10"}>Pending Requests</div>
