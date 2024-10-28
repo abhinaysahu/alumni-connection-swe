@@ -10,10 +10,11 @@ import About from './pages/About.jsx';
 import Home from './pages/Home.jsx';
 import Signup from './pages/Signup.jsx';
 import Signin from './pages/Signin.jsx';
-import PostJob from './pages/postJob.jsx';
+import PostJob from './pages/PostJob.jsx';
 import UserCard from "./components/UserCard.jsx";
 import NewUserRequests from "./pages/NewUserRequests.jsx";
 import ProfileSettings from './pages/ProfileSettings.jsx';
+import Alumni from './pages/Alumni.jsx';
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
           <Route path='/signin' element={<Signin/>}></Route>
           <Route path='/postjob' element={<PostJob/>}></Route>
           <Route path='/profilesettings' element={<ProfileSettings/>}></Route>
+          <Route path='/alumni' element={<Alumni/>}></Route>
         </Routes>
          <Footer></Footer>
        
