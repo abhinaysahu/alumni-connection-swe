@@ -17,6 +17,7 @@ import ProfileSettings from './pages/ProfileSettings.jsx';
 import {authContext} from "./auth.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import axios from "axios";
+import Dashboard from './pages/Dashboard.jsx';
 
 
 function App(){
@@ -53,6 +54,7 @@ function App(){
               <Route path='/signin' element={<Signin/>}></Route>
               <Route path='/postjob' element={<ProtectedRoute><PostJob/></ProtectedRoute>}></Route>
               <Route path='/profilesettings' element={<ProtectedRoute><ProfileSettings/></ProtectedRoute>}></Route>
+              <Route path='/dashboard' element={<Dashboard/>}></Route>
             </Routes>
              <Footer></Footer>
 
