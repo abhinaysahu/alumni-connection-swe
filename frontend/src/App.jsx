@@ -14,6 +14,7 @@ import PostJob from "./pages/postJob.jsx";
 import UserCard from "./components/UserCard.jsx";
 import NewUserRequests from "./pages/NewUserRequests.jsx";
 import ProfileSettings from './pages/ProfileSettings.jsx';
+import Alumni from './pages/Alumni.jsx';
 import {authContext} from "./auth.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import axios from "axios";
