@@ -2,15 +2,15 @@ import {useState, useContext, useEffect} from 'react'
 import './App.css'
 import Header from "./components/Header.jsx";
 import FAQ from "./pages/FAQ.jsx";
-import Navbar from './components/Navbar.jsx';
-import Footer from './components/Footer.jsx';
+import Navbar from "./components/Navbar.jsx";
+import Footer from "./components/Footer.jsx";
 import Contact from "./pages/Contact.jsx";
-import {Route, Routes} from "react-router-dom";
-import About from './pages/About.jsx';
-import Home from './pages/Home.jsx';
-import Signup from './pages/Signup.jsx';
-import Signin from './pages/Signin.jsx';
-import PostJob from './pages/postJob.jsx';
+import { Route, Routes } from "react-router-dom";
+import About from "./pages/About.jsx";
+import Home from "./pages/Home.jsx";
+import Signup from "./pages/Signup.jsx";
+import Signin from "./pages/Signin.jsx";
+import PostJob from "./pages/postJob.jsx";
 import UserCard from "./components/UserCard.jsx";
 import NewUserRequests from "./pages/NewUserRequests.jsx";
 import ProfileSettings from './pages/ProfileSettings.jsx';
@@ -59,7 +59,7 @@ function App(){
             </div>
         </authContext.Provider>
     </>
-  )
+  );
 }
 
 export default App;
