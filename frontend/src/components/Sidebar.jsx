@@ -7,7 +7,7 @@ import { MdCreateNewFolder } from "react-icons/md";
 import { MdEventNote } from "react-icons/md";
 import { IoMdSettings } from "react-icons/io";
 import { LuLogOut } from "react-icons/lu";
-import { useLocation } from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 
 import {
   HiArrowSmRight,
@@ -18,10 +18,26 @@ import {
   HiUser,
   HiViewBoards,
 } from "react-icons/hi";
+import {useContext} from "react";
+import axios from "axios";
+import {authContext} from "../auth.jsx";
 export default function SideMenu() {
     const location = useLocation();
+    const navigate = useNavigate();
+    const {isAuthenticated, setIsAuthenticated} = useContext(authContext);
 
     const isActive = (path) => location.pathname === path;
+
+    const logout = async () => {
+        try{
+           const response = await axios.get("http://localhost:8080/users/logout");
+           console.log(response.data);
+           setIsAuthenticated(false);
+           navigate('/signin');
+        }catch (e) {
+            console.log(e);
+        }
+    }
   return (
     <>
       <Sidebar  className=" fixed left-0 z-20"aria-label="Sidebar with content separator example">
@@ -35,46 +51,34 @@ export default function SideMenu() {
                   )}>
               Dashboard
             </Sidebar.Item>
-            <Sidebar.Item  className={isActive("/postjob") ? "text-white bg-blue-700 hover:bg-blue-700" : "text-gray-900 hover:bg-blue-400"} href="/postjob" icon={() => (
+            <Sidebar.Item  className={isActive("/postjob") ? "text-white bg-blue-700 hover:bg-blue-700" : "text-gray-900 hover:bg-blue-400"} icon={() => (
                     <MdPostAdd
                       className={(isActive("/postjob") ? "text-white" : "") + "w-5 h-5"}
                     />
                   )}>
-              Post a Job
+                <Link to={"/postjob"}>Post a Job</Link>
             </Sidebar.Item>
             <Sidebar.Item  className={isActive("/myjobs") ? "text-white bg-blue-700 hover:bg-blue-700" : "text-gray-900 hover:bg-blue-400"} href="/myjobs" icon={()=>(<FaSuitcase className={(isActive("/myjobs")? "text-white":"") + "w-5 h-4" }/>)}>
               My Jobs
             </Sidebar.Item>
-            <Sidebar.Item  className={isActive("/createevent") ? "text-white bg-blue-700 hover:bg-blue-700" : "text-gray-900 hover:bg-blue-400"} href="createevent"  icon={() => (
-                    <MdCreateNewFolder
-                      className={(isActive("/createevent") ? "text-white" : "") + "w-5 h-5"}
-                    />
-                  )}>
-              Create an event
-            </Sidebar.Item>
-            <Sidebar.Item  className={isActive("/myevents") ? "text-white bg-blue-700 hover:bg-blue-700" : "text-gray-900 hover:bg-blue-400"} href="#"  icon={() => (
-                    <MdEventNote
-                      className={(isActive("/myevents") ? "text-white" : "") + "w-5 h-5"}
-                    />
-                  )}>
-              My Events
-            </Sidebar.Item>
-            <Sidebar.Item  className={isActive("/profilesettings") ? "text-white bg-blue-700 hover:bg-blue-700" : "text-gray-900 hover:bg-blue-400"} href="/profilesettings"  icon={() => (
+            <Sidebar.Item  className={isActive("/profilesettings") ? "text-white bg-blue-700 hover:bg-blue-700" : "text-gray-900 hover:bg-blue-400"}  icon={() => (
                     <IoMdSettings
                       className={(isActive("/profilesettings") ? "text-white" : "") + "w-5 h-5"}
                     />
                   )}>
-              Profile Settings
+
+                <Link to={"/profilesettings"}>Profile Settings</Link>
             </Sidebar.Item>
-            <Sidebar.Item  className={isActive("/changepassword") ? "text-white bg-blue-700 hover:bg-blue-700" : "text-gray-900 hover:bg-blue-400"} href="#" icon={() => (
+            <Sidebar.Item  className={isActive("/changepassword") ? "text-white bg-blue-700 hover:bg-blue-700" : "text-gray-900 hover:bg-blue-400"} icon={() => (
                     <HiTable
                       className={(isActive("/changepassword") ? "text-white" : "") + "w-5 h-5"}
                     />
                   )}>
-              Change Password
+
+                <Link to={"/changepassword"}>Change Password</Link>
             </Sidebar.Item>
 
-            <Sidebar.Item className={isActive("/") ? "text-white bg-blue-700 hover:bg-blue-700" : "text-gray-900 hover:bg-blue-400"} href="/" icon={() => (
+            <Sidebar.Item onClick={logout} className={isActive("/") ? "text-white bg-blue-700 hover:bg-blue-700 cursor-pointer" : "text-gray-900 hover:bg-blue-400 cursor-pointer"} icon={() => (
                     <LuLogOut
                       className={(isActive("/") ? "text-white" : "") + "w-5 h-5"}
                     />
