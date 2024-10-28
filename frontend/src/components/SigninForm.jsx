@@ -1,34 +1,46 @@
-import React ,{ useState } from "react";
+import React, {useContext, useState} from "react";
 import { Button, Checkbox, Label, TextInput } from "flowbite-react";
 import {useForm} from "react-hook-form";
 import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
+import {authContext} from "../auth.jsx";
 
 
 export default function SinginForm(){
   const {register,handleSubmit,formState:{errors} }  = useForm();
   const navigate = useNavigate();
   const [loginError, setLoginError] = useState('');
+  const [loginMessage, setLoginMessage] = useState('');
+  const {isAuthenticated, setIsAuthenticated} = useContext(authContext);
+  // const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   return (
       <>
         <form className="flex max-w-md flex-col gap-4" onSubmit={handleSubmit(async (data) => {
         try {
+          setLoginMessage('Please wait....');
           const response = await axios.post('http://localhost:8080/users/login', {
             email: data.email,
             password: data.password
           }, {withCredentials: true});  // This is important
 
+          // console.log("Before delay")
+          // await delay(1000);
+          // console.log("After delay")
           // If login is successful, redirect to dashboard
           setLoginError('');  //clear any existing errors
-          navigate("/about")
+
+          setIsAuthenticated(true);
+          navigate("/")
         } catch (error) {
           console.error('Login failed:', error);
           // Set error message based on the response
           if (error.response?.status === 401) {
             setLoginError(error.response.data.msg);
+            setLoginMessage('');
           } else {
             setLoginError('An error occurred. Please try again later.');
+            setLoginMessage('');
           }
           // Handle login error (show error message to user)
         }
@@ -36,6 +48,7 @@ export default function SinginForm(){
       })}
       > {/* email */}
         {loginError && <div style={{color: 'red', marginBottom: '10px'}}>{loginError}</div>}
+          {loginMessage && <div style={{color: 'green', marginBottom: '10px'}}>{loginMessage}</div>}
         <div>
           <div className="mb-2 block">
             <Label htmlFor="email1" value="Email"/>

@@ -16,7 +16,7 @@ exports.authenticate = async (req,res,next)=>{
     }catch (e) {
         return res.status(500).json({
             success: false,
-            msg: e
+            msg: "Invalid token " + e
         })
     }
 }
