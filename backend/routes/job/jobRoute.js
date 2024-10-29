@@ -7,10 +7,11 @@ const {
   getJobById,
 } = require("../../controllers/Job/getJobController");
 const updateJob = require("../../controllers/Job/updateJobController");
+const {authenticate} = require("../../middlewares/auth");
 
 const router = express.Router();
 
-router.post("/add", addJob);
+router.post("/add", authenticate, addJob);
 router.delete("/delete/:jobId", deleteJob);
 router.get("/getJob/:jobId", getJobById);
 router.get("/getAllJobs", getAllJobs);

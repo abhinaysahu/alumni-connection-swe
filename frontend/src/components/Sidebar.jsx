@@ -40,16 +40,15 @@ export default function SideMenu() {
     }
   return (
     <>
-      <Sidebar  className=" fixed left-0"aria-label="Sidebar with content separator example">
+      <Sidebar  className=" fixed left-0 z-20"aria-label="Sidebar with content separator example">
         <Sidebar.Items>
           <Sidebar.ItemGroup>
-            <Sidebar.Item  className={isActive("/dashboard") ? "text-white bg-blue-700 hover:bg-blue-700" : "text-gray-900 hover:bg-blue-400"}
-                   href="/" icon={() => (
+            <Sidebar.Item  className={isActive("/dashboard") ? "text-white bg-blue-700 hover:bg-blue-700" : "text-gray-900 hover:bg-blue-400"} icon={() => (
                     <FaHome
                       className={(isActive("/dashboard") ? "text-white" : "") + "w-5 h-5"}
                     />
                   )}>
-              Dashboard
+                <Link to={"/dashboard"}>Dashboard</Link>
             </Sidebar.Item>
             <Sidebar.Item  className={isActive("/postjob") ? "text-white bg-blue-700 hover:bg-blue-700" : "text-gray-900 hover:bg-blue-400"} icon={() => (
                     <MdPostAdd
@@ -58,8 +57,8 @@ export default function SideMenu() {
                   )}>
                 <Link to={"/postjob"}>Post a Job</Link>
             </Sidebar.Item>
-            <Sidebar.Item  className={isActive("/myjobs") ? "text-white bg-blue-700 hover:bg-blue-700" : "text-gray-900 hover:bg-blue-400"} href="/myjobs" icon={()=>(<FaSuitcase className={(isActive("/myjobs")? "text-white":"") + "w-5 h-4" }/>)}>
-              My Jobs
+            <Sidebar.Item  className={isActive("/myjobs") ? "text-white bg-blue-700 hover:bg-blue-700" : "text-gray-900 hover:bg-blue-400"} icon={()=>(<FaSuitcase className={(isActive("/myjobs")? "text-white":"") + "w-5 h-4" }/>)}>
+                <Link to={"/myjobs"}>My Jobs</Link>
             </Sidebar.Item>
             <Sidebar.Item  className={isActive("/profilesettings") ? "text-white bg-blue-700 hover:bg-blue-700" : "text-gray-900 hover:bg-blue-400"}  icon={() => (
                     <IoMdSettings

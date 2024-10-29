@@ -14,9 +14,12 @@ import PostJob from "./pages/postJob.jsx";
 import UserCard from "./components/UserCard.jsx";
 import NewUserRequests from "./pages/NewUserRequests.jsx";
 import ProfileSettings from './pages/ProfileSettings.jsx';
+import Alumni from './pages/Alumni.jsx';
 import {authContext} from "./auth.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import axios from "axios";
+import MyJob from "./pages/MyJobs.jsx";
+import Dashboard from './pages/Dashboard.jsx';
 import MyJob from "./pages/MyJobs.jsx";
 
 
@@ -42,7 +45,7 @@ function App(){
     <>
         <authContext.Provider value={{isAuthenticated, setIsAuthenticated}}>
             <div className="min-h-screen  pt-10 pb-20 flex flex-col">
-             <Navbar></Navbar>
+                {isAuthenticated ? <Navbar></Navbar> : null}
              {/*   <UserCard name={"Aman Sheoran"} roll={"234CA007"} batch={"2026"} company={"DE Shaw"} contact={"8930460660"} email={"amansheo@gmail.com"} jobTitle={"SDE"} linkedin={"https://www.linkedin.com/in/amansheoran/"}></UserCard>*/}
             <Routes >
                 <Route path='/' element={<ProtectedRoute><Home/></ProtectedRoute>}></Route>
@@ -52,9 +55,12 @@ function App(){
               <Route path='/contact' element={ <ProtectedRoute><Contact/></ProtectedRoute>}></Route>
               <Route path='/signup' element={<Signup/>}></Route>
               <Route path='/signin' element={<Signin/>}></Route>
-              <Route path='myjobs' element={<MyJob/>}></Route>
+               <Route path='myjobs' element={<MyJob/>}></Route>
               <Route path='/postjob' element={<ProtectedRoute><PostJob/></ProtectedRoute>}></Route>
+               <Route path='/myjobs' element={<ProtectedRoute><MyJob/></ProtectedRoute>}></Route>
               <Route path='/profilesettings' element={<ProtectedRoute><ProfileSettings/></ProtectedRoute>}></Route>
+              <Route path='/dashboard' element={<Dashboard/>}></Route>
+              <Route path = '/alumni' element={<Alumni/>}></Route>
             </Routes>
              <Footer></Footer>
 

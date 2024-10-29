@@ -17,7 +17,7 @@ export default function ProfileForm() {
   } = useForm();
   return (
     <form
-      className=" w-9/10 grid grid-cols-2 grid-rows-6 gap-1 m-2"
+      className=" w-9/10 grid grid-cols-2 gap-1 m-2"
       onSubmit={handleSubmit((data) => {
         console.log(data);
       })}
@@ -30,12 +30,13 @@ export default function ProfileForm() {
         <TextInput
           id="firstName"
           type="text"
-          placeholder="John  "
+          placeholder="John"
+          color={errors.firstName?"failure" : "success"}
           {...register("firstName", {
             required: "this is required",
           })}
         />
-        <p>{errors.skills?.message}</p>
+        <div className={errors.firstName?"text-sm text-red-600" : "text-sm text-green-400"}>{errors.firstName?.message}</div>
       </div>
       {/* Last Name */}
       <div className="col-start-2 col-end-3 row-start-1 row-end-2">
@@ -45,25 +46,27 @@ export default function ProfileForm() {
         <TextInput
           id="lastName"
           type="text"
-          placeholder="Doe "
+          placeholder="Doe"
+          color={errors.lastName?"failure" : "success"}
           {...register("lastName", {
             required: "this is required",
           })}
         />
-        <p>{errors.lastName?.message}</p>
+        <div  className={errors.lastName?"text-sm text-red-600" : "text-sm text-green-400"}>{errors.lastName?.message}</div>
       </div>
       {/* email  */}
       {/* {loginError && (
         <div style={{ color: "red", marginBottom: "10px" }}>{loginError}</div>
       )} */}
-      <div className="col-start-1 col-end-3 row-start-2 row-end-3">
+      <div className="col-start-1 col-end-2 row-start-2 row-end-3">
         <div className="mb-2 block">
-          <Label htmlFor="email1" value="Email" />
+          <Label htmlFor="email" value="Email" />
         </div>
         <TextInput
-          id="email1"
+          id="email"
           type="email"
           placeholder="name@google.com"
+          color={errors.email?"failure" : "success"}
           {...register("email", {
             required: "this is required",
             pattern: {
@@ -72,11 +75,11 @@ export default function ProfileForm() {
             },
           })}
         />
-        <p>{errors.email?.message}</p>
+        <div className={errors.email?"text-sm text-red-600" : "text-sm text-green-400"}>{errors.email?.message}</div>
       </div>
 
       {/* Bio */}
-      <div className="col-start-1 col-end-3 row-start-3 row-end-5">
+      <div className="col-start-1 col-end-3 row-start-3 row-end-4">
         <div className="mb-2 block">
           <Label htmlFor="bio" value="Bio" />
         </div>
@@ -84,7 +87,7 @@ export default function ProfileForm() {
       </div>
 
       {/* Status */}
-      <div className="col-start-1 col-end-2 row-start-5 row-end-6">
+      <div className="col-start-2 col-end-3 row-start-2 row-end-3">
         <div className="mb-2 block ">
           <Label htmlFor="status" value="Status" />
         </div>
@@ -100,25 +103,8 @@ export default function ProfileForm() {
           <option>Not working</option>
         </Select>
       </div>
-
-      {/* Skills */}
-
-      <div className="col-start-2 col-end-3 row-start-5 row-end-6">
-        <div className="mb-2 block ">
-          <Label htmlFor="skills" value="Skills" />
-        </div>
-        <TextInput
-          id="skills"
-          type="text"
-          placeholder="John  "
-          {...register("skills", {
-            required: "this is required",
-          })}
-        />
-        <p>{errors.skills?.message}</p>
-      </div>
-      <div className="col-start-1 col-end-2 row-start-6 row-end-7 mt-3">
-        <Button type="submit">Update</Button>
+      <div className="col-start-1 col-end-3 row-start-5 row-end-6 mt-3 flex justify-center pb-2">
+        <Button type="submit" color={"blue"} className="w-1/3">Update</Button>
       </div>
     </form>
   );
@@ -136,3 +122,22 @@ export default function ProfileForm() {
 //     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
 //     placeholder="Enter your first name"
 //   /> */}
+
+
+
+{/* Skills */}
+
+{/* <div className="col-start-2 col-end-3 row-start-4 row-end-5">
+<div className="mb-2 block ">
+  <Label htmlFor="skills" value="Skills" />
+</div>
+<TextInput
+  id="skills"
+  type="text"
+  placeholder="John  "
+  {...register("skills", {
+    required: "this is required",
+  })}
+/>
+<div>{errors.skills?.message}</div>
+</div> */}
