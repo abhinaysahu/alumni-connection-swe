@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { WithContext as ReactTags } from 'react-tag-input';
 import { Button, Checkbox, Label, TextInput, Select, Textarea, FileInput, Badge } from "flowbite-react";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 export default function JobForm() {
     const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -129,7 +130,7 @@ export default function JobForm() {
             {/* skills */}
             <div className="row-start-6 row-end-7 col-start-2 col-end-3">
                 <div className="mb-2 block">
-                    <Label value="skills" />
+                    <Label value="Skills" />
                 </div>
                 <div className="flex space-x-2 mb-2">
                     <TextInput
@@ -176,8 +177,10 @@ export default function JobForm() {
             </div>
 
 
-            <div className="col-start-1 col-end-2 row-start-8 row-end-9 mt-3">
-                <Button type="submit">Post </Button>
+            <div className="col-start-1 col-end-3 row-start-8 row-end-9 mt-3 flex justify-center">
+                <Button type="submit" color={"blue"} className="w-1/3 ">
+                    Post  
+                     </Button>
             </div>
         </form>
 

@@ -52,10 +52,10 @@ function App(){
               <Route path='/contact' element={ <ProtectedRoute><Contact/></ProtectedRoute>}></Route>
               <Route path='/signup' element={<Signup/>}></Route>
               <Route path='/signin' element={<Signin/>}></Route>
-              {/* <Route path='/postjob' element={<ProtectedRoute><PostJob/></ProtectedRoute>}></Route> */}
+              <Route path='/postjob' element={<ProtectedRoute><PostJob/></ProtectedRoute>}></Route>
               <Route path='/profilesettings' element={<ProtectedRoute><ProfileSettings/></ProtectedRoute>}></Route>
               <Route path = '/alumni' element={<Alumni/>}></Route>
-              <Route path='/postjob' element = {<PostJob/>}></Route>
+              
             </Routes>
              <Footer></Footer>
 

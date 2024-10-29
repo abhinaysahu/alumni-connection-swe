@@ -54,11 +54,10 @@ export default function SignupForm() {
                   <div className="block">
                       <Label htmlFor="name" value="  Name"/>
                   </div>
-                  <TextInput id="name" type="text"
+                  <TextInput id="name" type="text" color={errors.name? "failure" : "success"}
                              {...register("name", {
-                                 required: "this is required"
+                                 required: "This is required"
                              })} />
-                  <p>{errors.firstName?.message}</p>
               </div>
 
               {/* phone  validate number to only have integers */}
@@ -66,9 +65,9 @@ export default function SignupForm() {
                   <div className=" block">
                       <Label htmlFor="phone" value="Phone number"/>
                   </div>
-                  <TextInput id="contactNo" type="tel"
+                  <TextInput id="contactNo" type="tel" color={errors.contactNo?"failure" : "success"}
                              {...register("contactNo", {
-                                 required: "this is  required",
+                                 required: "This is  required",
                                  minLength: {
                                      value: 10,
                                      message: "phone number should be of 10 digits"
@@ -82,7 +81,6 @@ export default function SignupForm() {
                                      message: "Phone number must contain only numbers",
                                  }
                              })} />
-                  <p>{errors.phone?.message}</p>
               </div>
               {/* email */}
               <div className="row-start-2 row-end-3 col-start-1 col-end-2">
@@ -90,29 +88,30 @@ export default function SignupForm() {
                       <Label htmlFor="email1" value="Email"/>
                   </div>
                   <TextInput id="email" type="email" placeholder="name@google.com"
+                        color={errors.email?"failure" : "success"}
                              {...register("email", {
-                                 required: "this is required",
+                                 required: "This is required",
                                  pattern: {
                                      value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
                                      message: "Enter a valid email address"
                                  }
                              })} />
-                  <p>{errors.email?.message}</p>
+                  <div className={errors.email? "text-red-600 text-sm" : "text-green-400 text-sm"} >{errors.email?.message}</div >
               </div>
               {/* password */}
               <div className="row-start-2 row-end-3 col-start-2 col-end-3">
                   <div className=" block">
                       <Label htmlFor="password" value="Password"/>
                   </div>
-                  <TextInput id="password" type="password" required
+                  <TextInput id="password" type="password" required color={errors.password?"failure" : "success" }
                              {...register("password", {
-                                 required: "this is required",
+                                 required: "This is required",
                                  pattern: {
                                      value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
                                      message: "Password must be at least 8 characters, include an uppercase, a lowercase, a number, and a special character"
                                  }
                              })} />
-                  <p>{errors.password?.message}</p>
+                  <div className= {errors.password? "text-sm text-red-600" : "text-sm text-green-400"}>{errors.password?.message}</div >
               </div>
 
 
@@ -135,7 +134,7 @@ export default function SignupForm() {
                       id="currentWorkingStatus"
                       required
                       {...register("currentWorkingStatus", {
-                          required: "this is required",
+                          required: "This is required",
                       })}
                   >
                       <option>Student</option>
@@ -149,18 +148,20 @@ export default function SignupForm() {
                   <div className="block">
                       <Label htmlFor="company" value="Company"/>
                   </div>
-                  <TextInput id="currentCompany" type="text"
-                             {...register("currentCompany")} />
-                  <p>{errors.currentCompany?.message}</p>
+                  <TextInput id="currentCompany" type="text"  color={errors.currentCompany?"failure" : "success"}
+                             {...register("currentCompany" ,{
+                                required: "This is required",
+                            })} />
+                  <div className= {errors.currentCompany? "text-sm text-red-600" : "text-sm text-green-400"} >{errors.currentCompany?.message}</div >
               </div>
               {/* current Position */}
               <div className="row-start-5 row-end-6 col-start-1 col-end-2">
                   <div className="block">
                       <Label htmlFor="name" value="Position"/>
                   </div>
-                  <TextInput id="currPos" type="text"
-                             {...register("currPos")} />
-                  <p>{errors.currPos?.message}</p>
+                  <TextInput id="currPos" type="text"  color={errors.currPos?"failure" : "success"}
+                             {...register("currPos",{required: "This is required"})} />
+                    <div className= {errors.currPos? "text-sm text-red-600" : "text-sm text-green-400"} >{errors.currPos?.message}</div >
               </div>
 
               {/* batch */}
@@ -168,11 +169,11 @@ export default function SignupForm() {
                   <div className=" block ">
                       <Label htmlFor="passoutYear" value="Batch of"/>
                   </div>
-                  <Select
+                  <Select 
                       id="passoutYear"
                       required
                       {...register("passoutYear", {
-                          required: "this is required",
+                          required: "This is required",
                       })}
                   >
                       <option value="">Select year</option>
@@ -199,14 +200,12 @@ export default function SignupForm() {
                   <div>
                       <Label htmlFor="profilePhoto" value="Upload Photo"/>
                   </div>
-                  <FileInput id="profilePhotoUrl"
-                             helperText="SVG, PNG, JPG or GIF (MAX. 10MB)." {...register("profilePhotoUrl", {
-                      required: "this is required",
-                  })}  />
+                  <FileInput id="profilePhotoUrl" 
+                             helperText="SVG, PNG, JPG or GIF (MAX. 10MB)." {...register("profilePhotoUrl")}  />
               </div>
               <div className="mt-3">
               </div>
-              <Button className="row-start-7 row-end-8 col-start-1 col-end-3" type="submit">Sign up</Button>
+              <Button className="row-start-7 row-end-8 col-start-1 col-end-3" type="submit" color="blue">Sign up</Button>
           </form>
           <div id="sign-in" className="text-center w-full max-w-md text-gray-500 text-md mt-4">
               Already have an account? <Link to="/signin" className="text-blue-600 underline cursor-pointer">Sign
@@ -239,11 +238,11 @@ export default function SignupForm() {
 //   </div>
 //   <TextInput id="rollNo" type="text" placeholder="234CA001"
 //     {...register("rollNo", {
-//       required: "this is  required",
+//       required: "This is  required",
 //       pattern: {
 //         value: /^\d{3}CA\d{3}$/,
 //         message: "Enter a valid roll number"
 //       }
 //     })} />
-//   <p>{errors.rollNo?.message}</p>
+//   <div >{errors.rollNo?.message}</div >
 // </div>
