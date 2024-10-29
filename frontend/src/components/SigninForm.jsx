@@ -51,34 +51,34 @@ export default function SinginForm(){
           {loginMessage && <div style={{color: 'green', marginBottom: '10px'}}>{loginMessage}</div>}
         <div>
           <div className="mb-2 block">
-            <Label htmlFor="email1" value="Email"/>
+            <Label htmlFor="email1" value="Email" />
           </div>
-          <TextInput id="email1" type="email" placeholder="name@google.com"
+          <TextInput id="email1" type="email" placeholder="name@google.com" color={errors.email?"failure" : "success"}
                      {...register("email", {
-                       required: "this is required",
+                       required: "This is required",
                        pattern: {
                          value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
                          message: "Enter a valid email address"
                        }
                      })} />
-          <p>{errors.email?.message}</p>
+          <div className={errors.email?"text-red-600":"text-green-400"}>{errors.email?.message}</div>
         </div>
         {/* password */}
         <div>
           <div className="mb-2 block">
             <Label htmlFor="password" value="Password"/>
           </div>
-          <TextInput id="password" type="password" required
+          <TextInput id="password" type="password" required color={errors.password ? "failure" : "success"}
                      {...register("password", {
-                       required: "this is required",
+                       required: "This is required",
                        pattern: {
                          value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
                          message: "Password must be at least 8 characters, include an uppercase, a lowercase, a number, and a special character"
                        }
                      })} />
-          <p>{errors.password?.message}</p>
+          <div className={errors.password?"text-red-600" : "text-green-400"}>{errors.password?.message}</div>
         </div>
-        <Button type="submit">Sign in</Button></form>
+        <Button type="submit" color="blue">Sign in</Button></form>
   <div id="register" className="text-right w-full max-w-md text-gray-500 text-sm mt-1">
     Are you new? <Link to="/signup" className="text-blue-600 underline cursor-pointer">Create an account</Link>
   </div>
