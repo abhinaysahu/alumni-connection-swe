@@ -53,7 +53,7 @@ export default function SinginForm(){
           <div className="mb-2 block">
             <Label htmlFor="email1" value="Email" />
           </div>
-          <TextInput id="email1" type="email" placeholder="name@google.com" color={errors.email?"failure" : "success"}
+          <TextInput id="email1" type="email" placeholder="name@google.com" color={errors.email?"failure" : "none"}
                      {...register("email", {
                        required: "This is required",
                        pattern: {
@@ -68,7 +68,7 @@ export default function SinginForm(){
           <div className="mb-2 block">
             <Label htmlFor="password" value="Password"/>
           </div>
-          <TextInput id="password" type="password" required color={errors.password ? "failure" : "success"}
+          <TextInput id="password" type="password" required color={errors.password?"failure":"none"}
                      {...register("password", {
                        required: "This is required",
                        pattern: {

@@ -54,7 +54,7 @@ export default function SignupForm() {
                   <div className="block">
                       <Label htmlFor="name" value="  Name"/>
                   </div>
-                  <TextInput id="name" type="text" color={errors.name? "failure" : "success"}
+                  <TextInput id="name" type="text" color={errors.name? "failure" : "none"}
                              {...register("name", {
                                  required: "This is required"
                              })} />
@@ -65,7 +65,7 @@ export default function SignupForm() {
                   <div className=" block">
                       <Label htmlFor="phone" value="Phone number"/>
                   </div>
-                  <TextInput id="contactNo" type="tel" color={errors.contactNo?"failure" : "success"}
+                  <TextInput id="contactNo" type="tel" color={errors.contactNo?"failure" : "none"}
                              {...register("contactNo", {
                                  required: "This is  required",
                                  minLength: {
@@ -88,7 +88,7 @@ export default function SignupForm() {
                       <Label htmlFor="email1" value="Email"/>
                   </div>
                   <TextInput id="email" type="email" placeholder="name@google.com"
-                        color={errors.email?"failure" : "success"}
+                        color={errors.email?"failure" : "none"}
                              {...register("email", {
                                  required: "This is required",
                                  pattern: {
@@ -103,7 +103,7 @@ export default function SignupForm() {
                   <div className=" block">
                       <Label htmlFor="password" value="Password"/>
                   </div>
-                  <TextInput id="password" type="password" required color={errors.password?"failure" : "success" }
+                  <TextInput id="password" type="password" required color={errors.password?"failure" : "none" }
                              {...register("password", {
                                  required: "This is required",
                                  pattern: {
@@ -148,20 +148,20 @@ export default function SignupForm() {
                   <div className="block">
                       <Label htmlFor="company" value="Company"/>
                   </div>
-                  <TextInput id="currentCompany" type="text"  color={errors.currentCompany?"failure" : "success"}
+                  <TextInput id="currentCompany" type="text"  color={errors.currentCompany?"failure" : "none"}
                              {...register("currentCompany" ,{
                                 required: "This is required",
                             })} />
-                  <div className= {errors.currentCompany? "text-sm text-red-600" : "text-sm text-green-400"} >{errors.currentCompany?.message}</div >
+                  {/* <div className= {errors.currentCompany? "text-sm text-red-600" : "text-sm text-green-400"} >{errors.currentCompany?.message}</div > */}
               </div>
               {/* current Position */}
               <div className="row-start-5 row-end-6 col-start-1 col-end-2">
                   <div className="block">
                       <Label htmlFor="name" value="Position"/>
                   </div>
-                  <TextInput id="currPos" type="text"  color={errors.currPos?"failure" : "success"}
+                  <TextInput id="currPos" type="text"  color={errors.currPos?"failure" : "none"}
                              {...register("currPos",{required: "This is required"})} />
-                    <div className= {errors.currPos? "text-sm text-red-600" : "text-sm text-green-400"} >{errors.currPos?.message}</div >
+                    {/* <div className= {errors.currPos? "text-sm text-red-600" : "text-sm text-green-400"} >{errors.currPos?.message}</div > */}
               </div>
 
               {/* batch */}
@@ -171,7 +171,6 @@ export default function SignupForm() {
                   </div>
                   <Select 
                       id="passoutYear"
-                      required
                       {...register("passoutYear", {
                           required: "This is required",
                       })}
