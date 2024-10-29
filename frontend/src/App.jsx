@@ -20,6 +20,10 @@ import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import axios from "axios";
 import MyJob from "./pages/MyJobs.jsx";
 import Dashboard from './pages/Dashboard.jsx';
+import { Button } from 'primereact/button';
+import JobTable from "./components/JobTable.jsx";
+import 'primereact/resources/themes/lara-light-indigo/theme.css';   // Theme
+import 'primereact/resources/primereact.min.css';           // Core CSS
 
 
 function App(){
