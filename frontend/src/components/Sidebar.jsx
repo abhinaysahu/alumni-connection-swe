@@ -44,12 +44,12 @@ export default function SideMenu() {
         <Sidebar.Items>
           <Sidebar.ItemGroup>
             <Sidebar.Item  className={isActive("/dashboard") ? "text-white bg-blue-700 hover:bg-blue-700" : "text-gray-900 hover:bg-blue-400"}
-                   href="/" icon={() => (
+                    icon={() => (
                     <FaHome
                       className={(isActive("/dashboard") ? "text-white" : "") + "w-5 h-5"}
                     />
                   )}>
-              Dashboard
+                <Link to={"/dashboard"}>Dashboard</Link>
             </Sidebar.Item>
             <Sidebar.Item  className={isActive("/postjob") ? "text-white bg-blue-700 hover:bg-blue-700" : "text-gray-900 hover:bg-blue-400"} icon={() => (
                     <MdPostAdd
