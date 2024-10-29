@@ -2,7 +2,7 @@ const express = require('express');
 const{ addNewUser, getUserDetailsByID, getAllUsersDetails, updateUserDetails, getUserRequests, acceptUserRequest,
     declineUserRequest
 } = require('../../controllers/users/userController');
-const { login, checkToken, logout} = require('../../controllers/users/authentication');
+const { login, checkToken, logout, getUserId} = require('../../controllers/users/authentication');
 const {authenticate} = require("../../middlewares/auth");
 const router = express.Router();
 
@@ -16,5 +16,6 @@ router.put('/accept/:id', acceptUserRequest)
 router.put('/decline/:id', declineUserRequest)
 router.get('/auth/check', checkToken)
 router.get('/logout', logout)
+router.get('/me', authenticate, getUserId);
 
 module.exports = router;
