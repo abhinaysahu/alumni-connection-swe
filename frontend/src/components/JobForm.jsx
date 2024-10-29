@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { WithContext as ReactTags } from 'react-tag-input';
 import { Button, Checkbox, Label, TextInput, Select, Textarea, FileInput, Badge } from "flowbite-react";
 import { useForm } from "react-hook-form";
+import { FaIndianRupeeSign } from "react-icons/fa6";
+import axios from "axios";
+import {useNavigate} from "react-router-dom";
 import { Link } from "react-router-dom";
 export default function JobForm() {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors } , reset} = useForm();
 
+    const [userId, setUserId] = useState(null);
+    const [showAlert, setShowAlert] = useState(false);
+    const navigate = useNavigate();
     const [skills, setSkills] = useState([]);
     const [inputValue, setInputValue] = useState('');
     const handleDeleteSkill = (index) => {
@@ -19,20 +25,81 @@ export default function JobForm() {
             setInputValue('');
         }
     };
+
+    const getFormattedDate = () => {
+        const date = new Date();
+        const day = String(date.getDate()).padStart(2, '0'); // Get day and pad with leading zero if necessary
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed, so add 1
+        const year = date.getFullYear(); // Get full year
+
+        return `${day}-${month}-${year}`;
+    };
+
+    useEffect(() => {
+        const getUser = async () => {
+            try{
+                const response = await axios.get('http://localhost:8080/users/me', {withCredentials: true});
+                const id = response.data.id;
+                console.log(id);
+                if(id !== null){
+                    setUserId(id);
+                }else{
+                    navigate('/signin')
+                }
+            }catch (e) {
+                console.log(e);
+            }
+        }
+
+        getUser();
+    }, []);
+
+
     return (
-        <form className=" pb-2 w-9/10 grid grid-cols-2   gap-1 m-2" onSubmit={handleSubmit((data) => {
+        <form className=" pb-2 w-9/10 grid grid-cols-2   gap-1 m-2" onSubmit={handleSubmit(async (data) => {
             const formData = { ...data, skills };
             console.log(formData);
-            //  work with formData 
+            //  work with formData
+
+            try{
+                const response = await axios.post('http://localhost:8080/jobs/add', {
+                    title: formData.title,
+                    type: formData.type,
+                    description: formData.description,
+                    yoe: formData.yoe,
+                    salary: formData.salary,
+                    skills: formData.skills,
+                    postedOn: getFormattedDate(),
+                    applyLink: formData.applyLink,
+                    companyName: formData.companyName,
+                    jobExp: formData.jobExp,
+                    userId: userId,
+                }, {withCredentials: true});
+
+                console.log("done");
+                reset();
+                setSkills([]);
+                setShowAlert(true);
+
+
+            }catch (e) {
+                console.log(e);
+            }
         })}
         >
+
+            {showAlert && (
+                <div style={{color: "green", marginTop: "10px"}}>
+                    Form submitted successfully!
+                </div>
+            )}
 
             {/* company Name */}
             <div className="col-start-1 col-end-2 row-start-1 row-end-2">
                 <div className="mb-2 block ">
                     <Label htmlFor="company Name" value="Company " />
                 </div>
-                <TextInput id="companyName" type="text" placeholder=""
+                <TextInput id="companyName" type="text" placeholder="Company Name"
                     {...register("companyName", {
                         required: "this is required"
                     })} />
@@ -44,7 +111,7 @@ export default function JobForm() {
                 <div className="mb-2 block ">
                     <Label htmlFor="title" value="Job Title " />
                 </div>
-                <TextInput id="title" type="text" placeholder="Job title here "
+                <TextInput id="title" type="text" placeholder="Job Title here "
                     {...register("title", {
                         required: "this is required"
                     })} />
@@ -69,7 +136,7 @@ export default function JobForm() {
                 <div className="mb-2 block">
                     <Label htmlFor="salary" value="Salary" />
                 </div>
-                <TextInput id="salary" type="text"
+                <TextInput id="salary" type="text" icon={FaIndianRupeeSign}
                     {...register("salary", {
                         required: "this is required"
                     })
@@ -79,7 +146,7 @@ export default function JobForm() {
             {/* Expire Date */}
             <div className="col-start-1 col-end-2 row-start-3 row-end-4">
                 <div className="mb-2 block">
-                    <Label htmlFor="jobExp" value="Expire date " />
+                    <Label htmlFor="jobExp" value="Expiry Date " />
                 </div>
                 <TextInput id="jobExp" type="date" placeholder=""
                     {...register("jobExp", {
@@ -103,7 +170,7 @@ export default function JobForm() {
 
             <div className="row-start-3 row-end-4 col-start-2 col-end-3">
                 <div className="mb-2 block ">
-                    <Label htmlFor="yoe" value="Year of Experience" />
+                    <Label htmlFor="yoe" value="Years of Experience" />
                 </div>
                 <Select
                     id="yoe"
@@ -112,7 +179,8 @@ export default function JobForm() {
                         required: "this is required",
                     })}
                 >
-                    <option value="">Select year</option>
+                    <option value="">Select Year</option>
+                    <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="1">2</option>
                     <option value="1">3</option>
@@ -123,7 +191,7 @@ export default function JobForm() {
                     <option value="1">8</option>
                     <option value="1">9</option>
                     <option value="1">10</option>
-                    <option value="1">other</option>
+                    <option value="1">Other</option>
                 </Select>
             </div>
 
@@ -166,9 +234,9 @@ export default function JobForm() {
             {/* applyLink */}
             <div className="col-start-1 col-end-2 row-start-6 row-end-7">
                 <div className="mb-2 block">
-                    <Label htmlFor="applyLink" value="Apply link" />
+                    <Label htmlFor="applyLink" value="Apply Link" />
                 </div>
-                <TextInput id="applyLink" type="text"
+                <TextInput id="applyLink" type="text" placeholder={"https://www.example.com/applyforjob/123"}
                     {...register("applyLink", {
                         required: "this is required"
                     })
@@ -200,43 +268,3 @@ export default function JobForm() {
 //     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
 //     placeholder="Enter your first name"
 //   /> */}
-
-
-//    {/* Job Category */}
-//    <div className="col-start-2 col-end-3 row-start-2 row-end-3">
-//    <div className="mb-2 block">
-//        <Label htmlFor="jobCategory" value="Job category" />
-//    </div>
-//    <Select id="jobType" required {...register("jobCategory", {
-//            required: "this is required"
-//        })
-//        }>
-//        <option>Technical Consultant</option>
-//        <option>Software Engineer</option>
-//        <option>Memeber of Technical Staff</option>
-//        <option>Data Analyst</option>
-//        <option>Machine Learning Engineer</option>
-//    </Select>
-// </div>
-//  {/* job location */}
-{/* <div className="col-start-1 col-end-3 row-start-4 row-end-5">
-<div className="mb-2 block">
-    <Label htmlFor="Job location" value="Job location" />
-</div>
-<TextInput id="jobLocation" type="" placeholder="Location ex: Jaipur "
-    {...register("jobLocation", {
-        required: "this is required",
-    })} />
-<p>{errors.email?.message}</p>
-</div> */}
-
-
-//   {/* job label */}
-//   <div className="col-start-1 col-end-3 row-start-7 row-end-8">
-//   <div>
-//       <Label htmlFor="jobThumbnail" value="Job Thumbnail" />
-//   </div>
-//   <FileInput id="jobThumbnail" helperText="SVG, PNG, JPG or GIF (MAX. 10MB)." {...register("jobThumbnail", {
-//           required: "this is required",
-//       })}  />
-// </div>

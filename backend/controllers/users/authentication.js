@@ -31,7 +31,7 @@ exports.login = async (req, res) => {
 
         if(passwordMatched){
             const token = jwt.sign({
-                user_id: user._id,
+                user_id: user.userId,
             }, process.env.JWT_SECRET, {expiresIn: "7d"});
 
             const options = {
@@ -93,5 +93,14 @@ exports.checkToken = async (req, res) => {
         return res.status(200).json({ authenticated: true });
     } catch (err) {
         return res.status(500).json({authenticated: false});
+    }
+}
+
+exports.getUserId = async (req, res) => {
+    try {
+        // console.log(req.user_id);
+        return res.status(200).json({id: req.user_id});
+    }catch (e) {
+        return res.status(500).json({msg: e.message});
     }
 }
