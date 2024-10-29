@@ -16,7 +16,8 @@ export  default function(){
   </div>
 
   {/* Right half */}
-  <div className="w-1/2 ">
+  <div className="w-1/2 h-">
+  <Sign_Right/>
   {/* Add background image with blend mode */} 
   </div>
 </div>

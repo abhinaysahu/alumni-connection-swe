@@ -40,7 +40,7 @@ export default function SideMenu() {
     }
   return (
     <>
-      <Sidebar  className=" fixed left-0"aria-label="Sidebar with content separator example">
+      <Sidebar  className=" fixed left-0 z-20"aria-label="Sidebar with content separator example">
         <Sidebar.Items>
           <Sidebar.ItemGroup>
             <Sidebar.Item  className={isActive("/dashboard") ? "text-white bg-blue-700 hover:bg-blue-700" : "text-gray-900 hover:bg-blue-400"}
