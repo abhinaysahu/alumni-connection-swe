@@ -100,10 +100,11 @@ export default function JobForm() {
                     <Label htmlFor="company Name" value="Company " />
                 </div>
                 <TextInput id="companyName" type="text" placeholder="Company Name"
+                    color={errors.companyName?"failure" : "none"}
                     {...register("companyName", {
                         required: "this is required"
                     })} />
-                <p>{errors.companyName?.message}</p>
+                {/* <p>{errors.companyName?.message}</p> */}
             </div>
 
             {/* Job Title*/}
@@ -112,10 +113,11 @@ export default function JobForm() {
                     <Label htmlFor="title" value="Job Title " />
                 </div>
                 <TextInput id="title" type="text" placeholder="Job Title here "
+                    color={errors.title?"failure" : "none"}
                     {...register("title", {
                         required: "this is required"
                     })} />
-                <p>{errors.title?.message}</p>
+                {/* <p>{errors.title?.message}</p> */}
             </div>
             {/* Job Type*/}
             <div className="col-start-1 col-end-2 row-start-2 row-end-3">
@@ -137,11 +139,12 @@ export default function JobForm() {
                     <Label htmlFor="salary" value="Salary" />
                 </div>
                 <TextInput id="salary" type="text" icon={FaIndianRupeeSign}
+                    color={errors.salary?"failure" : "none"}
                     {...register("salary", {
                         required: "this is required"
                     })
                     } />
-                <p>{errors.salary?.message}</p>
+                {/* <p>{errors.salary?.message}</p> */}
             </div>
             {/* Expire Date */}
             <div className="col-start-1 col-end-2 row-start-3 row-end-4">
@@ -149,10 +152,11 @@ export default function JobForm() {
                     <Label htmlFor="jobExp" value="Expiry Date " />
                 </div>
                 <TextInput id="jobExp" type="date" placeholder=""
+                    color={errors.jobExp?"failure" : "none"}
                     {...register("jobExp", {
                         required: "this is  required",
                     })} />
-                <p>{errors.jobExp?.message}</p>
+                {/* <p>{errors.jobExp?.message}</p> */}
             </div>
 
 
@@ -161,7 +165,8 @@ export default function JobForm() {
                 <div className="mb-2 block">
                     <Label htmlFor="description" value="Description" />
                 </div>
-                <Textarea id="description" placeholder="" rows={4} {...register("description", {
+                <Textarea id="description" placeholder="" rows={4}  
+                    {...register("description", {
                     required: "this is required",
                 })} />
             </div>
@@ -174,7 +179,7 @@ export default function JobForm() {
                 </div>
                 <Select
                     id="yoe"
-                    required
+                    color={errors.yoe?"failure" : "none"}
                     {...register("yoe", {
                         required: "this is required",
                     })}
@@ -237,11 +242,12 @@ export default function JobForm() {
                     <Label htmlFor="applyLink" value="Apply Link" />
                 </div>
                 <TextInput id="applyLink" type="text" placeholder={"https://www.example.com/applyforjob/123"}
+                     color={errors.applyLink?"failure" : "none"}
                     {...register("applyLink", {
                         required: "this is required"
                     })
                     } />
-                <p>{errors.applyLink?.message}</p>
+                {/* <p>{errors.applyLink?.message}</p> */}
             </div>
 
 

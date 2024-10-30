@@ -31,12 +31,12 @@ export default function ProfileForm() {
           id="firstName"
           type="text"
           placeholder="John"
-          color={errors.firstName?"failure" : "success"}
+          color={errors.firstName?"failure" : "none"}
           {...register("firstName", {
             required: "this is required",
           })}
         />
-        <div className={errors.firstName?"text-sm text-red-600" : "text-sm text-green-400"}>{errors.firstName?.message}</div>
+        {/* <div className={errors.firstName?"text-sm text-red-600" : "text-sm text-green-400"}>{errors.firstName?.message}</div> */}
       </div>
       {/* Last Name */}
       <div className="col-start-2 col-end-3 row-start-1 row-end-2">
@@ -47,12 +47,12 @@ export default function ProfileForm() {
           id="lastName"
           type="text"
           placeholder="Doe"
-          color={errors.lastName?"failure" : "success"}
+          color={errors.lastName?"failure" : "none"}
           {...register("lastName", {
             required: "this is required",
           })}
         />
-        <div  className={errors.lastName?"text-sm text-red-600" : "text-sm text-green-400"}>{errors.lastName?.message}</div>
+        {/* <div  className={errors.lastName?"text-sm text-red-600" : "text-sm text-green-400"}>{errors.lastName?.message}</div> */}
       </div>
       {/* email  */}
       {/* {loginError && (
@@ -66,7 +66,7 @@ export default function ProfileForm() {
           id="email"
           type="email"
           placeholder="name@google.com"
-          color={errors.email?"failure" : "success"}
+          color={errors.email?"failure" : "none"}
           {...register("email", {
             required: "this is required",
             pattern: {
