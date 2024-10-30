@@ -3,22 +3,26 @@
 import SideMenu from "../components/Sidebar";
 import { BreadCrumb } from "../components/BreadCrumb";
 import { Table } from "flowbite-react";
-import { Button } from "flowbite-react";
+// import { Button } from "flowbite-react";
 
 import { Pagination } from "flowbite-react";
 import { useState } from "react";
+
+import { Button, Modal } from "flowbite-react";
+
+
 
 
 
 export default function MyJob() {
 
 
-
+    const [openModal, setOpenModal] = useState(false);
 
 
     const jobs = [
         {
-            title: "Lorem ipsum, dolor sit amet consectetur adipiscing elit.",
+            title: "Software Engineer",
             category: "Technical Consultant",
             postedOn: "January 18, 2024 02:51 PM",
             location: "Jaipur",
@@ -204,7 +208,61 @@ export default function MyJob() {
                                             </span>
                                         </td>
                                         <td className="py-3 px-6">
-                                            <button className="text-blue-500 hover:underline">View</button>
+
+
+                                            <Button className="bg-blue-700  hover:bg-blue-400" size="sm" onClick={() => setOpenModal(true)}>View</Button>
+                                            <Modal show={openModal} onClose={() => setOpenModal(false)}>
+                                                <Modal.Header>Event Details</Modal.Header>
+                                                <Modal.Body>
+                                                    <div className="space-y-20 ">
+
+                                                        <div className="p-6 bg-white shadow-md  w-90 relative rounded-xl">
+
+
+                                                            <div className="mb-4">
+                                                                <h3 className="text-2xl font-semibold">Software Engineer</h3>
+                                                                <p className="text-xl">Microsoft</p>
+
+                                                            </div>
+
+
+
+
+
+                                                            <div className="space-y-4">
+                                                            
+                                                                <div className="border-t pt-2 mb-4">
+                                                                <p className="text-md font-bold">Description</p>
+                                                                    <p className="text-sm">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorem maxime rem dolores maiores dolor aperiam debitis consequatur voluptate nisi, et sunt ducimus nobis, ipsum voluptates eum. Dolore cum rerum odit!</p>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div className="space-y-4">
+                                                                <div className="flex justify-between border-t pt-2">
+                                                                    <span className="text-gray-600">Deadline</span>
+                                                                    <span className="text-black">Jan 10, 2024</span>
+                                                                </div>
+                                                                <div className="flex justify-between border-t pt-2">
+                                                                    <span className="text-gray-600">Location</span>
+                                                                    <span className="text-black">Jaipur, Rajasthan</span>
+                                                                </div>
+                                                                <div className="flex justify-between border-t pt-2">
+                                                                    <span className="text-gray-600">Salary</span>
+                                                                    <span className="text-black">10L-15L</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </Modal.Body>
+                                                <Modal.Footer>
+                                                    <Button className="bg-blue-700  hover:bg-blue-400" onClick={() => setOpenModal(false)}>Edit</Button>
+                                                    <Button className="bg-blue-700  hover:bg-blue-400" onClick={() => setOpenModal(false)}>
+                                                        Cancel
+                                                    </Button>
+                                                </Modal.Footer>
+                                            </Modal>
                                         </td>
                                     </tr>
                                 ))}
@@ -218,7 +276,7 @@ export default function MyJob() {
 
                 <div className="flex overflow-x-auto sm:justify-end mt-3">
                     <div className="mb-4">
-                        
+
                     </div>
                     <Pagination
                         currentPage={currentPage}

@@ -20,6 +20,7 @@ import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import axios from "axios";
 import MyJob from "./pages/MyJobs.jsx";
 import Dashboard from './pages/Dashboard.jsx';
+import MyJob from "./pages/MyJobs.jsx";
 
 
 function App(){
@@ -54,7 +55,8 @@ function App(){
               <Route path='/contact' element={ <ProtectedRoute><Contact/></ProtectedRoute>}></Route>
               <Route path='/signup' element={<Signup/>}></Route>
               <Route path='/signin' element={<Signin/>}></Route>
-               <Route path='/postjob' element={<ProtectedRoute><PostJob/></ProtectedRoute>}></Route>
+               <Route path='myjobs' element={<MyJob/>}></Route>
+              <Route path='/postjob' element={<ProtectedRoute><PostJob/></ProtectedRoute>}></Route>
                <Route path='/myjobs' element={<ProtectedRoute><MyJob/></ProtectedRoute>}></Route>
               <Route path='/profilesettings' element={<ProtectedRoute><ProfileSettings/></ProtectedRoute>}></Route>
               <Route path='/dashboard' element={<Dashboard/>}></Route>
