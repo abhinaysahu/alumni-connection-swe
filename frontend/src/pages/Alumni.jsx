@@ -12,7 +12,6 @@ export default function Alumni(){
         const fetchData = async () => {
             const response = await axios.get('http://localhost:8080/users/getAllUsers');
             setUsers(response.data);
-        console.log("hello");
         }
         fetchData();
 

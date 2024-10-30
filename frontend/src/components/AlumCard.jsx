@@ -36,7 +36,7 @@ export default function AlumCard({ name, batch, jobTitle, contact, company, emai
         </div>
         </div>
         <div className=" flex  items-center justify-center w-full ">
-            <Link to={`/profile/${userId}`} >
+            <Link to={`/alumni/profile/${userId}`} >
               <Button >Know more</Button>
             </Link>
           </div>

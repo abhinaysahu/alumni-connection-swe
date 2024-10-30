@@ -40,44 +40,53 @@ export default function SideMenu() {
     }
   return (
     <>
-      <Sidebar  className=" fixed left-0 z-20"aria-label="Sidebar with content separator example">
-        <Sidebar.Items>
+      <Sidebar  className=" fixed left-0 z-20" aria-label="Sidebar with content separator example">
+        <Sidebar.Items >
           <Sidebar.ItemGroup>
-            <Sidebar.Item  className={isActive("/dashboard") ? "text-white bg-blue-700 hover:bg-blue-700" : "text-gray-900 hover:bg-blue-400"} icon={() => (
+          <Link to={"/dashboard"}  >
+            <Sidebar.Item  className={isActive("/dashboard") ? "text-white bg-blue-700 hover:bg-blue-700 mb-2" : "text-gray-900 hover:bg-blue-400 mb-2"} icon={() => (
                     <FaHome
                       className={(isActive("/dashboard") ? "text-white" : "") + "w-5 h-5"}
                     />
                   )}>
-                <Link to={"/dashboard"}>Dashboard</Link>
+                Dashboard
             </Sidebar.Item>
-            <Sidebar.Item  className={isActive("/postjob") ? "text-white bg-blue-700 hover:bg-blue-700" : "text-gray-900 hover:bg-blue-400"} icon={() => (
+            </Link>
+            <Link to={"/postjob"} >
+            <Sidebar.Item  className={isActive("/postjob") ? "text-white bg-blue-700 hover:bg-blue-700 mb-2" : "text-gray-900 hover:bg-blue-400 mb-2"} icon={() => (
                     <MdPostAdd
                       className={(isActive("/postjob") ? "text-white" : "") + "w-5 h-5"}
                     />
                   )}>
-                <Link to={"/postjob"}>Post a Job</Link>
+                Post a Job
             </Sidebar.Item>
-            <Sidebar.Item  className={isActive("/myjobs") ? "text-white bg-blue-700 hover:bg-blue-700" : "text-gray-900 hover:bg-blue-400"} icon={()=>(<FaSuitcase className={(isActive("/myjobs")? "text-white":"") + "w-5 h-4" }/>)}>
-                <Link to={"/myjobs"}>My Jobs</Link>
+            </Link>
+            <Link to={"/myjobs"} >
+            <Sidebar.Item  className={isActive("/myjobs") ? "text-white bg-blue-700 hover:bg-blue-700 mb-2" : "text-gray-900 hover:bg-blue-400 mb-2"} icon={()=>(<FaSuitcase className={(isActive("/myjobs")? "text-white":"") + "w-5 h-4" }/>)}>
+               My Jobs
             </Sidebar.Item>
-            <Sidebar.Item  className={isActive("/profilesettings") ? "text-white bg-blue-700 hover:bg-blue-700" : "text-gray-900 hover:bg-blue-400"}  icon={() => (
+            </Link>
+            <Link to={"/profilesettings"} >
+            <Sidebar.Item  className={isActive("/profilesettings") ? "text-white bg-blue-700 hover:bg-blue-700 mb-2" : "text-gray-900 hover:bg-blue-400 mb-2"}  icon={() => (
                     <IoMdSettings
                       className={(isActive("/profilesettings") ? "text-white" : "") + "w-5 h-5"}
                     />
                   )}>
 
-                <Link to={"/profilesettings"}>Profile Settings</Link>
+                Profile Settings
             </Sidebar.Item>
-            <Sidebar.Item  className={isActive("/changepassword") ? "text-white bg-blue-700 hover:bg-blue-700" : "text-gray-900 hover:bg-blue-400"} icon={() => (
+            </Link>
+            <Link to={"/changepassword"}>
+            <Sidebar.Item  className={isActive("/changepassword") ? "text-white bg-blue-700 hover:bg-blue-700 mb-2" : "text-gray-900 hover:bg-blue-400 mb-2"} icon={() => (
                     <HiTable
                       className={(isActive("/changepassword") ? "text-white" : "") + "w-5 h-5"}
                     />
                   )}>
-
-                <Link to={"/changepassword"}>Change Password</Link>
+                Change Password
             </Sidebar.Item>
+            </Link>
 
-            <Sidebar.Item onClick={logout} className={isActive("/") ? "text-white bg-blue-700 hover:bg-blue-700 cursor-pointer" : "text-gray-900 hover:bg-blue-400 cursor-pointer"} icon={() => (
+            <Sidebar.Item onClick={logout} className={isActive("/") ? "text-white bg-blue-700 hover:bg-blue-700 cursor-pointer mb-2" : "text-gray-900 hover:bg-blue-400 cursor-pointer mb-2"} icon={() => (
                     <LuLogOut
                       className={(isActive("/") ? "text-white" : "") + "w-5 h-5"}
                     />
