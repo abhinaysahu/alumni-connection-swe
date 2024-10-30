@@ -12,8 +12,8 @@ export default function AlumCard({ name, batch, jobTitle, contact, company, emai
   return ( <div className=' hover:bg-gradient-to-r hover:from-cyan-400 hover:to-blue-400 hover:text-slate-50 rounded-lg'>
     <Card class=" shadow-lg p-0 " >
       <div className=" rounded-md flex  flex-col  items-center justify-around gap-4 hover:bg-gradient-to-r hover:from-cyan-500 hover:to-blue-500 hover:text-slate-50 ">
-        <div className='content-center '>
-          <img  src={profilePhoto}  className='w-40 pt-1 h-40 rounded-full' alt="profile photo"></img>
+        <div className=' w-40 h-40 pt-1 rounded-full '>
+          <img  src={photo}  className='w-full  h-full rounded-full  object-cover border-gray-300 border-2' alt="profile photo"></img>
         </div>
           <div className='bg-gradient-to-r from-gray-600 to-gray-800 w-full text-white p-0 h-1/2 rounded-md'>
             { currentWorkingStatus==='Student' ? ( <div className='flex flex-col items-center gap-1 '>
