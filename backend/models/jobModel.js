@@ -11,7 +11,8 @@ class Job {
     postedOn,
     applyLink,
     companyName,
-    jobExp
+    jobExp,
+    location
   ) {
     this.jobId = jobId;
     this.userId = userId;
@@ -25,6 +26,7 @@ class Job {
     this.applyLink = applyLink;
     this.jobExp = jobExp;
     this.companyName = companyName;
+    this.location = location;
   }
 }
 module.exports = Job;

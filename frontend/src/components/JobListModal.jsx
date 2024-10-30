@@ -9,7 +9,7 @@ export default function JobListModal({openModal, selectedRowData, setOpenModal, 
                     <div className="p-6 bg-white shadow-md  w-90 relative rounded-xl">
                         <div className="mb-4">
                             <h3 className="text-2xl font-semibold">Software Engineer</h3>
-                            <p className="text-xl">{selectedRowData.company}</p>
+                            <p className="text-xl">{selectedRowData.companyName}</p>
                         </div>
                         <div className="space-y-4">
 
