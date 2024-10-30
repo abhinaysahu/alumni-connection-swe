@@ -4,7 +4,7 @@ import { Button, ButtonGroup, Card } from "flowbite-react";
 import { Modal } from "flowbite-react";
 import axios from "axios"
 import { Link, useLocation } from 'react-router-dom';
-import profilePhoto from "../assets/New_photo_resized.jpg"
+// import profilePhoto from "../assets/New_photo_resized.jpg"
 
 export default function AlumCard({ name, batch, jobTitle, contact, company, email, linkedin, userId, photo , currentWorkingStatus }) {
   const location = useLocation();
