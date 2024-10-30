@@ -2,13 +2,14 @@ import {DataTable} from "primereact/datatable";
 import {Column} from "primereact/column";
 import FullTime from "./FullTime.jsx";
 import InternshipPill from "./InternshipPill.jsx";
-import {Button, TextInput} from "flowbite-react";
+import {Button, Modal, TextInput} from "flowbite-react";
 import {IconField} from "primereact/iconfield";
 import {InputText} from "primereact/inputtext";
 import {InputIcon} from "primereact/inputicon";
 import searchIcon from "@heroicons/react/solid/esm/SearchIcon.js";
 import {useState} from "react";
 import {FilterMatchMode} from "primereact/api";
+import JobListModal from "./JobListModal.jsx";
 
 export default function JobTable() {
     const data = [
@@ -93,6 +94,18 @@ export default function JobTable() {
             "posted by": "Daniel"
         }
     ]
+    const [openModal, setOpenModal] = useState(false);
+    const [selectedRowData, setSelectedRowData] = useState(null); // Store selected row data for modal
+
+    const handleViewDetails = (rowData) => {
+        setSelectedRowData(rowData); // Set the selected row data
+        setOpenModal(true);        // Open the modal
+    };
+
+    const handleCloseModal = () => {
+        setOpenModal(false);       // Close the modal
+        setSelectedRowData(null);    // Clear selected row data
+    };
 
     const [filters, setFilters] = useState({
         global: {
@@ -106,8 +119,12 @@ export default function JobTable() {
         return rowData.category === "Full Time" ? <FullTime /> : rowData.category === "Internship" ? <InternshipPill /> : rowData.category;
     };
 
-    const ViewDetails = () => {
-        return <Button gradientDuoTone="greenToBlue">View Details</Button>;
+    const ViewDetails = ({rowData}) => {
+        return <>
+            <Button gradientDuoTone="greenToBlue" onClick={() => handleViewDetails(rowData)}>View Details</Button>
+            {selectedRowData && <JobListModal openModal={openModal} setOpenModal={setOpenModal} selectedRowData={selectedRowData}
+                           handleCloseModal={handleCloseModal}/>}
+        </>;
     }
 
     const TableHeader = ()=>{
@@ -121,14 +138,14 @@ export default function JobTable() {
     }
 
     return <>
-        <DataTable value={data} stripedRows tableStyle={{ minWidth: '50rem' }} filters={filters} header={TableHeader} paginator rows={5}>
+        <DataTable value={data} stripedRows dataKey={"id"} tableStyle={{ minWidth: '50rem' }} filters={filters} header={TableHeader} paginator rows={5}>
             <Column field={"company"} header={"Company"}/>
             <Column field={"designation"} header={"Designation"}/>
             <Column field={"category"} header={"Category"} body={categoryBodyTemplate}/>
             <Column field={"location"} header={"Location"}/>
             <Column field={"salary"} header={"Salary"}/>
             <Column field={"posted by"} header={"Posted By"}/>
-            <Column header={""} body={ViewDetails}/>
+            <Column header={""} body={(rowData) => <ViewDetails rowData={rowData}/> }/>
         </DataTable>
     </>
 }

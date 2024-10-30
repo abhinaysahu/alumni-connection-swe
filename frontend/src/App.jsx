@@ -1,6 +1,5 @@
 import {useState, useContext, useEffect} from 'react'
 import './App.css'
-import Header from "./components/Header.jsx";
 import FAQ from "./pages/FAQ.jsx";
 import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
@@ -11,7 +10,6 @@ import Home from "./pages/Home.jsx";
 import Signup from "./pages/Signup.jsx";
 import Signin from "./pages/Signin.jsx";
 import PostJob from "./pages/postJob.jsx";
-import UserCard from "./components/UserCard.jsx";
 import NewUserRequests from "./pages/NewUserRequests.jsx";
 import ProfileSettings from './pages/ProfileSettings.jsx';
 import Alumni from './pages/Alumni.jsx';
@@ -20,12 +18,9 @@ import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import axios from "axios";
 import MyJob from "./pages/MyJobs.jsx";
 import Dashboard from './pages/Dashboard.jsx';
-import { Button } from 'primereact/button';
-import JobTable from "./components/JobTable.jsx";
 import 'primereact/resources/themes/lara-light-indigo/theme.css';   // Theme
 import 'primereact/resources/primereact.min.css';
 import JobsList from "./pages/JobsListing.jsx";           // Core CSS
-import MyJob from "./pages/MyJobs.jsx";
 
 
 function App(){
