@@ -23,7 +23,8 @@ import Dashboard from './pages/Dashboard.jsx';
 import { Button } from 'primereact/button';
 import JobTable from "./components/JobTable.jsx";
 import 'primereact/resources/themes/lara-light-indigo/theme.css';   // Theme
-import 'primereact/resources/primereact.min.css';           // Core CSS
+import 'primereact/resources/primereact.min.css';
+import JobsList from "./pages/JobsListing.jsx";           // Core CSS
 
 
 function App(){
@@ -52,6 +53,7 @@ function App(){
              {/*   <UserCard name={"Aman Sheoran"} roll={"234CA007"} batch={"2026"} company={"DE Shaw"} contact={"8930460660"} email={"amansheo@gmail.com"} jobTitle={"SDE"} linkedin={"https://www.linkedin.com/in/amansheoran/"}></UserCard>*/}
             <Routes >
                 <Route path='/' element={<ProtectedRoute><Home/></ProtectedRoute>}></Route>
+                <Route path='/jobs' element={<ProtectedRoute><JobsList/></ProtectedRoute>}></Route>
               <Route path='/admin' element={<NewUserRequests/>}></Route>
               <Route path='/about' element={<ProtectedRoute><About/></ProtectedRoute>}></Route>
               <Route path='/faqs' element={<ProtectedRoute><FAQ/></ProtectedRoute>}></Route>
