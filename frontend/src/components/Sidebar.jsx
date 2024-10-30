@@ -21,6 +21,7 @@ import {
 import {useContext} from "react";
 import axios from "axios";
 import {authContext} from "../auth.jsx";
+import { useUser } from "../UserContext.jsx";
 export default function SideMenu() {
     const location = useLocation();
     const navigate = useNavigate();
@@ -38,6 +39,14 @@ export default function SideMenu() {
             console.log(e);
         }
     }
+
+    const {user} = useUser();
+
+    // if(!user){
+    //   return null;
+    // }
+
+    console.log(user.currentWorkingStatus);
   return (
     <>
       <Sidebar  className=" fixed left-0 z-20" aria-label="Sidebar with content separator example">
@@ -52,7 +61,7 @@ export default function SideMenu() {
                 Dashboard
             </Sidebar.Item>
             </Link>
-            <Link to={"/postjob"} >
+            {user.currentWorkingStatus==="Student"? null: (<><Link to={"/postjob"} >
             <Sidebar.Item  className={isActive("/postjob") ? "text-white bg-blue-700 hover:bg-blue-700 mb-2" : "text-gray-900 hover:bg-blue-400 mb-2"} icon={() => (
                     <MdPostAdd
                       className={(isActive("/postjob") ? "text-white" : "") + "w-5 h-5"}
@@ -66,6 +75,8 @@ export default function SideMenu() {
                My Jobs
             </Sidebar.Item>
             </Link>
+            </>)}
+            
             <Link to={"/profilesettings"} >
             <Sidebar.Item  className={isActive("/profilesettings") ? "text-white bg-blue-700 hover:bg-blue-700 mb-2" : "text-gray-900 hover:bg-blue-400 mb-2"}  icon={() => (
                     <IoMdSettings

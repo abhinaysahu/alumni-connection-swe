@@ -24,7 +24,7 @@ export default function SignupForm() {
   return (
       <>
           <form className=" max-w-md  grid grid-row-11 grid-cols-2 gap-2 " onSubmit={handleSubmit(async (data) => {
-              // console.log(data);
+              console.log(data);
               try{
                   const response = await axios.post('http://localhost:8080/users/addUser', {
                       email : data.email,
