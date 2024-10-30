@@ -17,7 +17,7 @@ export default function ProfileForm() {
   } = useForm();
   return (
     <form
-      className=" w-9/10 grid grid-cols-2 gap-1 m-2"
+      className=" w-9/10 grid grid-cols-2 gap-1 m-2 pb-2"
       onSubmit={handleSubmit((data) => {
         console.log(data);
       })}

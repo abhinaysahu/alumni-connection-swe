@@ -1,23 +1,50 @@
 
 import { useState } from 'react';
-import { Button, Card } from "flowbite-react";
+import { Button, ButtonGroup, Card } from "flowbite-react";
 import { Modal } from "flowbite-react";
 import axios from "axios"
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import profilePhoto from "../assets/New_photo_resized.jpg"
 
-export default function AlumCard({ name, batch, jobTitle, contact, company, email, linkedin, userId, photo }) {
-  return <>
-    <Card >
-      <div className="font-semibold text-lg text-center">{name}</div>
-      <div className="flex justify-around gap-0 ">
-        <div className='content-center'>
-          <img src='photo' alt="profile photo"></img>
+export default function AlumCard({ name, batch, jobTitle, contact, company, email, linkedin, userId, photo , currentWorkingStatus }) {
+  const location = useLocation();
+  const currPath = location.pathname;
+  return ( <div className=' hover:bg-gradient-to-r hover:from-cyan-400 hover:to-blue-400 hover:text-slate-50 rounded-lg'>
+    <Card class=" shadow-lg p-0 " >
+      <div className=" rounded-md flex  flex-col  items-center justify-around gap-4 hover:bg-gradient-to-r hover:from-cyan-500 hover:to-blue-500 hover:text-slate-50 ">
+        <div className='content-center '>
+          <img  src={profilePhoto}  className='w-40 pt-1 h-40 rounded-full' alt="profile photo"></img>
         </div>
-        {/* may be add userId to it to get profile  */}
-        <div>
-          <div>
-            <div className="font-normal text-gray-700 dark:text-gray-400">
-              <table className={"border-separate border-spacing-4"}>
+          <div className='bg-gradient-to-r from-gray-600 to-gray-800 w-full text-white p-0 h-1/2 rounded-md'>
+            { currentWorkingStatus==='Student' ? ( <div className='flex flex-col items-center gap-1 '>
+                <div className='text-3xl font-semibold  '> {name}</div>
+                <div className='text-xl font-normal '> Batch of : {batch}</div>
+                <div className='text-xl font-normal  overflow-hidden'>  {email}</div>
+              </div>):
+              (<div className='flex flex-col items-center gap-2 '>
+                <div className='text-3xl font-semibold  '> {name}</div>
+                <div className='text-xl font-normal '> Company : {company}</div>
+                <div className='text-xl font-normal text-ellipsis  overflow-hidden whitespace-nowrap'> {email}</div>
+              </div>)
+            }
+            <div className=" flex  items-center justify-center w-full  py-2">
+            <Link to={`/alumni/profile/${userId}`} >
+              { currPath.includes("profile")?
+                null:
+                <Button  color={"blue"}  className='w-full'>Know more</Button>
+               }
+              
+            </Link>
+          </div>
+          </div>
+        </div>
+    </Card>
+  </div>
+  )
+}
+
+
+ {/* <table className={"border-separate border-spacing-4"}>
               <tr>
                   <td className={"font-bold text-left"}>Company: </td>
                   <td>{company}</td>
@@ -30,16 +57,4 @@ export default function AlumCard({ name, batch, jobTitle, contact, company, emai
                   <td className={"font-bold"}>Passout Year: </td>
                   <td>{batch}</td>
                 </tr>
-              </table>
-            </div>
-          </div>
-        </div>
-        </div>
-        <div className=" flex  items-center justify-center w-full ">
-            <Link to={`/profile/${userId}`} >
-              <Button >Know more</Button>
-            </Link>
-          </div>
-    </Card>
-  </>
-}
+              </table> */}
