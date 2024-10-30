@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { FaIndianRupeeSign } from "react-icons/fa6";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import { Link } from "react-router-dom";
 export default function JobForm() {
     const { register, handleSubmit, formState: { errors } , reset} = useForm();
 
@@ -244,8 +245,10 @@ export default function JobForm() {
             </div>
 
 
-            <div className="col-start-1 col-end-2 row-start-8 row-end-9 mt-3">
-                <Button type="submit">Post </Button>
+            <div className="col-start-1 col-end-3 row-start-8 row-end-9 mt-3 flex justify-center">
+                <Button type="submit" color={"blue"} className="w-1/3 ">
+                    Post  
+                     </Button>
             </div>
         </form>
 
