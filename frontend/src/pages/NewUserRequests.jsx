@@ -30,7 +30,6 @@ export default function NewUserRequests() {
             fetchData();
 
         }catch (e) {
-
         }
     }, [])
 

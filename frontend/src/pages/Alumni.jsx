@@ -12,7 +12,6 @@ export default function Alumni(){
         const fetchData = async () => {
             const response = await axios.get('http://localhost:8080/users/getAllUsers');
             setUsers(response.data);
-        console.log("hello");
         }
         fetchData();
 
@@ -36,9 +35,9 @@ console.log(paginatedUsers);
     <Header name={"Alumni"}></Header>
     <div className="mx-[2rem] lg:mx-[8rem] mt-10 flex-grow md:mx-[3rem]">
     <div className={"font-bold text-4xl flex justify-center items-center "}>Know Your Alumni</div>
-    <div className="grid grid-cols-2 mt-8 w-full gap-4">
+    <div className="grid grid-cols-3 mt-8 w-full gap-y-8 gap-x-16 p-4">
             {paginatedUsers.map((request) => (
-                <AlumCard  name={request.name}  batch={request.passoutYear} jobTitle={ request.currPos} contact={request.contactNo} company={request.currentCompany}  email={request.email}  linkedin={request.linkedinUrl} userId={request.userId} photo = {request.profilePhotoUrl}></AlumCard>
+                <AlumCard   name={request.name}  batch={request.passoutYear} jobTitle={ request.currPos} contact={request.contactNo} company={request.currentCompany}  email={request.email}  linkedin={request.linkedinUrl} userId={request.userId} photo = {request.profilePhotoUrl} currentWorkingStatus = {request.currentWorkingStatus} ></AlumCard>
             ))}
         </div>
 

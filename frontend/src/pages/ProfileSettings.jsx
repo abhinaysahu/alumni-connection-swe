@@ -8,12 +8,10 @@ export default function ProfileSettings() {
       <div className="bg-slate-50 flex-auto w-[10%] pt-10 ">
         <SideMenu />
       </div>
-      <div className="bg-slate-50 flex-auto w-[80%] ">
+      <div className="bg-gray-200 flex-auto w-[80%] pl-4 ">
         <div className="w-9/10 bg-gray-200 ">
           <div className="pt-16 pl-5 ">
-            <h2 class="mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl dark:text-white">
-              Profile Settings
-            </h2>
+            <h2 class="mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl dark:text-white">Profile Settings</h2>
             <BreadCrumb name="Profile Settings" />
           </div>
 

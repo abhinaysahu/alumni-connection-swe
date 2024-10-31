@@ -7,6 +7,7 @@ import { Table } from "flowbite-react";
 
 import { Pagination } from "flowbite-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 import { Button, Modal } from "flowbite-react";
 
@@ -150,17 +151,19 @@ export default function MyJob() {
 
     return (
 
-        <div className="flex gap-2 h-[85vh]">
+        <div className="flex gap-2 h-full">
 
             <div className="bg-slate-50 flex-auto w-[10%] pt-10 ">
                 <SideMenu />
             </div>
 
-            <div className=" bg-gray-200  flex-auto w-9/12 pt-10 mt-6 px-4">
-                <div className="flex justify-between items-center mb-1 ">
+            <div className=" bg-gray-200  flex-auto w-[80%] pt-10 mt-6 px-4">
+                <div className="w-full pl-4 mb-2">
+                <div className="flex justify-between items-center mb-1  ">
                     <h2 className="mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl dark:text-white">My Jobs</h2>
-
-                    <a href="/postjob" className="bg-slate-800 hover:bg-blue-500 text-white px-4 py-2 rounded">Post a New Job</a>
+                    <Link to="/postjob">
+                    <div  className="bg-slate-800 hover:bg-blue-500 text-white px-4 py-2 rounded">Post a New Job</div>
+                    </Link>
 
                 </div>
 
@@ -285,7 +288,7 @@ export default function MyJob() {
                     />
                 </div>
             </div>
-
+            </div>
         </div>
     );
 

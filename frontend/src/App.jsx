@@ -21,6 +21,7 @@ import Dashboard from './pages/Dashboard.jsx';
 import 'primereact/resources/themes/lara-light-indigo/theme.css';   // Theme
 import 'primereact/resources/primereact.min.css';
 import JobsList from "./pages/JobsListing.jsx";           // Core CSS
+import UserDetails from './pages/UserDetails.jsx';
 
 
 function App(){
@@ -59,8 +60,9 @@ function App(){
               <Route path='/postjob' element={<ProtectedRoute><PostJob/></ProtectedRoute>}></Route>
                <Route path='/myjobs' element={<ProtectedRoute><MyJob/></ProtectedRoute>}></Route>
               <Route path='/profilesettings' element={<ProtectedRoute><ProfileSettings/></ProtectedRoute>}></Route>
-              <Route path='/dashboard' element={<Dashboard/>}></Route>
-              <Route path = '/alumni' element={<Alumni/>}></Route>
+              <Route path='/dashboard' element={<ProtectedRoute><Dashboard/></ProtectedRoute>}></Route>
+              <Route path = '/alumni' element={<ProtectedRoute><Alumni/></ProtectedRoute>}></Route>
+              <Route path = '/alumni/profile/:userId' element = {<ProtectedRoute><UserDetails/></ProtectedRoute>}></Route>
             </Routes>
              <Footer></Footer>
 
