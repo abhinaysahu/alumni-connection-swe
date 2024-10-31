@@ -12,12 +12,27 @@ const addNewUser = async (req, res) => {
       await collectionRef.doc("UserId").set({});
     }
 
+
     const userID = generateUniqueId();
     data["userId"] = userID;
     data["userStatus"] = "Pending";
     const encryptedPassword = await bcrypt.hash(data["password"], 10);
     data["password"] = encryptedPassword;
-    await db.collection("User").doc(userID).set(data);
+    await db.collection("User").doc(userID).set({
+      email: data.email,
+      password: encryptedPassword,
+      userStatus: data["userStatus"],
+      name: data["name"],
+      contactNo: data["contactNo"],
+      bio: data["bio"],
+      linkedinUrl: data["linkedinUrl"],
+      currentCompany: data["currentCompany"],
+      profilePhotoUrl: data["profilePhotoUrl"],
+      currPos: data["currPos"],
+      currentWorkingStatus: data["currentWorkingStatus"],
+      userId: userID,
+      passoutYear: data.passoutYear,
+    });
 
     res.status(200).send("User creation request sent successfully");
   } catch (err) {

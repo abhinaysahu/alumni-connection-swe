@@ -12,7 +12,7 @@ class Job {
     applyLink,
     companyName,
     jobExp,
-    location
+    location,
   ) {
     this.jobId = jobId;
     this.userId = userId;

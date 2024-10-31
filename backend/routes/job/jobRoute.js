@@ -4,7 +4,7 @@ const deleteJob = require("../../controllers/Job/deleteJobController");
 const {
   getAllJobs,
   getJobsByType,
-  getJobById,
+  getJobById, getJobsByUser,
 } = require("../../controllers/Job/getJobController");
 const updateJob = require("../../controllers/Job/updateJobController");
 const {authenticate} = require("../../middlewares/auth");
@@ -18,4 +18,5 @@ router.get("/getJob/:jobId", getJobById);
 router.get("/getAllJobs", authenticate, getAllJobs);
 router.get("/getJobsByType/:type", getJobsByType);
 router.put("/updateJob/:jobId", updateJob);
+router.get("/postedjobs", authenticate, getJobsByUser);
 module.exports = router;

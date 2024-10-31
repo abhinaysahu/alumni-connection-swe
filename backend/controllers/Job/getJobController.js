@@ -84,4 +84,39 @@ const getJobsByType = async (req, res) => {
   }
 };
 
-module.exports = { getAllJobs, getJobById, getJobsByType };
+const getJobsByUser = async (req, res) => {
+  try{
+    const userId = req.user_id;
+    const jobsRef = db.collection("Job");
+    const snapshot = await jobsRef.where("userId", "==", userId).get();
+
+    const jobs = [];
+    snapshot.forEach((doc) => {
+      const data = doc.data();
+
+      const job = new Job(
+          doc.id,
+          data.userId,
+          data.title,
+          data.type,
+          data.description,
+          data.salary,
+          data.yoe,
+          data.skills,
+          data.postedOn,
+          data.applyLink,
+          data.companyName,
+          data.jobExp,
+          "Bangalore"
+      );
+
+      jobs.push(job);
+    });
+
+    res.status(200).send(jobs);
+  }catch (e) {
+    return res.status(500).send(e.message);
+  }
+}
+
+module.exports = { getAllJobs, getJobById, getJobsByType, getJobsByUser };

@@ -42,11 +42,11 @@ export default function SideMenu() {
 
     const {user} = useUser();
 
-    // if(!user){
-    //   return null;
-    // }
+    if(!user){
+      return null;
+    }
 
-    console.log(user.currentWorkingStatus);
+    console.log(user);
   return (
     <>
       <Sidebar  className=" fixed left-0 z-20" aria-label="Sidebar with content separator example">

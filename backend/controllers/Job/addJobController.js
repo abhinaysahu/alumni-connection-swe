@@ -5,6 +5,7 @@ const { generateUniqueId } = require("../../utills/generateId");
 const addJob = async (req, res) => {
   try {
     const data = req.body;
+    console.log(data);
     const collectionRef = db.collection("Job");
     const collectionSnapshot = await collectionRef.get();
     if (collectionSnapshot.empty) {
@@ -12,6 +13,7 @@ const addJob = async (req, res) => {
     }
 
     const jobId = generateUniqueId();
+    data["jobId"] = jobId;
     await db.collection("Job").doc(jobId).set(data);
 
     res.status(200).send("Job created successfully");
