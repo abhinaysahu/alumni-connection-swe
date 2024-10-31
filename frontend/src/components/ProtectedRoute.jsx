@@ -36,6 +36,8 @@ export default function ProtectedRoute({children}){
             if (!response) {
                 navigate('/signin');
             }
+        }).catch(()=>{
+            navigate('/signin');
         });
     }, []);
 

@@ -33,7 +33,10 @@ export default function SinginForm(){
           setLoginError('');  //clear any existing errors
 
           setIsAuthenticated(true);
-          navigate("/");
+          if(response.data.msg === "Admin"){
+            navigate("/admin")
+          }else
+            navigate("/");
 
           //  for User Context 
           if (response.data.success) {
