@@ -4,9 +4,11 @@ import {useForm} from "react-hook-form";
 import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 import {authContext} from "../auth.jsx";
+import { useUser } from "../UserContext.jsx";
 
 
 export default function SinginForm(){
+  const { setUser } = useUser();
   const {register,handleSubmit,formState:{errors} }  = useForm();
   const navigate = useNavigate();
   const [loginError, setLoginError] = useState('');
@@ -31,7 +33,13 @@ export default function SinginForm(){
           setLoginError('');  //clear any existing errors
 
           setIsAuthenticated(true);
-          navigate("/")
+          navigate("/");
+
+          //  for User Context 
+          if (response.data.success) {
+            setUser(response.data.user); // Store user data
+            // Redirect to home or dashboard page
+        }
         } catch (error) {
           console.error('Login failed:', error);
           // Set error message based on the response
@@ -53,7 +61,7 @@ export default function SinginForm(){
           <div className="mb-2 block">
             <Label htmlFor="email1" value="Email" />
           </div>
-          <TextInput id="email1" type="email" placeholder="name@google.com" color={errors.email?"failure" : "success"}
+          <TextInput id="email1" type="email" placeholder="name@google.com" color={errors.email?"failure" : "none"}
                      {...register("email", {
                        required: "This is required",
                        pattern: {
@@ -68,7 +76,7 @@ export default function SinginForm(){
           <div className="mb-2 block">
             <Label htmlFor="password" value="Password"/>
           </div>
-          <TextInput id="password" type="password" required color={errors.password ? "failure" : "success"}
+          <TextInput id="password" type="password" required color={errors.password?"failure":"none"}
                      {...register("password", {
                        required: "This is required",
                        pattern: {
