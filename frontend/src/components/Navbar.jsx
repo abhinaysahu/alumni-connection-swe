@@ -1,10 +1,10 @@
 import {Link, NavLink} from "react-router-dom";
 import nitklogo from "../assets/nitk.svg";
 import {useContext} from "react";
-import {authContext} from "../auth.jsx";
+import {useAuth} from "../auth.jsx";
 
 export default function Navbar() {
-  const {isAuthenticated} = useContext((authContext));
+  const {isAuthenticated} = useAuth();
   return (
     <>
       <nav className="   bg-white dark:bg-gray-900 fixed w-screen z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600  mb-100">

@@ -13,7 +13,7 @@ import PostJob from "./pages/postJob.jsx";
 import NewUserRequests from "./pages/NewUserRequests.jsx";
 import ProfileSettings from './pages/ProfileSettings.jsx';
 import Alumni from './pages/Alumni.jsx';
-import {authContext} from "./auth.jsx";
+import {useAuth} from "./auth.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import axios from "axios";
 import MyJob from "./pages/MyJobs.jsx";
@@ -22,29 +22,15 @@ import 'primereact/resources/themes/lara-light-indigo/theme.css';   // Theme
 import 'primereact/resources/primereact.min.css';
 import JobsList from "./pages/JobsListing.jsx";           // Core CSS
 import UserDetails from './pages/UserDetails.jsx';
-
+import {useUser} from "./UserContext.jsx";
 
 function App(){
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const {isAuthenticated, setIsAuthenticated} = useAuth();
+    const {user, setUser} = useUser();
 
-    useEffect(() => {
-        const checkAuth = async () => {
-            try{
-                const response = await axios.get("http://localhost:8080/users/auth/check",{ withCredentials: true });
-                setIsAuthenticated(response.data.authenticated);
-            }catch (e) {
-                setIsAuthenticated(false);
-            }
-        }
-
-        checkAuth().then(()=>{
-            console.log(isAuthenticated);
-        });
-    }, []);
 
   return (
     <>
-        <authContext.Provider value={{isAuthenticated, setIsAuthenticated}}>
             <div className="min-h-screen  pt-10 pb-20 flex flex-col">
                 {isAuthenticated ? <Navbar></Navbar> : null}
              {/*   <UserCard name={"Aman Sheoran"} roll={"234CA007"} batch={"2026"} company={"DE Shaw"} contact={"8930460660"} email={"amansheo@gmail.com"} jobTitle={"SDE"} linkedin={"https://www.linkedin.com/in/amansheoran/"}></UserCard>*/}
@@ -67,7 +53,6 @@ function App(){
              <Footer></Footer>
 
             </div>
-        </authContext.Provider>
     </>
   );
 }

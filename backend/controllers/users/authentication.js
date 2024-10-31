@@ -83,6 +83,15 @@ exports.checkToken = async (req, res) => {
     const {token} = req.cookies;
     // console.log("Token"+  token);
 
+    const collectionRef = db.collection("User");
+
+    const detailsObj = await collectionRef.doc(req.user_id).get();
+    if(!detailsObj){
+        return res.status(404).send("User does not exist");
+    }
+
+    const user = detailsObj.data();
+
     if (!token) {
         return res.status(401).json({ authenticated: false });
     }
@@ -90,7 +99,7 @@ exports.checkToken = async (req, res) => {
     try {
         // Verify the token (e.g., using jwt.verify)
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        return res.status(200).json({ authenticated: true });
+        return res.status(200).json({ authenticated: true, user: user });
     } catch (err) {
         return res.status(500).json({authenticated: false});
     }

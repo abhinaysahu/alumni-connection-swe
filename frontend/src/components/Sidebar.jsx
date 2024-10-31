@@ -20,18 +20,18 @@ import {
 } from "react-icons/hi";
 import {useContext} from "react";
 import axios from "axios";
-import {authContext} from "../auth.jsx";
+import {useAuth} from "../auth.jsx";
 import { useUser } from "../UserContext.jsx";
 export default function SideMenu() {
     const location = useLocation();
     const navigate = useNavigate();
-    const {isAuthenticated, setIsAuthenticated} = useContext(authContext);
+    const {isAuthenticated, setIsAuthenticated} = useAuth();
 
     const isActive = (path) => location.pathname === path;
 
     const logout = async () => {
         try{
-           const response = await axios.get("http://localhost:8080/users/logout");
+           const response = await axios.get("http://localhost:8080/users/logout", { withCredentials: true });
            console.log(response.data);
            setIsAuthenticated(false);
            navigate('/signin');
@@ -41,12 +41,12 @@ export default function SideMenu() {
     }
 
     const {user} = useUser();
+    console.log(user);
 
     if(!user){
       return null;
     }
 
-    console.log(user);
   return (
     <>
       <Sidebar  className=" fixed left-0 z-20" aria-label="Sidebar with content separator example">

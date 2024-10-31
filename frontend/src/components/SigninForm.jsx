@@ -3,7 +3,7 @@ import { Button, Checkbox, Label, TextInput } from "flowbite-react";
 import {useForm} from "react-hook-form";
 import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
-import {authContext} from "../auth.jsx";
+import {useAuth} from "../auth.jsx";
 import { useUser } from "../UserContext.jsx";
 
 
@@ -13,7 +13,7 @@ export default function SinginForm(){
   const navigate = useNavigate();
   const [loginError, setLoginError] = useState('');
   const [loginMessage, setLoginMessage] = useState('');
-  const {isAuthenticated, setIsAuthenticated} = useContext(authContext);
+  const {isAuthenticated, setIsAuthenticated} = useAuth();
   // const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   return (

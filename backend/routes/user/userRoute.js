@@ -14,7 +14,7 @@ router.post('/userRequests', getUserRequests);
 router.post('/login', login)
 router.put('/accept/:id', acceptUserRequest)
 router.put('/decline/:id', declineUserRequest)
-router.get('/auth/check', checkToken)
+router.get('/auth/check', authenticate, checkToken)
 router.get('/logout', logout)
 router.get('/me', authenticate, getUserId);
 
