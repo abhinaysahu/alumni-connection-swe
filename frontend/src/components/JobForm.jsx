@@ -73,7 +73,9 @@ export default function JobForm() {
                     applyLink: formData.applyLink,
                     companyName: formData.companyName,
                     jobExp: formData.jobExp,
+                    location: formData.location,
                     userId: userId,
+                    
                 }, {withCredentials: true});
 
                 console.log("done");
@@ -124,7 +126,7 @@ export default function JobForm() {
                 <div className="mb-2 block ">
                     <Label htmlFor="type" value="Job type" />
                 </div>
-                <Select id="type" required {...register("type", {
+                <Select id="type" className="border-gray-600" {...register("type", {
                     required: "this is required"
                 })
                 }>
@@ -165,7 +167,7 @@ export default function JobForm() {
                 <div className="mb-2 block">
                     <Label htmlFor="description" value="Description" />
                 </div>
-                <Textarea id="description" placeholder="" rows={4}  
+                <Textarea id="description" placeholder="" rows={4}  className="border-gray-700"
                     {...register("description", {
                     required: "this is required",
                 })} />
@@ -200,8 +202,22 @@ export default function JobForm() {
                 </Select>
             </div>
 
+                  {/* company Name */}
+            <div className="col-start-2 col-end-3 row-start-6 row-end-7">
+                <div className="mb-2 block ">
+                    <Label htmlFor="location" value="Location" />
+                </div>
+                <TextInput id="location" type="text" placeholder=""
+                    color={errors.location?"failure" : "none"}
+                    {...register("location", {
+                        required: "this is required"
+                    })} />
+                {/* <p>{errors.companyName?.message}</p> */}
+            </div>
+
+
             {/* skills */}
-            <div className="row-start-6 row-end-7 col-start-2 col-end-3">
+            <div className="row-start-7 row-end-8 col-start-1 col-end-3">
                 <div className="mb-2 block">
                     <Label value="Skills" />
                 </div>
@@ -212,7 +228,7 @@ export default function JobForm() {
                         value={inputValue}
                         onChange={(e) => setInputValue(e.target.value)}
                         onKeyDown={(e) => e.key === 'Enter' && handleAddSkill(e)}
-                        className="w-full"
+                        className="w-full border-gray-700 border-1"
                     />
                 </div>
                 <div className="flex flex-wrap gap-2  items-start">
