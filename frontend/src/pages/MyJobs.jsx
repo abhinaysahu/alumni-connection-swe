@@ -27,7 +27,7 @@ export default function MyJob() {
             postedOn: "January 18, 2024 02:51 PM",
             location: "Jaipur",
             salary: "10L-15L",
-            status: "Pending",
+            status: "Active",
         },
         {
             title: "Lorem ipsum, dolor sit amet consectetur adipiscing elit.",
@@ -35,7 +35,7 @@ export default function MyJob() {
             postedOn: "January 18, 2024 02:51 PM",
             location: "Jaipur",
             salary: "10L-15L",
-            status: "Pending",
+            status: "Active",
         },
         {
             title: "Lorem ipsum, dolor sit amet consectetur adipiscing elit.",
@@ -43,7 +43,7 @@ export default function MyJob() {
             postedOn: "January 18, 2024 02:51 PM",
             location: "fsdjafhdlskjhf",
             salary: "10L-15L",
-            status: "Pending",
+            status: "Active",
         },
         {
             title: "Lorem ipsum, dolor sit amet consectetur adipiscing elit.",
@@ -51,7 +51,7 @@ export default function MyJob() {
             postedOn: "January 18, 2024 02:51 PM",
             location: "Jaipur",
             salary: "10L-15L",
-            status: "Pending",
+            status: "Active",
         },
         {
             title: "Lorem ipsum, dolor sit amet consectetur adipiscing elit.",
@@ -59,7 +59,7 @@ export default function MyJob() {
             postedOn: "January 18, 2024 02:51 PM",
             location: "Jaipur",
             salary: "10L-15L",
-            status: "Pending",
+            status: "Expired",
         },
         {
             title: "Lorem ipsum, dolor sit amet consectetur adipiscing elit.",
@@ -67,7 +67,7 @@ export default function MyJob() {
             postedOn: "January 18, 2024 02:51 PM",
             location: "Jaipur",
             salary: "10L-jdhfjdsf",
-            status: "Pending",
+            status: "Active",
         },
         {
             title: "Lorem ipsum, dolor sit amet consectetur adipiscing elit.",
@@ -75,7 +75,7 @@ export default function MyJob() {
             postedOn: "January 18, 2024 02:51 PM",
             location: "Jaipur",
             salary: "10L-dfhjheuifu",
-            status: "Pending",
+            status: "Expired",
         },
         {
             title: "Lorem ipsum, dolor sit amet consectetur adipiscing elit.",
@@ -83,7 +83,7 @@ export default function MyJob() {
             postedOn: "January 18, 2024 02:51 PM",
             location: "hsdkjfhdf",
             salary: "10L-15L",
-            status: "Pending",
+            status: "Expired",
         },
         {
             title: "Lorem ipsum, dolor sit amet consectetur adipiscing elit.",
@@ -91,49 +91,49 @@ export default function MyJob() {
             postedOn: "January 18, 2024 02:51 PM",
             location: "Jaipur",
             salary: "10L-15L",
-            status: "Pending",
+            status: "Active",
         }, {
             title: "Lorem ipsum, dolor sit amet consectetur adipiscing elit.",
             category: "Technical Consultant",
             postedOn: "January 18, 2024 02:51 PM",
             location: "Jaipur",
             salary: "10L-15L",
-            status: "Pending",
+            status: "Active",
         }, {
             title: "Lorem ipsum, dolor sit amet consectetur adipiscing elit.",
             category: "Technical Consultant",
             postedOn: "January 18, 2024 02:51 PM",
             location: "Jaipur",
             salary: "10L-15L",
-            status: "Pending",
+            status: "Active",
         }, {
             title: "Lorem ipsum, dolor sit amet consectetur adipiscing elit.",
             category: "Technical Consultant",
             postedOn: "January 18, 2024 02:51 PM",
             location: "Jaipur",
             salary: "10L-15L",
-            status: "Pending",
+            status: "Active",
         }, {
             title: "Lorem ipsum, dolor sit amet consectetur adipiscing elit.",
             category: "Technical Consultant",
             postedOn: "January 18, 2024 02:51 PM",
             location: "Jaipur",
             salary: "10L-15L",
-            status: "Pending",
+            status: "Active",
         }, {
             title: "Lorem ipsum, dolor sit amet consectetur adipiscing elit.",
             category: "Technical Consultant",
             postedOn: "January 18, 2024 02:51 PM",
             location: "hfkjhdfd",
             salary: "10L-15L",
-            status: "Pending",
+            status: "Expired",
         }, {
             title: "Lorem ipsum, dolor sit amet consectetur adipiscing elit.",
             category: "kieujbdkej",
             postedOn: "January 18, 2024 02:51 PM",
             location: "Jaipur",
             salary: "10L-15L",
-            status: "Pending",
+            status: "Active",
         }
     ];
 
@@ -172,7 +172,6 @@ export default function MyJob() {
 
                     <button className="bg-white hover:bg-blue-400 px-5 py-1 rounded-full size-sm ">All ({jobs.length})</button>
                     <button className="bg-white  hover:bg-blue-400  px-5 py-1 rounded-full size-sm">Active</button>
-                    <button className="bg-white hover:bg-blue-400  px-5 py-1 rounded-full size-sm">Pending</button>
                     <button className="bg-white  hover:bg-blue-400  px-5 py-1 rounded-full size-sm">Expired</button>
                 </div>
 
@@ -201,7 +200,7 @@ export default function MyJob() {
                                         <td className="py-3 px-6">{job.salary}</td>
                                         <td className="py-3 px-6">
                                             <span
-                                                className={`px-3 py-1 rounded-full text-sm ${job.status === "Pending" ? "bg-yellow-100 text-yellow-700" : "bg-green-200 text-green-700"
+                                                className={`px-3 py-1 rounded-full text-sm ${job.status === "Pending" ? "bg-yellow-100 text-yellow-700" : job.status === "Active" ? "bg-green-200 text-green-700" : "bg-red-200 text-red-700"
                                                     }`}
                                             >
                                                 {job.status}
