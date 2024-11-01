@@ -2,6 +2,9 @@ const db = require("../../config");
 const {generateUniqueId} = require("../../utills/generateId");
 const User = require("../../models/userModel");
 const bcrypt = require('bcryptjs');
+const transporter = require("../../config/mailer");
+
+require('dotenv').config({ path: `./config/config.env` });
 
 const addNewUser = async (req, res) => {
   try {
@@ -177,6 +180,7 @@ const getUserRequests = async (req, res) => {
           userStatus
       ));
     })
+
     return res.status(200).send(responses);
 
   }catch (e){
@@ -193,6 +197,28 @@ const acceptUserRequest = async (req, res) => {
     userStatus: "Approved",
   })
 
+  const mailOptions = {
+    from: {
+      name: `MCA NITK`,
+      address: process.env.USERNAME,
+    },
+    to: [`amansheo@gmail.com`],
+    subject: "Your request to register have been accepted",
+    html: `
+        <h1>Congratulations!</h1>
+        <p>Your request to register on AlumConnect MCA NITK have been accepted. You can login now.</p>
+    `,
+  }
+  const sendMail = async (transporter, mailOptions) => {
+    try {
+      await transporter.sendMail(mailOptions);
+    }catch (e) {
+      console.log(e)
+    }
+  }
+
+  await sendMail(transporter, mailOptions);
+
 }
 
 const declineUserRequest = async (req, res) => {
@@ -201,6 +227,27 @@ const declineUserRequest = async (req, res) => {
   const docRef = db.collection("User").doc(id);
 
   await docRef.delete();
+
+  const mailOptions = {
+    from: {
+      name: `MCA NITK`,
+      address: process.env.USERNAME,
+    },
+    to: [`amansheo@gmail.com`],
+    subject: "Your request to register have been rejected",
+    html: `
+        <p>Your request to register on AlumConnect MCA NITK have been rejected. It is because we can't verify your identity as an alumni of MCA NITK.</p>
+    `,
+  }
+  const sendMail = async (transporter, mailOptions) => {
+    try {
+      await transporter.sendMail(mailOptions);
+    }catch (e) {
+      console.log(e)
+    }
+  }
+
+  await sendMail(transporter, mailOptions);
 
 }
 
