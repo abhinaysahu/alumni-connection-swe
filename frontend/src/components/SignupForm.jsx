@@ -15,30 +15,38 @@ import axios from 'axios';
 export default function SignupForm() {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [error, setError] = useState("");
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+    const [profilePhoto, setProfilePhoto] = useState(null);
 
-  const startYear = 1988;
+    const handlePhotoChange = (event) => {
+        setProfilePhoto(event.target.files[0]);
+    };
+
+
+    const startYear = 1988;
   const endYear = 2027;
   const years = Array.from({ length: endYear - startYear + 1 }, (v, i) => startYear + i);
 
   return (
       <>
           <form className=" max-w-md  grid grid-row-11 grid-cols-2 gap-2 " onSubmit={handleSubmit(async (data) => {
-              console.log(data);
+              const formData = new FormData();
+              formData.append("profilePhoto", profilePhoto);
+              formData.append("email", data.email);
+              formData.append("password", data.password);
+              formData.append("name", data.name);
+              formData.append("contactNo", data.contactNo);
+              formData.append("bio", data.bio);
+              formData.append("linkedinUrl", data.linkedinUrl);
+              formData.append("currentCompany", data.currentCompany);
+              formData.append("passoutYear", data.passoutYear);
+              formData.append("currPos", data.currPos);
+              formData.append("currentWorkingStatus", data.currentWorkingStatus);
+
+
+              console.log(formData);
               try{
-                  const response = await axios.post('http://localhost:8080/users/addUser', {
-                      email : data.email,
-                      password : data.password,
-                      name: data.name,
-                      contactNo: data.contactNo,
-                      bio: data.bio,
-                      linkedinUrl: data.linkedinUrl,
-                      passoutYear: data.passoutYear,
-                      currentCompany: data.currentCompany,
-                      profilePhotoUrl: "testurl",
-                      currPos: data.currPos,
-                      currentWorkingStatus: data.currentWorkingStatus,
-                  })
+                  const response = await axios.post('http://localhost:8080/users/addUser', formData)
 
                   setError("");
                   console.log("hello");
@@ -200,7 +208,7 @@ export default function SignupForm() {
                       <Label htmlFor="profilePhoto" value="Upload Photo"/>
                   </div>
                   <FileInput id="profilePhotoUrl" 
-                             helperText="SVG, PNG, JPG or GIF (MAX. 10MB)." {...register("profilePhotoUrl")}  />
+                             helperText="SVG, PNG, JPG or GIF (MAX. 10MB)." {...register("profilePhotoUrl")} onChange={handlePhotoChange} />
               </div>
               <div className="mt-3">
               </div>
@@ -216,32 +224,16 @@ export default function SignupForm() {
 }
 
 
-// {/* <div className="mb-4">
-//   <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="firstName">
-//     First Name
-//   </label>
-//   <input
-//     type="text"
-//     name="firstName"
-//     value={formData.firstName}
-//     onChange={handleChange}
-//     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-//     placeholder="Enter your first name"
-//   /> */}
-
-
-//   {/* roll number */}
-//   <div>
-//   <div className=" block">
-//     <Label htmlFor="roll number" value="Roll number " />
-//   </div>
-//   <TextInput id="rollNo" type="text" placeholder="234CA001"
-//     {...register("rollNo", {
-//       required: "This is  required",
-//       pattern: {
-//         value: /^\d{3}CA\d{3}$/,
-//         message: "Enter a valid roll number"
-//       }
-//     })} />
-//   <div >{errors.rollNo?.message}</div >
-// </div>
+// {
+//     email : data.email,
+//         password : data.password,
+//     name: data.name,
+//     contactNo: data.contactNo,
+//     bio: data.bio,
+//     linkedinUrl: data.linkedinUrl,
+//     passoutYear: data.passoutYear,
+//     currentCompany: data.currentCompany,
+//     profilePhotoUrl: "testurl",
+//     currPos: data.currPos,
+//     currentWorkingStatus: data.currentWorkingStatus,
+// }
