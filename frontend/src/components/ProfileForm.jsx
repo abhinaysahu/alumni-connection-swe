@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Checkbox,
@@ -7,103 +7,225 @@ import {
   Select,
   Textarea,
   FileInput,
+
 } from "flowbite-react";
 import { useForm } from "react-hook-form";
+import axios from "axios";
+import { useUser } from "../UserContext";
 export default function ProfileForm() {
+    const [userData, setUserData] = useState();
+    const { user } = useUser();
+    // useEffect( () =>{
+    //   try{
+    //     const fetchData = async () => {
+    //       const response = await axios.get('http://localhost:8080/users/getUser/' + user.userId, {
+    //         withCredentials: true,
+    //       });
+    //         setUserData(response.data);
+    //     }
+    //     fetchData();
+    //   }
+
+    //   catch(e){
+
+    //   }
+
+    // },[]);
+    
+   
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+    reset
+  } = useForm({
+    defaultValues: user  || {},
+  });
+
+  const startYear = 1988;
+  const endYear = 2027;
+  const years = Array.from({ length: endYear - startYear + 1 }, (v, i) => startYear + i);
   return (
     <form
       className=" w-9/10 grid grid-cols-2 gap-1 m-2 pb-2"
-      onSubmit={handleSubmit((data) => {
-        console.log(data);
+      onSubmit={handleSubmit( async (data) => {
+        reset();
+        try{
+          const response = await axios.post('http://localhost:8080/users/addUser', {
+              email : data.email,
+              password : data.password,
+              name: data.name,
+              contactNo: data.contactNo,
+              bio: data.bio,
+              linkedinUrl: data.linkedinUrl,
+              passoutYear: data.passoutYear,
+              currentCompany: data.currentCompany,
+              profilePhotoUrl: "testurl",
+              currPos: data.currPos,
+              currentWorkingStatus: data.currentWorkingStatus,
+          })
+
+      }catch (e) {
+          setError(e);
+      }
       })}
     >
-      {/* First Name*/}
-      <div className="col-start-1 col-end-2 row-start-1 row-end-2">
-        <div className="mb-2 block ">
-          <Label htmlFor="firstName" value="First Name" />
-        </div>
-        <TextInput
-          id="firstName"
-          type="text"
-          placeholder="John"
-          color={errors.firstName?"failure" : "none"}
-          {...register("firstName", {
-            required: "this is required",
-          })}
-        />
-        {/* <div className={errors.firstName?"text-sm text-red-600" : "text-sm text-green-400"}>{errors.firstName?.message}</div> */}
-      </div>
-      {/* Last Name */}
-      <div className="col-start-2 col-end-3 row-start-1 row-end-2">
-        <div className="mb-2 block ">
-          <Label htmlFor="lastName" value="Last Name" />
-        </div>
-        <TextInput
-          id="lastName"
-          type="text"
-          placeholder="Doe"
-          color={errors.lastName?"failure" : "none"}
-          {...register("lastName", {
-            required: "this is required",
-          })}
-        />
-        {/* <div  className={errors.lastName?"text-sm text-red-600" : "text-sm text-green-400"}>{errors.lastName?.message}</div> */}
-      </div>
-      {/* email  */}
-      {/* {loginError && (
-        <div style={{ color: "red", marginBottom: "10px" }}>{loginError}</div>
-      )} */}
-      <div className="col-start-1 col-end-2 row-start-2 row-end-3">
-        <div className="mb-2 block">
-          <Label htmlFor="email" value="Email" />
-        </div>
-        <TextInput
-          id="email"
-          type="email"
-          placeholder="name@google.com"
-          color={errors.email?"failure" : "none"}
-          {...register("email", {
-            required: "this is required",
-            pattern: {
-              value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-              message: "Enter a valid email address",
-            },
-          })}
-        />
-        <div className={errors.email?"text-sm text-red-600" : "text-sm text-green-400"}>{errors.email?.message}</div>
-      </div>
+      {/* name */}
+      <div row-start-1 row-end-2 col-start-1 col-end-2>
+                  <div className="block">
+                      <Label htmlFor="name" value="  Name"/>
+                  </div>
+                  <TextInput id="name" type="text" color={errors.name? "failure" : "none"}
+                             {...register("name", {
+                                 required: "This is required"
+                             })} />
+              </div>
 
-      {/* Bio */}
-      <div className="col-start-1 col-end-3 row-start-3 row-end-4">
-        <div className="mb-2 block">
-          <Label htmlFor="bio" value="Bio" />
-        </div>
-        <Textarea id="bio" placeholder="" rows={4} {...register("bio")} />
-      </div>
+              {/* phone  validate number to only have integers */}
+              <div className="row-start-1 row-end-2 col-start-2 col-end-3">
+                  <div className=" block">
+                      <Label htmlFor="phone" value="Phone number"/>
+                  </div>
+                  <TextInput id="contactNo" type="tel" color={errors.contactNo?"failure" : "none"}
+                             {...register("contactNo", {
+                                 required: "This is  required",
+                                 minLength: {
+                                     value: 10,
+                                     message: "phone number should be of 10 digits"
+                                 },
+                                 maxLength: {
+                                     value: 10,
+                                     message: "phone number should be of 10 digits"
+                                 },
+                                 pattern: {
+                                     value: /^[0-9]{10}$/,  // Regex to allow only 10 digits
+                                     message: "Phone number must contain only numbers",
+                                 }
+                             })} />
+              </div>
+              {/* email */}
+              <div className="row-start-2 row-end-3 col-start-1 col-end-2">
+                  <div className=" block">
+                      <Label htmlFor="email" value="Email"/>
+                  </div>
+                  <TextInput id="email" type="email" placeholder="name@google.com"
+                        color={errors.email?"failure" : "none"}
+                             {...register("email", {
+                                 required: "This is required",
+                                 pattern: {
+                                     value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                                     message: "Enter a valid email address"
+                                 }
+                             })} />
+                  <div className={errors.email? "text-red-600 text-sm" : "text-green-400 text-sm"} >{errors.email?.message}</div >
+              </div>
+              {/* password */}
+              {/* <div className="row-start-2 row-end-3 col-start-2 col-end-3">
+                  <div className=" block">
+                      <Label htmlFor="password" value="Password"/>
+                  </div>
+                  <TextInput id="password" type="password" required color={errors.password?"failure" : "none" }
+                             {...register("password", {
+                                 required: "This is required",
+                                 pattern: {
+                                     value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                                     message: "Password must be at least 8 characters, include an uppercase, a lowercase, a number, and a special character"
+                                 }
+                             })} />
+                  <div className= {errors.password? "text-sm text-red-600" : "text-sm text-green-400"}>{errors.password?.message}</div >
+              </div> */}
 
-      {/* Status */}
-      <div className="col-start-2 col-end-3 row-start-2 row-end-3">
-        <div className="mb-2 block ">
-          <Label htmlFor="status" value="Status" />
-        </div>
-        <Select
-          id="currentWorkingStatus"
-          required
-          {...register("currentWorkingStatus", {
-            required: "this is required",
-          })}
-        >
-          <option>Student</option>
-          <option>Working</option>
-          <option>Not working</option>
-        </Select>
-      </div>
-      <div className="col-start-1 col-end-3 row-start-5 row-end-6 mt-3 flex justify-center pb-2">
+
+              {/* Bio */}
+              <div className="row-start-3 row-end-4 col-start-1 col-end-3">
+                  <div className="block">
+                      <Label htmlFor="bio" value="Bio"/>
+                  </div>
+                  <Textarea id="bio" placeholder="" rows={2} {...register("bio")} />
+              </div>
+
+
+              {/* Status */}
+
+              <div className="row-start-4 row-end-5 col-start-1 col-end-2">
+                  <div className=" block ">
+                      <Label htmlFor="status" value="Status"/>
+                  </div>
+                  <Select
+                      id="currentWorkingStatus"
+                      required
+                      {...register("currentWorkingStatus", {
+                          required: "This is required",
+                      })}
+                  >
+                      <option >Student</option>
+                      <option>Working</option>
+                      <option>Not working</option>
+                  </Select>
+              </div>
+
+              {/* current Company */}
+              <div className="row-start-4 row-end-5 col-start-2 col-end-3">
+                  <div className="block">
+                      <Label htmlFor="company" value="Company"/>
+                  </div>
+                  <TextInput id="currentCompany" type="text"  color={errors.currentCompany?"failure" : "none"}
+                             {...register("currentCompany" ,{
+                                required: "This is required",
+                            })} />
+                  {/* <div className= {errors.currentCompany? "text-sm text-red-600" : "text-sm text-green-400"} >{errors.currentCompany?.message}</div > */}
+              </div>
+              {/* current Position */}
+              <div className="row-start-5 row-end-6 col-start-1 col-end-2">
+                  <div className="block">
+                      <Label htmlFor="name" value="Position"/>
+                  </div>
+                  <TextInput id="currPos" type="text"  color={errors.currPos?"failure" : "none"}
+                             {...register("currPos",{required: "This is required"})} />
+                    {/* <div className= {errors.currPos? "text-sm text-red-600" : "text-sm text-green-400"} >{errors.currPos?.message}</div > */}
+              </div>
+
+              {/* batch */}
+              <div className="row-start-5 row-end-6 col-start-2 col-end-3">
+                  <div className=" block ">
+                      <Label htmlFor="passoutYear" value="Batch of"/>
+                  </div>
+                  <Select 
+                      id="passoutYear"
+                      {...register("passoutYear", {
+                          required: "This is required",
+                      })}
+                  >
+                      <option value="">Select year</option>
+                      {/* Placeholder */}
+                      {years.map((year) => (
+                          <option key={year} value={year}>
+                              {year}
+                          </option>
+                      ))}
+                  </Select>
+              </div>
+
+              {/* linkedin Url */}
+              <div className="row-start-6 row-end-7 col-start-1 col-end-2">
+                  <div className="block">
+                      <Label htmlFor="linkedinUrl" value="LinkedIn Url"/>
+                  </div>
+                  <TextInput id="linkedinUrl" type="text"
+                             {...register("linkedinUrl")} />
+              </div>
+
+              {/* profile photo url */}
+              <div className="row-start-6 row-end-7 col-start-2 col-end-3">
+                  <div>
+                      <Label htmlFor="profilePhoto" value="Upload Photo"/>
+                  </div>
+                  <FileInput id="profilePhotoUrl" 
+                             helperText="SVG, PNG, JPG or GIF (MAX. 10MB)." {...register("profilePhotoUrl")}  />
+              </div>
+              <div className="mt-3">
+              </div>
+      <div className="col-start-1 col-end-3 row-start-7 row-end-8 mt-3 flex justify-center pb-2">
         <Button type="submit" color={"blue"} className="w-1/3">Update</Button>
       </div>
     </form>
@@ -136,7 +258,7 @@ export default function ProfileForm() {
   type="text"
   placeholder="John  "
   {...register("skills", {
-    required: "this is required",
+    required: "userData is required",
   })}
 />
 <div>{errors.skills?.message}</div>

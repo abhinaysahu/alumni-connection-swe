@@ -15,7 +15,6 @@ const addNewUser = async (req, res) => {
       await collectionRef.doc("UserId").set({});
     }
 
-
     const userID = generateUniqueId();
     data["userId"] = userID;
     data["userStatus"] = "Pending";
@@ -128,6 +127,38 @@ const getAllUsersDetails = async (req, res) => {
     return res.status(400).send(e.message);
   }
 }
+
+
+const verifyPassword = async(req,res)=>{
+  const { userId, currentPassword, newPassword } = req.body;
+  try{
+  const collectionRef = db.collection("User");
+  const detailsObj = await collectionRef.doc(userId).get();
+
+  if(!detailsObj){
+    return res.status(404).send("User does not exist");
+  }
+  const originalPassword = detailsObj.data().password;
+
+  const isPasswordValid = await bcrypt.compare(currentPassword, originalPassword);
+  // console.log(isPasswordValid);
+
+  if (!isPasswordValid) {
+    return res.json({ success: false, message: "Current password is incorrect" });
+  }
+
+  const encryptedPassword = await bcrypt.hash(newPassword, 10);
+
+  await collectionRef.doc(userId).update({
+    password: encryptedPassword
+  });
+  res.json({ success: true, message: "Password updated successfully" });
+  }
+  catch(error){
+    res.status(500).json({ success: false, message: "Error updating password" });
+  }
+}
+
 
 const updateUserDetails = async (req, res) => {
   try{
@@ -248,8 +279,9 @@ const declineUserRequest = async (req, res) => {
   }
 
   await sendMail(transporter, mailOptions);
-
 }
+
+
 
 module.exports = {
   addNewUser,
@@ -258,5 +290,6 @@ module.exports = {
   updateUserDetails,
   getUserRequests,
   acceptUserRequest,
-  declineUserRequest
+  declineUserRequest,
+  verifyPassword
 }

@@ -41,7 +41,6 @@ export default function SignupForm() {
                   })
 
                   setError("");
-                  console.log("hello");
                   navigate('/signin');
 
               }catch (e) {
