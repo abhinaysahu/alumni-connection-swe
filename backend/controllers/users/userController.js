@@ -48,6 +48,32 @@ const addNewUser = async (req, res) => {
   }
 };
 
+const updateUserDetails = async (req, res) => {
+  try{
+    const userId = req.params.userId;
+    const  userData  = req.body;
+    let profilePhotoUrl;
+    if(req.file){
+    const { path } = req.file;
+    const result = await cloudinary.uploader.upload(path, { folder: 'profile_pictures' });
+     profilePhotoUrl = result.secure_url;
+
+   
+    }
+    const updatedData = {
+      ...userData,
+      ...(profilePhotoUrl && {profilePhotoUrl : profilePhotoUrl})
+  }
+
+    const collectionRef = db.collection("User");
+    await collectionRef.doc(userId).update(updatedData);
+    return res.status(200).json({ success: true, message: "Profile update successfull !" });
+  }catch (e) {
+    // console.log("error here");
+    return res.status(400).send(e.message);
+  }
+}
+
 const getUserDetailsByID = async (req, res) => {
   try{
     const userId = req.params.userId;
@@ -166,18 +192,7 @@ const verifyPassword = async(req,res)=>{
 }
 
 
-const updateUserDetails = async (req, res) => {
-  try{
-    const userId = req.params.userId;
-    const  newUserData  = req.body;
 
-    const collectionRef = db.collection("User");
-    await collectionRef.doc(userId).update(newUserData);
-    return res.status(200).send("User updated successfully");
-  }catch (e) {
-    return res.status(400).send(e.message);
-  }
-}
 
 const getUserRequests = async (req, res) => {
   try{

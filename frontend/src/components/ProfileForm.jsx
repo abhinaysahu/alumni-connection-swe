@@ -15,24 +15,7 @@ import { useUser } from "../UserContext";
 export default function ProfileForm() {
     const [userData, setUserData] = useState();
     const { user } = useUser();
-    // useEffect( () =>{
-    //   try{
-    //     const fetchData = async () => {
-    //       const response = await axios.get('http://localhost:8080/users/getUser/' + user.userId, {
-    //         withCredentials: true,
-    //       });
-    //         setUserData(response.data);
-    //     }
-    //     fetchData();
-    //   }
-
-    //   catch(e){
-
-    //   }
-
-    // },[]);
-    
-   
+    const [error, setError] = useState("");
   const {
     register,
     handleSubmit,
@@ -45,31 +28,55 @@ export default function ProfileForm() {
   const startYear = 1988;
   const endYear = 2027;
   const years = Array.from({ length: endYear - startYear + 1 }, (v, i) => startYear + i);
+
+  const [profilePhoto, setProfilePhoto] = useState(null);
+  const[updateMessage,setUpdateMessage] = useState("");
+  const handlePhotoChange = (event) => {
+      setProfilePhoto(event.target.files[0]);
+  };
+
   return (
+    <>
     <form
       className=" w-9/10 grid grid-cols-2 gap-1 m-2 pb-2"
       onSubmit={handleSubmit( async (data) => {
-        reset();
-        try{
-          const response = await axios.post('http://localhost:8080/users/addUser', {
-              email : data.email,
-              password : data.password,
-              name: data.name,
-              contactNo: data.contactNo,
-              bio: data.bio,
-              linkedinUrl: data.linkedinUrl,
-              passoutYear: data.passoutYear,
-              currentCompany: data.currentCompany,
-              profilePhotoUrl: "testurl",
-              currPos: data.currPos,
-              currentWorkingStatus: data.currentWorkingStatus,
-          })
+        const formData = new FormData();
+              formData.append("profilePhoto", profilePhoto);
+              formData.append("email", data.email);
+              formData.append("password", data.password);
+              formData.append("name", data.name);
+              formData.append("contactNo", data.contactNo);
+              formData.append("bio", data.bio);
+              formData.append("linkedinUrl", data.linkedinUrl);
+              formData.append("currentCompany", data.currentCompany);
+              formData.append("passoutYear", data.passoutYear);
+              formData.append("currPos", data.currPos);
+              formData.append("currentWorkingStatus", data.currentWorkingStatus);
+              console.log(formData);
+              try{
+                setUpdateMessage('Please wait....');
+                  const response = await axios.post('http://localhost:8080/users/updateUser/' + user.userId, formData, {
+                    withCredentials: true,
+                  })
+                  setError("");
 
-      }catch (e) {
-          setError(e);
-      }
+                  if (response.data.success) {
+                    setUpdateMessage(response.data.message); // Store user data
+                    // Redirect to home or dashboard page
+                }
+              }catch (e) {
+                if (e.response?.status === 400) {
+                  setError(e.response.data.msg);
+                  setUpdateMessage('');
+                } else {
+                  setError('An error occurred. Please try again later.');
+                  setUpdateMessage('');
+                }
+              }
       })}
     >
+        
+        
       {/* name */}
       <div row-start-1 row-end-2 col-start-1 col-end-2>
                   <div className="block">
@@ -221,7 +228,7 @@ export default function ProfileForm() {
                       <Label htmlFor="profilePhoto" value="Upload Photo"/>
                   </div>
                   <FileInput id="profilePhotoUrl" 
-                             helperText="SVG, PNG, JPG or GIF (MAX. 10MB)." {...register("profilePhotoUrl")}  />
+                             helperText="SVG, PNG, JPG or GIF (MAX. 10MB)." {...register("profilePhotoUrl")}  onChange={handlePhotoChange} />
               </div>
               <div className="mt-3">
               </div>
@@ -229,6 +236,11 @@ export default function ProfileForm() {
         <Button type="submit" color={"blue"} className="w-1/3">Update</Button>
       </div>
     </form>
+    <div className="flex justify-center">
+    {error && <div className="bg-red-500 pb-4 ">{error}</div>}
+    {updateMessage && <div className="text-green-500 pb-4 " >{updateMessage}</div>}
+    </div>
+    </>
   );
 }
 
