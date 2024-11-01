@@ -3,11 +3,17 @@ const {generateUniqueId} = require("../../utills/generateId");
 const User = require("../../models/userModel");
 const bcrypt = require('bcryptjs');
 const transporter = require("../../config/mailer");
+const cloudinary = require("../../config/cloudinary");
+
 
 require('dotenv').config({ path: `./config/config.env` });
 
 const addNewUser = async (req, res) => {
   try {
+    const { path } = req.file;
+    const result = await cloudinary.uploader.upload(path, { folder: 'profile_pictures' });
+    const profilePhotoUrl = result.secure_url;
+
     const data = req.body;
     const collectionRef = db.collection("User");
     const collectionSnapshot = await collectionRef.get();
@@ -30,7 +36,7 @@ const addNewUser = async (req, res) => {
       bio: data["bio"],
       linkedinUrl: data["linkedinUrl"],
       currentCompany: data["currentCompany"],
-      profilePhotoUrl: data["profilePhotoUrl"],
+      profilePhotoUrl: profilePhotoUrl,
       currPos: data["currPos"],
       currentWorkingStatus: data["currentWorkingStatus"],
       userId: userID,
