@@ -23,6 +23,7 @@ import 'primereact/resources/primereact.min.css';
 import JobsList from "./pages/JobsListing.jsx";           // Core CSS
 import UserDetails from './pages/UserDetails.jsx';
 import {useUser} from "./UserContext.jsx";
+import JobDetails from './pages/JobDetails.jsx';
 
 function App(){
     const {isAuthenticated, setIsAuthenticated} = useAuth();
@@ -48,6 +49,7 @@ function App(){
               <Route path='/dashboard' element={<ProtectedRoute><Dashboard/></ProtectedRoute>}></Route>
               <Route path = '/alumni' element={<ProtectedRoute><Alumni/></ProtectedRoute>}></Route>
               <Route path = '/alumni/profile/:userId' element = {<ProtectedRoute><UserDetails/></ProtectedRoute>}></Route>
+              <Route path='jobdetails' element={<ProtectedRoute><JobDetails/></ProtectedRoute>}></Route>
             </Routes>
              <Footer></Footer>
 
