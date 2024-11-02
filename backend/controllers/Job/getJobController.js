@@ -37,7 +37,8 @@ const getAllJobs = async (req, res) => {
         data.postedOn,
         data.applyLink,
         data.companyName,
-        data.jobExp
+        data.jobExp,
+          data.location,
       );
 
       jobs.push(job);
@@ -107,7 +108,7 @@ const getJobsByUser = async (req, res) => {
           data.applyLink,
           data.companyName,
           data.jobExp,
-          "Bangalore"
+          data.location
       );
 
       jobs.push(job);

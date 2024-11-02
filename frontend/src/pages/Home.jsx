@@ -2,7 +2,7 @@ import React from 'react';
 import Navbar from '../components/Navbar';
 import GroupPic from "../assets/Group.png";
 
-function Home() {
+export default function Home() {
     return (
         <>
             <Navbar/>
@@ -32,5 +32,3 @@ function Home() {
         </>
     );
 }
-
-export default HomePage;
