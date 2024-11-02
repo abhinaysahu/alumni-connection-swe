@@ -21,7 +21,6 @@ const addNewUser = async (req, res) => {
       await collectionRef.doc("UserId").set({});
     }
 
-
     const userID = generateUniqueId();
     data["userId"] = userID;
     data["userStatus"] = "Pending";
@@ -48,6 +47,32 @@ const addNewUser = async (req, res) => {
     res.status(400).send(err.message);
   }
 };
+
+const updateUserDetails = async (req, res) => {
+  try{
+    const userId = req.params.userId;
+    const  userData  = req.body;
+    let profilePhotoUrl;
+    if(req.file){
+    const { path } = req.file;
+    const result = await cloudinary.uploader.upload(path, { folder: 'profile_pictures' });
+     profilePhotoUrl = result.secure_url;
+
+   
+    }
+    const updatedData = {
+      ...userData,
+      ...(profilePhotoUrl && {profilePhotoUrl : profilePhotoUrl})
+  }
+
+    const collectionRef = db.collection("User");
+    await collectionRef.doc(userId).update(updatedData);
+    return res.status(200).json({ success: true, message: "Profile update successfull !" });
+  }catch (e) {
+    // console.log("error here");
+    return res.status(400).send(e.message);
+  }
+}
 
 const getUserDetailsByID = async (req, res) => {
   try{
@@ -135,18 +160,39 @@ const getAllUsersDetails = async (req, res) => {
   }
 }
 
-const updateUserDetails = async (req, res) => {
-  try{
-    const userId = req.params.userId;
-    const  newUserData  = req.body;
 
-    const collectionRef = db.collection("User");
-    await collectionRef.doc(userId).update(newUserData);
-    return res.status(200).send("User updated successfully");
-  }catch (e) {
-    return res.status(400).send(e.message);
+const verifyPassword = async(req,res)=>{
+  const { userId, currentPassword, newPassword } = req.body;
+  try{
+  const collectionRef = db.collection("User");
+  const detailsObj = await collectionRef.doc(userId).get();
+
+  if(!detailsObj){
+    return res.status(404).send("User does not exist");
+  }
+  const originalPassword = detailsObj.data().password;
+
+  const isPasswordValid = await bcrypt.compare(currentPassword, originalPassword);
+  // console.log(isPasswordValid);
+
+  if (!isPasswordValid) {
+    return res.json({ success: false, message: "Current password is incorrect" });
+  }
+
+  const encryptedPassword = await bcrypt.hash(newPassword, 10);
+
+  await collectionRef.doc(userId).update({
+    password: encryptedPassword
+  });
+  res.json({ success: true, message: "Password updated successfully" });
+  }
+  catch(error){
+    res.status(500).json({ success: false, message: "Error updating password" });
   }
 }
+
+
+
 
 const getUserRequests = async (req, res) => {
   try{
@@ -254,8 +300,9 @@ const declineUserRequest = async (req, res) => {
   }
 
   await sendMail(transporter, mailOptions);
-
 }
+
+
 
 module.exports = {
   addNewUser,
@@ -264,5 +311,6 @@ module.exports = {
   updateUserDetails,
   getUserRequests,
   acceptUserRequest,
-  declineUserRequest
+  declineUserRequest,
+  verifyPassword
 }

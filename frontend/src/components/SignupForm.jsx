@@ -49,7 +49,6 @@ export default function SignupForm() {
                   const response = await axios.post('http://localhost:8080/users/addUser', formData)
 
                   setError("");
-                  console.log("hello");
                   navigate('/signin');
 
               }catch (e) {

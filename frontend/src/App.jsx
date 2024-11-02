@@ -22,7 +22,9 @@ import 'primereact/resources/themes/lara-light-indigo/theme.css';   // Theme
 import 'primereact/resources/primereact.min.css';
 import JobsList from "./pages/JobsListing.jsx";           // Core CSS
 import UserDetails from './pages/UserDetails.jsx';
+
 import {useUser} from "./UserContext.jsx";
+import ChangePassword from './pages/ChangePassword.jsx';
 import JobDetails from './pages/JobDetails.jsx';
 import HomePage from './pages/HomePage.jsx';
 
@@ -36,7 +38,7 @@ function App(){
             <div className="min-h-screen  pt-10 pb-20 flex flex-col">
                 {isAuthenticated ? <Navbar></Navbar> : null}
             <Routes >
-                <Route path='/' element={<ProtectedRoute><Home/></ProtectedRoute>}></Route>
+                <Route path='/' element={<ProtectedRoute><HomePage/></ProtectedRoute>}></Route>
                 <Route path='/jobs' element={<ProtectedRoute><JobsList/></ProtectedRoute>}></Route>
               <Route path='/admin' element={<NewUserRequests/>}></Route>
               <Route path='/about' element={<ProtectedRoute><About/></ProtectedRoute>}></Route>
@@ -50,8 +52,8 @@ function App(){
               <Route path='/dashboard' element={<ProtectedRoute><Dashboard/></ProtectedRoute>}></Route>
               <Route path = '/alumni' element={<ProtectedRoute><Alumni/></ProtectedRoute>}></Route>
               <Route path = '/alumni/profile/:userId' element = {<ProtectedRoute><UserDetails/></ProtectedRoute>}></Route>
-              <Route path='jobdetails' element={<ProtectedRoute><JobDetails/></ProtectedRoute>}></Route>
-              <Route path='homepage' element={<HomePage/>}></Route>
+              <Route path ='/changepassword' element= {<ProtectedRoute><ChangePassword /> </ProtectedRoute>}></Route>
+              <Route path='/jobdetails' element={<ProtectedRoute><JobDetails/></ProtectedRoute>}></Route>
             </Routes>
              <Footer></Footer>
 

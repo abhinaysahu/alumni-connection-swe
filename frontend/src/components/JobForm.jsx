@@ -202,7 +202,7 @@ export default function JobForm() {
                 </Select>
             </div>
 
-                  {/* company Name */}
+                  {/* location */}
             <div className="col-start-2 col-end-3 row-start-6 row-end-7">
                 <div className="mb-2 block ">
                     <Label htmlFor="location" value="Location" />
