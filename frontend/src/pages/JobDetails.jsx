@@ -26,7 +26,7 @@ const JobDetails = () => {
               </p>
               <h2 className="text-2xl font-bold text-gray-800">AI Engineer</h2>
               <p className="text-gray-600 ">Microsoft</p>
-              <div className="flex items-center gap-2 mt-2 text-sm text-gray-500 mt-4">
+              <div className="flex items-center gap-2 text-sm text-gray-500 mt-4">
                 <span className="bg-green-100 text-green-600 px-2 py-1 rounded-full">02 Days ago</span>
                 <span className="bg-gray-200 text-gray-600 px-2 py-1 rounded-full">Bangalore</span>
               </div>
