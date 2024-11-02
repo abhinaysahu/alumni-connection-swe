@@ -38,7 +38,7 @@ function App(){
             <div className="min-h-screen  pt-10 pb-20 flex flex-col">
                 {isAuthenticated ? <Navbar></Navbar> : null}
             <Routes >
-                <Route path='/' element={<ProtectedRoute><HomePage/></ProtectedRoute>}></Route>
+                <Route path='/' element={<ProtectedRoute><Home/></ProtectedRoute>}></Route>
                 <Route path='/jobs' element={<ProtectedRoute><JobsList/></ProtectedRoute>}></Route>
               <Route path='/admin' element={<NewUserRequests/>}></Route>
               <Route path='/about' element={<ProtectedRoute><About/></ProtectedRoute>}></Route>
