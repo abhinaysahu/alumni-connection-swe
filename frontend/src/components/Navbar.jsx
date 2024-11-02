@@ -1,10 +1,25 @@
 import {Link, NavLink} from "react-router-dom";
 import nitklogo from "../assets/nitk.svg";
-import {useContext} from "react";
 import {useAuth} from "../auth.jsx";
+import { Avatar, Dropdown } from "flowbite-react";
+import axios from "axios";
+import {useNavigate} from "react-router-dom";
+import {useUser} from "../UserContext.jsx";
 
 export default function Navbar() {
-  const {isAuthenticated} = useAuth();
+  const {isAuthenticated, setIsAuthenticated} = useAuth();
+  const navigate = useNavigate();
+  const {user} = useUser();
+  const logout = async () => {
+    try{
+      const response = await axios.get("http://localhost:8080/users/logout", { withCredentials: true });
+      console.log(response.data);
+      setIsAuthenticated(false);
+      navigate('/signin');
+    }catch (e) {
+      console.log(e);
+    }
+  }
   return (
     <>
       <nav className="   bg-white dark:bg-gray-900 fixed w-screen z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600  mb-100">
@@ -14,13 +29,28 @@ export default function Navbar() {
 
           {/* Right-side buttons and menu toggle */}
           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-            <button
-              type="button"
-              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            <Dropdown
+                label={<Avatar alt="User settings" img="https://res.cloudinary.com/doz0bxkui/image/upload/v1730478292/samples/upscale-face-1.jpg" rounded />}
+                arrowIcon={false}
+                inline
             >
-              {isAuthenticated ? <Link to={"/postjob"}>Dashboard</Link> : <Link to={"/signin"}>Login</Link>}
-              {/*<Link to={"/postjob"}>Dashboard</Link>*/}
-            </button>
+              <Dropdown.Header>
+                <span className="block text-sm">{user.name}</span>
+                <span className="block truncate text-sm font-medium">{user.currentWorkingStatus === "Student" ? "Student" : "Alumni"}</span>
+                <span className="block truncate text-sm font-medium">{user.email}</span>
+              </Dropdown.Header>
+              <Link to={"/dashboard"}><Dropdown.Item>Dashboard</Dropdown.Item></Link>
+              <Dropdown.Divider />
+              <Dropdown.Item onClick={logout}>Log Out</Dropdown.Item>
+            </Dropdown>
+
+            {/*<button*/}
+            {/*  type="button"*/}
+            {/*  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"*/}
+            {/*>*/}
+            {/*  {isAuthenticated ? <Link to={"/postjob"}>Dashboard</Link> : <Link to={"/signin"}>Login</Link>}*/}
+            {/*  /!*<Link to={"/postjob"}>Dashboard</Link>*!/*/}
+            {/*</button>*/}
             <button
               data-collapse-toggle="navbar-sticky"
               type="button"
