@@ -5,6 +5,7 @@ import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 import {useAuth} from "../auth.jsx";
 import { useUser } from "../UserContext.jsx";
+import {toast, Toaster} from "sonner";
 
 
 export default function SinginForm(){
@@ -19,8 +20,12 @@ export default function SinginForm(){
   return (
       <>
         <form className="flex max-w-md flex-col gap-4" onSubmit={handleSubmit(async (data) => {
+          const loadingToastId = toast.loading('Logging in...', {
+            duration: Infinity // Make it stay until manually dismissed
+          });
         try {
           setLoginMessage('Please wait....');
+          await new Promise(resolve => setTimeout(resolve, 500));
           const response = await axios.post('http://localhost:8080/users/login', {
             email: data.email,
             password: data.password
@@ -35,31 +40,41 @@ export default function SinginForm(){
           setIsAuthenticated(true);
           if(response.data.msg === "Admin"){
             navigate("/admin")
-          }else
+            toast.success("You're Logged in as admin", { id: loadingToastId, duration: 2000 });
+          }else {
             navigate("/");
+            toast.success("You're Logged in", { id: loadingToastId });
+            setTimeout(() =>{
+              toast.dismiss(loadingToastId)
+            },3000)
+          }
 
-          //  for User Context 
+          //  for User Context
           if (response.data.success) {
             setUser(response.data.user); // Store user data
             // Redirect to home or dashboard page
         }
         } catch (error) {
           console.error('Login failed:', error);
+          toast.error(`Login failed, please try again later`, { id: loadingToastId,  duration: 3000 });
+          setTimeout(() =>{
+            toast.dismiss(loadingToastId)
+          },3000)
           // Set error message based on the response
-          if (error.response?.status === 401) {
-            setLoginError(error.response.data.msg);
-            setLoginMessage('');
-          } else {
-            setLoginError('An error occurred. Please try again later.');
-            setLoginMessage('');
-          }
+          // if (error.response?.status === 401) {
+          //   setLoginError(error.response.data.msg);
+          //   setLoginMessage('');
+          // } else {
+          //   setLoginError('An error occurred. Please try again later.');
+          //   setLoginMessage('');
+          // }
           // Handle login error (show error message to user)
         }
         // console.log(data);
       })}
       > {/* email */}
-        {loginError && <div style={{color: 'red', marginBottom: '10px'}}>{loginError}</div>}
-          {loginMessage && <div style={{color: 'green', marginBottom: '10px'}}>{loginMessage}</div>}
+        {/*{loginError && <div style={{color: 'red', marginBottom: '10px'}}>{loginError}</div>}*/}
+        {/*  {loginMessage && <div style={{color: 'green', marginBottom: '10px'}}>{loginMessage}</div>}*/}
         <div>
           <div className="mb-2 block">
             <Label htmlFor="email1" value="Email" />

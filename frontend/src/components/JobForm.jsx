@@ -6,6 +6,7 @@ import { FaIndianRupeeSign } from "react-icons/fa6";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import { Link } from "react-router-dom";
+import {toast} from "sonner";
 export default function JobForm() {
     const { register, handleSubmit, formState: { errors } , reset} = useForm();
 
@@ -82,19 +83,21 @@ export default function JobForm() {
                 reset();
                 setSkills([]);
                 setShowAlert(true);
+                toast.success("Job Posted Successfully")
 
 
             }catch (e) {
                 console.log(e);
+                toast.error("There was an error posting the job")
             }
         })}
         >
 
-            {showAlert && (
-                <div style={{color: "green", marginTop: "10px"}}>
-                    Form submitted successfully!
-                </div>
-            )}
+            {/*{showAlert && (*/}
+            {/*    <div style={{color: "green", marginTop: "10px"}}>*/}
+            {/*        Form submitted successfully!*/}
+            {/*    </div>*/}
+            {/*)}*/}
 
             {/* company Name */}
             <div className="col-start-1 col-end-2 row-start-1 row-end-2">

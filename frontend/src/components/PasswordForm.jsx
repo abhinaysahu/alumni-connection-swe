@@ -13,6 +13,7 @@ import {
 } from "flowbite-react";
 import axios from "axios";
 import { useUser } from "../UserContext";
+import {toast} from "sonner";
 
 export default function PasswordForm() {
   const {
@@ -35,6 +36,8 @@ export default function PasswordForm() {
       className="grid grid-cols-2 gap-1 m-2 pb-2"
       onSubmit={handleSubmit( async (data) => {
           setError(null);
+          const toastId = toast.loading("Updating password", { duration: Infinity});
+
         if (data.newPassword !== data.confirmPassword) {
           setError("New passwords do not match.");
           return;
@@ -47,15 +50,19 @@ export default function PasswordForm() {
           });
     
           if (response.data.success) {
-            alert(response.data.message);
+            toast.success("Password updated successfully", { id: toastId});
             reset();  // Clears the form fields after successful submission
           } else {
             console.log(response);
-            setError(response.data.message || "An error occurred.");
+            toast.error(response.data.message || "An error occurred.", { id: toastId})
+            // setError(response.data.message || "An error occurred.");
           }
+            setTimeout(() => toast.dismiss(toastId), 3000);
         } catch (err) {
+            toast.error(response.data.message || "An error occurred.", { id: toastId})
           console.error("Error updating password:", err);
-          setError("An error occurred.");
+            setTimeout(() => toast.dismiss(toastId), 3000);
+          // setError("An error occurred.");
         }
 
       })}
@@ -136,7 +143,7 @@ export default function PasswordForm() {
             }
           })}
         />
-        {error && <p className="text-red-500 mt-2">{error}</p>}
+        {/*{error && <p className="text-red-500 mt-2">{error}</p>}*/}
         </div>
 
         

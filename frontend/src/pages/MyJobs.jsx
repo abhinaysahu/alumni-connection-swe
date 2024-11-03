@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 
 import { Button, Modal } from "flowbite-react";
 import axios from "axios";
+import {toast} from "sonner";
 
 
 
@@ -52,7 +53,9 @@ export default function MyJob() {
         try{
             const response = await axios.delete(`http://localhost:8080/jobs/delete/${jobId}`, {withCredentials: true});
             handleCloseModal();
+            toast.success("Job Posting deleted successfully")
         }catch (e){
+            toast.error("We encountered an error deleting the posting")
             console.log(e);
         }
     }

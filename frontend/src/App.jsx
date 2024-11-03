@@ -27,6 +27,7 @@ import {useUser} from "./UserContext.jsx";
 import ChangePassword from './pages/ChangePassword.jsx';
 import JobDetails from './pages/JobDetails.jsx';
 import HomePage from './pages/HomePage.jsx';
+import {Toaster} from "sonner";
 
 function App(){
     const {isAuthenticated, setIsAuthenticated} = useAuth();
@@ -37,6 +38,7 @@ function App(){
     <>
             <div className="min-h-screen  pt-10 pb-20 flex flex-col">
                 {isAuthenticated ? <Navbar></Navbar> : null}
+                <Toaster position="top-right" richColors closeButton/>
             <Routes >
                 <Route path='/' element={<ProtectedRoute><Home/></ProtectedRoute>}></Route>
                 <Route path='/jobs' element={<ProtectedRoute><JobsList/></ProtectedRoute>}></Route>

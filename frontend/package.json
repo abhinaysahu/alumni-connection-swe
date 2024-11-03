@@ -20,7 +20,8 @@
     "react-hook-form": "^7.53.1",
     "react-router-dom": "^6.26.2",
     "react-tag-input": "^6.10.3",
-    "router-dom": "^3.0.1"
+    "router-dom": "^3.0.1",
+    "sonner": "^1.6.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",

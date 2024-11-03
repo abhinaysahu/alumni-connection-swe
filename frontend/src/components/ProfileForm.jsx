@@ -12,6 +12,7 @@ import {
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useUser } from "../UserContext";
+import {toast} from "sonner";
 export default function ProfileForm() {
     const [userData, setUserData] = useState();
     const { user } = useUser();
@@ -53,25 +54,29 @@ export default function ProfileForm() {
               formData.append("currPos", data.currPos);
               formData.append("currentWorkingStatus", data.currentWorkingStatus);
               console.log(formData);
+              const toastId = toast.loading("Please wait", { duration: Infinity});
               try{
-                setUpdateMessage('Please wait....');
+                // setUpdateMessage('Please wait....');
                   const response = await axios.post('http://localhost:8080/users/updateUser/' + user.userId, formData, {
                     withCredentials: true,
                   })
-                  setError("");
+                  // setError("");
 
                   if (response.data.success) {
-                    setUpdateMessage(response.data.message); // Store user data
-                    // Redirect to home or dashboard page
+                    // setUpdateMessage(response.data.message); // Store user data
+                    toast.success(response.data.message, { id: toastId });
+                    setTimeout(() => toast.dismiss(toastId), 3000);
                 }
               }catch (e) {
                 if (e.response?.status === 400) {
-                  setError(e.response.data.msg);
-                  setUpdateMessage('');
+                    toast.error(e.response.data.msg, { id: toastId});
+                  // setError(e.response.data.msg);
+                  // setUpdateMessage('');
                 } else {
-                  setError('An error occurred. Please try again later.');
-                  setUpdateMessage('');
+                  toast.error('An error occurred. Please try again later.', { id: toastId});
+                  // setUpdateMessage('');
                 }
+                setTimeout(() => toast.dismiss(toastId), 3000);
               }
       })}
     >
@@ -236,10 +241,10 @@ export default function ProfileForm() {
         <Button type="submit" color={"blue"} className="w-1/3">Update</Button>
       </div>
     </form>
-    <div className="flex justify-center">
-    {error && <div className="bg-red-500 pb-4 ">{error}</div>}
-    {updateMessage && <div className="text-green-500 pb-4 " >{updateMessage}</div>}
-    </div>
+    {/*<div className="flex justify-center">*/}
+    {/*{error && <div className="bg-red-500 pb-4 ">{error}</div>}*/}
+    {/*{updateMessage && <div className="text-green-500 pb-4 " >{updateMessage}</div>}*/}
+    {/*</div>*/}
     </>
   );
 }
