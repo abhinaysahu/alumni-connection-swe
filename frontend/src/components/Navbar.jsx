@@ -30,7 +30,7 @@ export default function Navbar() {
           {/* Right-side buttons and menu toggle */}
           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
             <Dropdown
-                label={<Avatar alt="User settings" img="https://res.cloudinary.com/doz0bxkui/image/upload/v1730478292/samples/upscale-face-1.jpg" rounded />}
+                label={<Avatar alt="User settings" img={user.profilePhotoUrl} rounded />}
                 arrowIcon={false}
                 inline
             >

@@ -11,94 +11,15 @@ import {useEffect, useState} from "react";
 import {FilterMatchMode} from "primereact/api";
 import JobListModal from "./JobListModal.jsx";
 import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 export default function JobTable() {
-    // const data = [
-    //     {
-    //         "company": "Walmart",
-    //         "designation": "Software Engineer",
-    //         "category": "Full Time",
-    //         "location": "New York",
-    //         "salary": "15L",
-    //         "posted by": "Aman"
-    //     },
-    //     {
-    //         "company": "Amazon",
-    //         "designation": "Data Scientist",
-    //         "category": "Internship",
-    //         "location": "San Francisco",
-    //         "salary": "20L",
-    //         "posted by": "Priya"
-    //     },
-    //     {
-    //         "company": "Google",
-    //         "designation": "Product Manager",
-    //         "category": "Full Time",
-    //         "location": "Mountain View",
-    //         "salary": "30L",
-    //         "posted by": "Raj"
-    //     },
-    //     {
-    //         "company": "Microsoft",
-    //         "designation": "Cloud Engineer",
-    //         "category": "Full Time",
-    //         "location": "Seattle",
-    //         "salary": "18L",
-    //         "posted by": "Sara"
-    //     },
-    //     {
-    //         "company": "Facebook",
-    //         "designation": "UX Designer",
-    //         "category": "Internship",
-    //         "location": "Austin",
-    //         "salary": "10L",
-    //         "posted by": "John"
-    //     },
-    //     {
-    //         "company": "Apple",
-    //         "designation": "iOS Developer",
-    //         "category": "Full Time",
-    //         "location": "Cupertino",
-    //         "salary": "25L",
-    //         "posted by": "Mike"
-    //     },
-    //     {
-    //         "company": "Tesla",
-    //         "designation": "Embedded Systems Engineer",
-    //         "category": "Full Time",
-    //         "location": "Fremont",
-    //         "salary": "22L",
-    //         "posted by": "Elena"
-    //     },
-    //     {
-    //         "company": "Adobe",
-    //         "designation": "Front End Developer",
-    //         "category": "Internship",
-    //         "location": "San Jose",
-    //         "salary": "12L",
-    //         "posted by": "Arjun"
-    //     },
-    //     {
-    //         "company": "Netflix",
-    //         "designation": "Backend Engineer",
-    //         "category": "Full Time",
-    //         "location": "Los Angeles",
-    //         "salary": "28L",
-    //         "posted by": "Jessica"
-    //     },
-    //     {
-    //         "company": "Spotify",
-    //         "designation": "Data Engineer",
-    //         "category": "Full Time",
-    //         "location": "New York",
-    //         "salary": "18L",
-    //         "posted by": "Daniel"
-    //     }
-    // ]
+
     const [openModal, setOpenModal] = useState(false);
     const [selectedRowData, setSelectedRowData] = useState(null); // Store selected row data for modal
     const [data, setData] = useState([]);
     const [userMap, setUserMap] = useState({});
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchJobs = async () => {
@@ -141,15 +62,10 @@ export default function JobTable() {
         fetchAllUsers(); // Fetch users on mount or when data changes
     }, [data]); // Run effect when data changes
 
-    const handleViewDetails = (rowData) => {
-        setSelectedRowData(rowData); // Set the selected row data
-        setOpenModal(true);        // Open the modal
+    const handleViewDetails = (rowData, user) => {
+        navigate('/jobdetails', { state: { selectedRowData: rowData, user: user } })
     };
 
-    const handleCloseModal = () => {
-        setOpenModal(false);       // Close the modal
-        setSelectedRowData(null);    // Clear selected row data
-    };
 
     const [filters, setFilters] = useState({
         global: {
@@ -163,11 +79,10 @@ export default function JobTable() {
         return rowData.type === "FTE" ? <FullTime /> : rowData.type === "Internship" ? <InternshipPill /> : rowData.category;
     };
 
-    const ViewDetails = ({rowData}) => {
+    const ViewDetails = ({rowData, user}) => {
         return <>
-            <Button gradientDuoTone="greenToBlue" onClick={() => handleViewDetails(rowData)}>View Details</Button>
-            {selectedRowData && <JobListModal openModal={openModal} setOpenModal={setOpenModal} selectedRowData={selectedRowData}
-                           handleCloseModal={handleCloseModal}/>}
+            <Button gradientDuoTone="greenToBlue" onClick={() => handleViewDetails(rowData, user)}>View Details</Button>
+
         </>;
     }
 
@@ -187,10 +102,10 @@ export default function JobTable() {
             <Column field={"companyName"} header={"Company"}/>
             <Column field={"title"} header={"Designation"}/>
             <Column field={"type"} header={"Category"} body={categoryBodyTemplate}/>
-            <Column field={"location"} header={"Location"} body={"Bangalore"}/>
+            <Column field={"location"} header={"Location"} body={(rowData) => rowData.location}/>
             <Column field={"salary"} header={"Salary"}/>
             <Column field={"posted by"} header={"Posted By"} body={(rowData) => userMap[rowData.userId] || "Loading..."}/>
-            <Column header={""} body={(rowData) => <ViewDetails rowData={rowData}/> }/>
+            <Column header={""} body={(rowData) => <ViewDetails rowData={rowData} user ={userMap[rowData.userId]}/> }/>
         </DataTable>
     </>
 }

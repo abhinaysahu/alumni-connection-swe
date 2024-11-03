@@ -11,6 +11,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { Button, Modal } from "flowbite-react";
 import axios from "axios";
+import {toast} from "sonner";
 
 
 
@@ -21,123 +22,6 @@ export default function MyJob() {
 
     const [openModal, setOpenModal] = useState(false);
 
-
-    const jobs1 = [
-        {
-            title: "Software Engineer",
-            category: "Technical Consultant",
-            postedOn: "January 18, 2024 02:51 PM",
-            location: "Jaipur",
-            salary: "10L-15L",
-            status: "Active",
-        },
-        {
-            title: "Lorem ipsum, dolor sit amet consectetur adipiscing elit.",
-            category: "Technical fhsdjfhalksdf",
-            postedOn: "January 18, 2024 02:51 PM",
-            location: "Jaipur",
-            salary: "10L-15L",
-            status: "Active",
-        },
-        {
-            title: "Lorem ipsum, dolor sit amet consectetur adipiscing elit.",
-            category: "Technical Consultant",
-            postedOn: "January 18, 2024 02:51 PM",
-            location: "fsdjafhdlskjhf",
-            salary: "10L-15L",
-            status: "Active",
-        },
-        {
-            title: "Lorem ipsum, dolor sit amet consectetur adipiscing elit.",
-            category: "Technical Consultant",
-            postedOn: "January 18, 2024 02:51 PM",
-            location: "Jaipur",
-            salary: "10L-15L",
-            status: "Active",
-        },
-        {
-            title: "Lorem ipsum, dolor sit amet consectetur adipiscing elit.",
-            category: "Technical Consultant",
-            postedOn: "January 18, 2024 02:51 PM",
-            location: "Jaipur",
-            salary: "10L-15L",
-            status: "Expired",
-        },
-        {
-            title: "Lorem ipsum, dolor sit amet consectetur adipiscing elit.",
-            category: "Technical Consultant",
-            postedOn: "January 18, 2024 02:51 PM",
-            location: "Jaipur",
-            salary: "10L-jdhfjdsf",
-            status: "Active",
-        },
-        {
-            title: "Lorem ipsum, dolor sit amet consectetur adipiscing elit.",
-            category: "Technical Consultant",
-            postedOn: "January 18, 2024 02:51 PM",
-            location: "Jaipur",
-            salary: "10L-dfhjheuifu",
-            status: "Expired",
-        },
-        {
-            title: "Lorem ipsum, dolor sit amet consectetur adipiscing elit.",
-            category: "Technical Consultant",
-            postedOn: "January 18, 2024 02:51 PM",
-            location: "hsdkjfhdf",
-            salary: "10L-15L",
-            status: "Expired",
-        },
-        {
-            title: "Lorem ipsum, dolor sit amet consectetur adipiscing elit.",
-            category: "Technical Consultant",
-            postedOn: "January 18, 2024 02:51 PM",
-            location: "Jaipur",
-            salary: "10L-15L",
-            status: "Active",
-        }, {
-            title: "Lorem ipsum, dolor sit amet consectetur adipiscing elit.",
-            category: "Technical Consultant",
-            postedOn: "January 18, 2024 02:51 PM",
-            location: "Jaipur",
-            salary: "10L-15L",
-            status: "Active",
-        }, {
-            title: "Lorem ipsum, dolor sit amet consectetur adipiscing elit.",
-            category: "Technical Consultant",
-            postedOn: "January 18, 2024 02:51 PM",
-            location: "Jaipur",
-            salary: "10L-15L",
-            status: "Active",
-        }, {
-            title: "Lorem ipsum, dolor sit amet consectetur adipiscing elit.",
-            category: "Technical Consultant",
-            postedOn: "January 18, 2024 02:51 PM",
-            location: "Jaipur",
-            salary: "10L-15L",
-            status: "Active",
-        }, {
-            title: "Lorem ipsum, dolor sit amet consectetur adipiscing elit.",
-            category: "Technical Consultant",
-            postedOn: "January 18, 2024 02:51 PM",
-            location: "Jaipur",
-            salary: "10L-15L",
-            status: "Active",
-        }, {
-            title: "Lorem ipsum, dolor sit amet consectetur adipiscing elit.",
-            category: "Technical Consultant",
-            postedOn: "January 18, 2024 02:51 PM",
-            location: "hfkjhdfd",
-            salary: "10L-15L",
-            status: "Expired",
-        }, {
-            title: "Lorem ipsum, dolor sit amet consectetur adipiscing elit.",
-            category: "kieujbdkej",
-            postedOn: "January 18, 2024 02:51 PM",
-            location: "Jaipur",
-            salary: "10L-15L",
-            status: "Active",
-        }
-    ];
 
     const [jobs, setJobs] = useState([]);
     const [filteredJobs, setFilteredJobs] = useState([]);
@@ -170,7 +54,9 @@ export default function MyJob() {
         try{
             const response = await axios.delete(`http://localhost:8080/jobs/delete/${jobId}`, {withCredentials: true});
             handleCloseModal();
+            toast.success("Job Posting deleted successfully")
         }catch (e){
+            toast.error("We encountered an error deleting the posting")
             console.log(e);
         }
     }
