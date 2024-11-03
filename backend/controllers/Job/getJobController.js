@@ -3,14 +3,38 @@ const Job = require("../../models/jobModel");
 
 const getJobById = async (req, res) => {
   try {
-    const { jobId } = req.params;
-    const currJob = await db.collection("Job").doc(jobId).get();
-    if (!currJob.exists()) {
-      return res.status(400).send("No Job Find");
+    const jobId = req.params.jobId;
+    console.log("Job ID received:", jobId); // Log the jobId to ensure it’s being passed correctly
+    
+    // Fetch job details from Firestore
+    const collectionRef = db.collection("Job");
+    const detailsObj = await collectionRef.doc(jobId).get();
+    
+    if (!detailsObj.exists) {
+      console.error("Job not found for ID:", jobId);
+      return res.status(404).json({ error: "No Job Found" }); // Use 404 for better clarity
     }
-    return res.status(200).json(new Job(...currJob, jobId));
+    
+    const details = detailsObj.data();
+
+    // Respond with JSON-formatted data
+    return res.status(200).json({
+      userID: details.userId,
+      title: details.title,
+      type: details.type,
+      description: details.description,
+      salary: details.salary,
+      yoe: details.yoe,
+      skills: details.skills,
+      postedOn: details.postedOn,
+      applyLink: details.applyLink,
+      companyName: details.companyName,
+      jobExp: details.jobExp,
+      location: details.location,
+    });
   } catch (err) {
-    res.status(400).send(err.message);
+    console.error("Error fetching job by ID:", err); // Log error for troubleshooting
+    res.status(500).json({ error: "Server Error" }); // Use 500 status for server error
   }
 };
 

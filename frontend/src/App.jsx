@@ -25,6 +25,7 @@ import UserDetails from './pages/UserDetails.jsx';
 
 import {useUser} from "./UserContext.jsx";
 import ChangePassword from './pages/ChangePassword.jsx';
+import EditJob from './pages/EditJob.jsx';
 
 function App(){
     const {isAuthenticated, setIsAuthenticated} = useAuth();
@@ -51,6 +52,7 @@ function App(){
               <Route path = '/alumni' element={<ProtectedRoute><Alumni/></ProtectedRoute>}></Route>
               <Route path = '/alumni/profile/:userId' element = {<ProtectedRoute><UserDetails/></ProtectedRoute>}></Route>
               <Route path ='/changepassword' element= {<ProtectedRoute><ChangePassword /> </ProtectedRoute>}></Route>
+              <Route path ='/editjob/:jobId' element={<ProtectedRoute><EditJob></EditJob></ProtectedRoute>}></Route>
             </Routes>
              <Footer></Footer>
 

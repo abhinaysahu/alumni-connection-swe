@@ -243,35 +243,3 @@ export default function ProfileForm() {
     </>
   );
 }
-
-// {/* <div className="mb-4">
-//   <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="skills">
-//     First Name
-//   </label>
-//   <input
-//     type="text"
-//     name="skills"
-//     value={formData.skills}
-//     onChange={handleChange}
-//     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-//     placeholder="Enter your first name"
-//   /> */}
-
-
-
-{/* Skills */}
-
-{/* <div className="col-start-2 col-end-3 row-start-4 row-end-5">
-<div className="mb-2 block ">
-  <Label htmlFor="skills" value="Skills" />
-</div>
-<TextInput
-  id="skills"
-  type="text"
-  placeholder="John  "
-  {...register("skills", {
-    required: "userData is required",
-  })}
-/>
-<div>{errors.skills?.message}</div>
-</div> */}

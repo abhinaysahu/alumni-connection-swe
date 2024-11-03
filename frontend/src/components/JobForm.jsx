@@ -6,6 +6,7 @@ import { FaIndianRupeeSign } from "react-icons/fa6";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import { Link } from "react-router-dom";
+
 export default function JobForm() {
     const { register, handleSubmit, formState: { errors } , reset} = useForm();
 
@@ -46,6 +47,7 @@ export default function JobForm() {
                 }else{
                     navigate('/signin')
                 }
+
             }catch (e) {
                 console.log(e);
             }

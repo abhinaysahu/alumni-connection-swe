@@ -7,7 +7,7 @@ import { Table } from "flowbite-react";
 
 import { Pagination } from "flowbite-react";
 import {useEffect, useState} from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { Button, Modal } from "flowbite-react";
 import axios from "axios";
@@ -142,6 +142,7 @@ export default function MyJob() {
     const [jobs, setJobs] = useState([]);
     const [filteredJobs, setFilteredJobs] = useState([]);
     const [selectedRowData, setSelectedRowData] = useState(null);
+    const navigate = useNavigate();
 
     const [currentPage, setCurrentPage] = useState(1);
     const jobsPerPage = 5; // Number of jobs per page
@@ -314,7 +315,7 @@ export default function MyJob() {
                                                 </Modal.Body>
                                                 <Modal.Footer>
                                                     <Button className="bg-blue-700  hover:bg-blue-400"
-                                                            onClick={() => setOpenModal(false)}>Edit</Button>
+                                                            onClick={() => navigate('/editjob/'+ selectedRowData.jobId)}>Edit</Button>
                                                     <Button className="bg-red-700  hover:bg-red-400"
                                                             onClick={() => {handleDelete(selectedRowData.jobId)}}>
                                                         Delete
