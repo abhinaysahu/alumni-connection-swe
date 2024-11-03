@@ -2,8 +2,9 @@ const db = require("../../config");
 
 const updateJob = async (req, res) => {
   try {
-    const { jobId } = req.params;
-    const { newJobData } = req.body;
+    const  jobId  = req.params.jobId;
+    const newJobData  = req.body;
+    // console.log(newJobData);
 
     await db.collection("Job").doc(jobId).update(newJobData);
 
