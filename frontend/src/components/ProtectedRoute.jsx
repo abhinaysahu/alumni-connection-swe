@@ -9,7 +9,7 @@ export default function ProtectedRoute({children}){
     const {isAuthenticated, setIsAuthenticated} = useAuth();
     const {user, setUser} = useUser();
     const navigate = useNavigate();
-    console.log("hello "+ isAuthenticated);
+    // console.log("hello "+ isAuthenticated);
     const location = useLocation();
 
     useEffect(() => {
@@ -17,14 +17,14 @@ export default function ProtectedRoute({children}){
             return new Promise(async (resolve, reject) => {
                 try {
                     const response = await axios.get("http://localhost:8080/users/auth/check", { withCredentials: true });
-                    console.log(response.data);
+                    // console.log(response.data);
                     setIsAuthenticated(response.data.authenticated);
                     if (response.data.authenticated) {
                         setUser(response.data.user); // Store user data
                     }
                     resolve(response.data.authenticated);
                 } catch (e) {
-                    console.error(e);
+                    // console.error(e);
                     setIsAuthenticated(false);
                     reject(false);
                 }

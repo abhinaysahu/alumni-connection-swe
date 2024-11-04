@@ -6,9 +6,9 @@ import { FaIndianRupeeSign } from "react-icons/fa6";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import { Link } from "react-router-dom";
-import {toast} from "sonner";
-export default function JobForm() {
-    const { register, handleSubmit, formState: { errors } , reset} = useForm();
+
+export default function JobEdit(jobID) {
+    
 
     const [userId, setUserId] = useState(null);
     const [showAlert, setShowAlert] = useState(false);
@@ -18,6 +18,8 @@ export default function JobForm() {
     const handleDeleteSkill = (index) => {
         setSkills(skills.filter((_, i) => i !== index));
     };
+
+   
 
     const handleAddSkill = (e) => {
         e.preventDefault();
@@ -41,7 +43,7 @@ export default function JobForm() {
             try{
                 const response = await axios.get('http://localhost:8080/users/me', {withCredentials: true});
                 const id = response.data.id;
-                console.log(id);
+                // console.log(id);
                 if(id !== null){
                     setUserId(id);
                 }else{
@@ -55,19 +57,45 @@ export default function JobForm() {
 
         getUser();
     }, []);
+    const[job, setJob] = useState({});
+    // console.log("job id");
+    // console.log(id);
 
+    const { register, handleSubmit, formState: { errors } , reset} = useForm({
+      defaultValues: job || {},
+    });
 
+ useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:8080/jobs/getjob/'+ jobID.jobID, {
+          withCredentials: true,
+        });
+        setJob(response.data);
+        reset(response.data);  // Reset form values with fetched job data
+      } catch (e) {
+        console.log(e);
+      }
+    };
+
+    fetchData();
+  }, [jobID, reset]);
+  // console.log("job data");
+  // console.log(job);
+  useEffect(() => {
+    if (job?.skills) {
+      setSkills(job.skills);  // Set default skills from job data
+    }
+  }, [job]);
     return (
         <form className=" pb-2 w-9/10 grid grid-cols-2   gap-1 m-2" onSubmit={handleSubmit(async (data) => {
             const formData = { ...data, skills };
             console.log(formData);
-            //  work with formData
-
             try{
-                const response = await axios.post('http://localhost:8080/jobs/add', {
+                const response = await axios.put('http://localhost:8080/jobs/updatejob/'+ jobID.jobID, {
                     title: formData.title,
                     type: formData.type,
-                    description: formData.description,
+                    description: formData.description,    
                     yoe: formData.yoe,
                     salary: formData.salary,
                     skills: formData.skills,
@@ -81,24 +109,21 @@ export default function JobForm() {
                 }, {withCredentials: true});
 
                 console.log("done");
-                reset();
+                
                 setSkills([]);
                 setShowAlert(true);
-                toast.success("Job Posted Successfully")
-
 
             }catch (e) {
                 console.log(e);
-                toast.error("There was an error posting the job")
             }
         })}
         >
 
-            {/*{showAlert && (*/}
-            {/*    <div style={{color: "green", marginTop: "10px"}}>*/}
-            {/*        Form submitted successfully!*/}
-            {/*    </div>*/}
-            {/*)}*/}
+            {showAlert && (
+                <div style={{color: "green", marginTop: "10px"}}>
+                    Form submitted successfully!
+                </div>
+            )}
 
             {/* company Name */}
             <div className="col-start-1 col-end-2 row-start-1 row-end-2">
@@ -273,7 +298,7 @@ export default function JobForm() {
 
             <div className="col-start-1 col-end-3 row-start-8 row-end-9 mt-3 flex justify-center">
                 <Button type="submit" color={"blue"} className="w-1/3 ">
-                    Post  
+                    Update
                      </Button>
             </div>
         </form>
