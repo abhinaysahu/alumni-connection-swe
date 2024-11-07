@@ -4,6 +4,14 @@ import { Button, Card } from "flowbite-react";
 import { UsersIcon, BriefcaseIcon, CalendarIcon, NewspaperIcon } from "@heroicons/react/outline"; 
 import { Link } from "react-router-dom";
 
+import { IoSettingsOutline } from "react-icons/io5";
+import { HiTable } from "react-icons/hi";
+import { IoIosBriefcase } from "react-icons/io";
+
+
+
+
+
 export default function Dashboard() {
   return (
     <div className=" h-screen">
@@ -25,33 +33,27 @@ export default function Dashboard() {
 
                 </div>
 
+         
           {/* Cards Section */}
-          <div className="flex justify-center mt-8 gap-4">
-            <Card className="w-48 h-32 flex items-center justify-center border rounded-lg bg-white">
-              <div className="flex flex-col items-center justify-center">
-                <UsersIcon className="h-8 w-8 text-indigo-500" />
-                <p className="text-center text-lg font mt-2">View Connections</p>
-              </div>
-            </Card>
-            <Card className="w-48 h-32 flex items-center justify-center border rounded-lg bg-white">
-              <div className="flex flex-col items-center justify-center">
-                <BriefcaseIcon className="h-8 w-8 text-indigo-500" />
-                <p className="text-center text-lg font mt-2">All Jobs</p>
-              </div>
-            </Card>
-            <Card className="w-48 h-32 flex items-center justify-center border rounded-lg bg-white">
-              <div className="flex flex-col items-center justify-center">
-                <CalendarIcon className="h-8 w-8 text-indigo-500" />
-                <p className="text-center text-lg font mt-2">All Events</p>
-              </div>
-            </Card>
-            <Card className="w-48 h-32 flex items-center justify-center border rounded-lg bg-white">
-              <div className="flex flex-col items-center justify-center">
-                <NewspaperIcon className="h-8 w-8 text-indigo-500" />
-                <p className="text-center text-lg font mt-2">Post Feeds</p>
-              </div>
-            </Card>
-          </div>
+          <div className="flex justify-center mt-12 gap-16">
+              <button className="w-64 h-40 flex flex-col items-center justify-center  rounded-2xl bg-white">
+              <IoIosBriefcase className="h-8 w-8 text-indigo-500" />
+              <span className="text-center text-lg font mt-2">All Jobs</span>
+              </button>
+              <button className="w-64 h-40 flex flex-col items-center justify-center  rounded-2xl bg-white">
+              <UsersIcon className="h-8 w-8 text-indigo-500" />
+              <span className="text-center text-lg font mt-2">Alumni</span>
+              </button>
+              <button className="w-64 h-40 flex flex-col items-center justify-center  rounded-2xl bg-white">
+              <IoSettingsOutline className="h-8 w-8 text-indigo-500" />
+              <span className="text-center text-lg font mt-2">Profile Settings</span>
+              </button>
+              <button className="w-64 h-40 flex flex-col items-center justify-center  rounded-2xl bg-white">
+              <HiTable className="h-8 w-8 text-indigo-500" />
+              <span className="text-center text-lg font mt-2">Change Password</span>
+              </button>
+            </div>
+
         </div>
       </div>
       </div>
