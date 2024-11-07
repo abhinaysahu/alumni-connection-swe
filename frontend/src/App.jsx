@@ -58,6 +58,7 @@ function App(){
               <Route path ='/changepassword' element= {<ProtectedRoute><ChangePassword /> </ProtectedRoute>}></Route>
               <Route path ='/editjob/:jobId' element={<ProtectedRoute><EditJob></EditJob></ProtectedRoute>}></Route>
               <Route path='/jobdetails' element={<ProtectedRoute><JobDetails/></ProtectedRoute>}></Route>
+              
             </Routes>
              <Footer></Footer>
 
