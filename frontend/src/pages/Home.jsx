@@ -1,23 +1,26 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
 import GroupPic from "../assets/Group.png";
+import { useUser } from '../UserContext';
+import { Link } from 'react-router-dom';
 
 export default function Home() {
+    const {user} = useUser();
     return (
         <>
             <Navbar/>
             <div className="flex flex-grow h-full bg-gradient-to-b from-blue-50 to-blue-300 -mb-3">
                 <div className=" mx-auto px-4 flex flex-col md:flex-row items-center">
                     {/* Text Section */}
-                    <div className="text-center md:text-left md:w-1/2 ml-10">
+                    <div className="text-center md:text-left md:w-1/2 ml-10 ">
                         <h1 className="text-4xl font-bold text-blue-900 mb-4">Connecting Alumni's</h1>
                         <p className="text-lg text-gray-600 font-semibold">
                             <span className="text-blue-900 font-bold">Alum Connect</span> is an integrated platform
                             that helps you connect to your friends, grow Socially and Professionally
                         </p>
-                        <button className="mt-6 px-6 py-3 bg-blue-700  hover:bg-blue-500 text-white font-semibold rounded-full transition duration-300">
-                            Join our Network
-                        </button>
+                        <div className='pt-4'>
+                        {user==null ? <Link to="/signup" className="mt-6 px-6 py-3 bg-blue-700  hover:bg-blue-500 text-white font-semibold rounded-full transition duration-300">Join our Network</Link> : <Link to="/dashboard" className="mt-6 px-6 py-3 bg-blue-700  hover:bg-blue-500 text-white font-semibold rounded-full transition duration-300">Dashboard</Link>}
+                        </div>
                     </div>
 
                     {/* Image Section */}
