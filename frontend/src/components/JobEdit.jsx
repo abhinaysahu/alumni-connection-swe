@@ -6,6 +6,7 @@ import { FaIndianRupeeSign } from "react-icons/fa6";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import { Link } from "react-router-dom";
+import {toast} from "sonner";
 
 export default function JobEdit(jobID) {
     
@@ -87,8 +88,10 @@ export default function JobEdit(jobID) {
       setSkills(job.skills);  // Set default skills from job data
     }
   }, [job]);
+
     return (
         <form className=" pb-2 w-9/10 grid grid-cols-2   gap-1 m-2" onSubmit={handleSubmit(async (data) => {
+            const toastId = toast.loading("Updating", { duration: Infinity})
             const formData = { ...data, skills };
             console.log(formData);
             try{
@@ -112,18 +115,22 @@ export default function JobEdit(jobID) {
                 
                 setSkills([]);
                 setShowAlert(true);
+                toast.success("Updation Successful", { id : toastId});
+                setTimeout(() => toast.dismiss(toastId), 3000);
 
             }catch (e) {
                 console.log(e);
+                toast.error("Some error occurred, please try again", { id : toastId});
+                setTimeout(() => toast.dismiss(toastId), 3000);
             }
         })}
         >
 
-            {showAlert && (
-                <div style={{color: "green", marginTop: "10px"}}>
-                    Form submitted successfully!
-                </div>
-            )}
+            {/*{showAlert && (*/}
+            {/*    <div style={{color: "green", marginTop: "10px"}}>*/}
+            {/*        Form submitted successfully!*/}
+            {/*    </div>*/}
+            {/*)}*/}
 
             {/* company Name */}
             <div className="col-start-1 col-end-2 row-start-1 row-end-2">
@@ -306,16 +313,3 @@ export default function JobEdit(jobID) {
     );
 }
 
-
-// {/* <div className="mb-4">
-//   <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="firstName">
-//     First Name
-//   </label>
-//   <input
-//     type="text"
-//     name="firstName"
-//     value={formData.firstName}
-//     onChange={handleChange}
-//     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-//     placeholder="Enter your first name"
-//   /> */}
