@@ -7,27 +7,38 @@ export default function FAQ() {
             <div  className="flex-grow" id={"faq-section"}>
                 <Accordion className={"m-20"}>
                     <Accordion.Panel>
-                        <Accordion.Title>What is SWE?</Accordion.Title>
+                        <Accordion.Title>What is Alumni Connect?</Accordion.Title>
                         <Accordion.Content>
                             <p className="mb-2 text-gray-500 dark:text-gray-400">
-                                Vestibulum quis neque nunc. Maecenas pharetra libero id efficitur gravida. Aenean risus enim, condimentum vela aliquams in, consequat nec lacus. Aenean faucibus venenatis aliquet. Sed nulla quam, vehicula ut libero molestie volu our as satpat quam. Phasellus semper vitae tellus sit amet scelerisque
-                            </p>
+                                Alumni Connect is a platform that enables alumni to reconnect, network, and share updates with current students and other alumni. It’s designed to foster connections, mentoring opportunities, and career growth.                            </p>
                         </Accordion.Content>
                     </Accordion.Panel>
                     <Accordion.Panel>
-                        <Accordion.Title>How to browse this website?</Accordion.Title>
+                        <Accordion.Title>Who can join Alumni Connect? </Accordion.Title>
                         <Accordion.Content>
                             <p className="mb-2 text-gray-500 dark:text-gray-400">
-                                Vestibulum quis neque nunc. Maecenas pharetra libero id efficitur gravida. Aenean risus enim, condimentum vela aliquams in, consequat nec lacus. Aenean faucibus venenatis aliquet. Sed nulla quam, vehicula ut libero molestie volu our as satpat quam. Phasellus semper vitae tellus sit amet scelerisque
-                            </p>
+                                Alumni Connect is open to verified alumni and current students of MCA branch of NITK. Each account is verified to ensure the network remains exclusive to our community.    </p>
                         </Accordion.Content>
                     </Accordion.Panel>
                     <Accordion.Panel>
-                        <Accordion.Title>What is our aim?</Accordion.Title>
+                        <Accordion.Title>How do I sign up and create an account?</Accordion.Title>
                         <Accordion.Content>
                             <p className="mb-2 text-gray-500 dark:text-gray-400">
-                                Vestibulum quis neque nunc. Maecenas pharetra libero id efficitur gravida. Aenean risus enim, condimentum vela aliquams in, consequat nec lacus. Aenean faucibus venenatis aliquet. Sed nulla quam, vehicula ut libero molestie volu our as satpat quam. Phasellus semper vitae tellus sit amet scelerisque
-                            </p>
+                                You can sign up using your email address. During registration, you’ll be asked to provide a profile picture, background information, and other details to complete your profile.                            </p>
+                        </Accordion.Content>
+                    </Accordion.Panel>
+                    <Accordion.Panel>
+                        <Accordion.Title>Is my information secure? </Accordion.Title>
+                        <Accordion.Content>
+                            <p className="mb-2 text-gray-500 dark:text-gray-400">
+                                Yes, we prioritize your privacy and use Firebase for secure data storage. All communications and personal data are encrypted, and only verified alumni and students have access to the platform.                            </p>
+                        </Accordion.Content>
+                    </Accordion.Panel>
+                    <Accordion.Panel>
+                        <Accordion.Title>How can I update or edit my profile? </Accordion.Title>
+                        <Accordion.Content>
+                            <p className="mb-2 text-gray-500 dark:text-gray-400">
+                                You can edit your profile at any time by going to the Account Settings page. Here, you can update your personal information, work history, and other details.           </p>
                         </Accordion.Content>
                     </Accordion.Panel>
                 </Accordion>
