@@ -31,7 +31,7 @@ export default function UserCard({userId, name, batch, roll, jobTitle, contact, 
 
 
     return <>
-        <Card className="max-w-sm">
+        <Card className="w-80">
             <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                 {name}
             </h5>
