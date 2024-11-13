@@ -7,7 +7,7 @@ export default function Contact() {
 
         <div id={"main-container"} className={"mx-[2rem] lg:mx-[8rem] mt-10 flex-grow md:mx-[3rem]"}>
             <div className={"font-semibold text-4xl"}>Get in Touch</div>
-            <p className={"mt-7 text-gray-500"}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi debitis adipisci repellat ex accusamus quia quaerat magnam? Voluptas officiis tempora error officia beatae nemo tempore, dolorem doloribus aliquam sequi blanditiis?</p>
+            <p className={"mt-7 text-gray-500"}>We’re here to help! Whether you have questions about using Alumni Connect, need assistance with your account, or want to share feedback, don’t hesitate to reach out. Our team is dedicated to making your experience on the platform as valuable and seamless as possible. Please feel free to contact us via email at mca.nitk12@gmail.com, or use the form below to send us a message. We’ll get back to you as soon as possible. Thank you for being a part of our community!</p>
             <div id={"form-container"}>
                 <form>
                     <table className={"w-full"}>

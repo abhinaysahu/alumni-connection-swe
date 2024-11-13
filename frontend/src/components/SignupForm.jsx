@@ -11,6 +11,7 @@ import {
 import { useForm } from "react-hook-form";
 import {Link, useNavigate} from "react-router-dom";
 import axios from 'axios';
+import {toast} from "sonner";
 
 export default function SignupForm() {
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -43,16 +44,22 @@ export default function SignupForm() {
               formData.append("currPos", data.currPos);
               formData.append("currentWorkingStatus", data.currentWorkingStatus);
 
+              const toastId = toast.loading("In Progress", { duration: Infinity})
 
-              console.log(formData);
+
+              // console.log(formData);
               try{
                   const response = await axios.post('http://localhost:8080/users/addUser', formData)
 
                   setError("");
+                  toast.success("Request sent to admin. Your status will be informed via e-mail.", { id: toastId})
+                  setTimeout(() => toast.dismiss(toastId), 3000);
                   navigate('/signin');
 
               }catch (e) {
-                  setError(e);
+                  toast.error("Something went wrong.", { id: toastId });
+                  setTimeout(() => toast.dismiss(toastId), 3000);
+                  // setError(e);
               }
           })}
           >
@@ -207,7 +214,7 @@ export default function SignupForm() {
                       <Label htmlFor="profilePhoto" value="Upload Photo"/>
                   </div>
                   <FileInput id="profilePhotoUrl" 
-                             helperText="SVG, PNG, JPG or GIF (MAX. 10MB)." {...register("profilePhotoUrl")} onChange={handlePhotoChange} />
+                             helperText="SVG, PNG, JPG or GIF (MAX. 10MB)." {...register("profilePhotoUrl")} onChange={handlePhotoChange}/>
               </div>
               <div className="mt-3">
               </div>

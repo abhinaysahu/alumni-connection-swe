@@ -56,7 +56,14 @@ export default function SinginForm(){
         }
         } catch (error) {
           console.error('Login failed:', error);
-          toast.error(`Login failed, please try again later`, { id: loadingToastId,  duration: 3000 });
+          if (error.response?.status === 401) {
+            // setLoginError(error.response.data.msg);
+            // setLoginMessage('');
+            toast.error(error.response.data.msg, { id: loadingToastId,  duration: 3000 });
+          } else{
+            toast.error(`Login failed, please try again later`, { id: loadingToastId,  duration: 3000 });
+          }
+
           setTimeout(() =>{
             toast.dismiss(loadingToastId)
           },3000)

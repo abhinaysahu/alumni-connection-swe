@@ -6,13 +6,14 @@ const transporter = require("../../config/mailer");
 const cloudinary = require("../../config/cloudinary");
 
 
-require('dotenv').config({ path: `./config/config.env` });
+require('dotenv').config({ path: `../../config/config.env` });
 
 const addNewUser = async (req, res) => {
   try {
     const { path } = req.file;
     const result = await cloudinary.uploader.upload(path, { folder: 'profile_pictures' });
     const profilePhotoUrl = result.secure_url;
+    console.log("profilePhotoUrl");
 
     const data = req.body;
     const collectionRef = db.collection("User");
@@ -44,7 +45,7 @@ const addNewUser = async (req, res) => {
 
     res.status(200).send("User creation request sent successfully");
   } catch (err) {
-    res.status(400).send(err.message);
+    res.status(400).send("error: " + JSON.stringify(err));
   }
 };
 
@@ -120,6 +121,50 @@ const getAllUsersDetails = async (req, res) => {
   try{
     const collectionRef = db.collection("User");
     const responseObject = await collectionRef.get();
+    let responses = [];
+    responseObject.forEach((obj) =>{
+      const details = obj.data();
+
+      const userId = obj.id;
+      const email = details.email;
+      const password = details.password;
+      const name = details.name;
+      const contactNo = details.contactNo;
+      const bio = details.bio;
+      const linkedinUrl = details.linkedinUrl;
+      const passoutYear = details.passoutYear;
+      const currentCompany = details.currentCompany;
+      const profilePhotoUrl = details.profilePhotoUrl;
+      const currPos = details.currPos;
+      const currentWorkingStatus = details.currentWorkingStatus;
+      const userStatus = details.userStatus;
+
+      responses.push(new User(
+          userId,
+          email,
+          password,
+          name,
+          contactNo,
+          bio,
+          linkedinUrl,
+          passoutYear,
+          currentCompany,
+          profilePhotoUrl,
+          currPos,
+          currentWorkingStatus,
+          userStatus
+      ));
+    })
+    return res.status(200).send(responses);
+  }catch (e) {
+    return res.status(400).send(e.message);
+  }
+}
+
+const getAcceptedUsersDetails = async (req, res) => {
+  try{
+    const ref = db.collection("User");
+    const responseObject = await ref.where("userStatus","==","Approved").get();
     let responses = [];
     responseObject.forEach((obj) =>{
       const details = obj.data();
@@ -244,6 +289,7 @@ const acceptUserRequest = async (req, res) => {
   const id = req.params.id;
 
   const docRef = db.collection("User").doc(id);
+  const docObj = await docRef.get();
 
   await docRef.update({
     userStatus: "Approved",
@@ -254,7 +300,7 @@ const acceptUserRequest = async (req, res) => {
       name: `MCA NITK`,
       address: process.env.USERNAME,
     },
-    to: [`amansheo@gmail.com`],
+    to: [`${docObj.data().email}`],
     subject: "Your request to register have been accepted",
     html: `
         <h1>Congratulations!</h1>
@@ -277,6 +323,7 @@ const declineUserRequest = async (req, res) => {
   const id = req.params.id;
 
   const docRef = db.collection("User").doc(id);
+  const docObj = await docRef.get();
 
   await docRef.delete();
 
@@ -285,7 +332,7 @@ const declineUserRequest = async (req, res) => {
       name: `MCA NITK`,
       address: process.env.USERNAME,
     },
-    to: [`amansheo@gmail.com`],
+    to: [docObj.get().email],
     subject: "Your request to register have been rejected",
     html: `
         <p>Your request to register on AlumConnect MCA NITK have been rejected. It is because we can't verify your identity as an alumni of MCA NITK.</p>
@@ -312,5 +359,6 @@ module.exports = {
   getUserRequests,
   acceptUserRequest,
   declineUserRequest,
-  verifyPassword
+  verifyPassword,
+  getAcceptedUsersDetails
 }

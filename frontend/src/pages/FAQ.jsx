@@ -7,17 +7,17 @@ export default function FAQ() {
             <div  className="flex-grow" id={"faq-section"}>
                 <Accordion className={"m-20"}>
                     <Accordion.Panel>
-                        <Accordion.Title>What is Alumni Connect?</Accordion.Title>
+                        <Accordion.Title>What is AlumConnect?</Accordion.Title>
                         <Accordion.Content>
                             <p className="mb-2 text-gray-500 dark:text-gray-400">
-                                Alumni Connect is a platform that enables alumni to reconnect, network, and share updates with current students and other alumni. It’s designed to foster connections, mentoring opportunities, and career growth.                            </p>
+                                AlumConnect is a platform that enables alumni to reconnect, network, and share updates with current students and other alumni. It’s designed to foster connections, mentoring opportunities, and career growth.                            </p>
                         </Accordion.Content>
                     </Accordion.Panel>
                     <Accordion.Panel>
-                        <Accordion.Title>Who can join Alumni Connect? </Accordion.Title>
+                        <Accordion.Title>Who can join AlumConnect? </Accordion.Title>
                         <Accordion.Content>
                             <p className="mb-2 text-gray-500 dark:text-gray-400">
-                                Alumni Connect is open to verified alumni and current students of MCA branch of NITK. Each account is verified to ensure the network remains exclusive to our community.    </p>
+                                AlumConnect is open to verified alumni and current students of MCA branch of NITK. Each account is verified to ensure the network remains exclusive to our community.    </p>
                         </Accordion.Content>
                     </Accordion.Panel>
                     <Accordion.Panel>

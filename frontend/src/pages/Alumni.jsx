@@ -10,7 +10,7 @@ export default function Alumni(){
   useEffect( () => {
     try{
         const fetchData = async () => {
-            const response = await axios.get('http://localhost:8080/users/getAllUsers');
+            const response = await axios.get('http://localhost:8080/users/getAcceptedUsers');
             setUsers(response.data);
         }
         fetchData();

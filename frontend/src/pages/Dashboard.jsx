@@ -57,7 +57,7 @@ export default function Dashboard() {
               <div className="flex justify-center items-center">
               <FaUser className="h-8 w-8 " />
               </div>
-              <div className="text-center text-lg font mt-2">My profile</div>
+              <div className="text-center text-lg font mt-2">My Profile</div>
               </Card>
               </Link>
               <Link to="/changepassword">

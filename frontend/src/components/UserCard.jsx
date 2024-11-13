@@ -10,8 +10,8 @@ export default function UserCard({userId, name, batch, roll, jobTitle, contact, 
     const handleAccept = async () => {
         setOpenModal(false);
         try{
-            const response  = await axios.put(`http://localhost:8080/users/accept/${userId}`);
             onDelete(userId);
+            const response  = await axios.put(`http://localhost:8080/users/accept/${userId}`);
         }catch (e) {
             console.log(e);
         }
@@ -21,8 +21,8 @@ export default function UserCard({userId, name, batch, roll, jobTitle, contact, 
     const handleDecline = async () => {
         setOpenModal(false);
         try{
-            const response  = await axios.put(`http://localhost:8080/users/decline/${userId}`);
             onDelete(userId);
+            const response  = await axios.put(`http://localhost:8080/users/decline/${userId}`);
         }catch (e) {
             console.log(e);
         }

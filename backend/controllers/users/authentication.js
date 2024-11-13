@@ -7,6 +7,9 @@ exports.login = async (req, res) => {
     {
         const {email, password} = req.body;
 
+        const collectionRef = db.collection("User");
+        let user = await collectionRef.where("email" ,"==" , email).get();
+
         if(email === "admin@gmail.com" && password === "Admin@123") {
             const token = jwt.sign({
                 user_id: "12345",
@@ -24,13 +27,12 @@ exports.login = async (req, res) => {
             return res.status(200).cookie('token',token,options).json({
                 success: true,
                 msg: "Admin",
-                token
+                token,
+                user
             })
         }
 
-        const collectionRef = db.collection("User");
 
-        let user = await collectionRef.where("email" ,"==" , email).get();
 
         if(user.docs.length === 0){
             return res.status(401).json({

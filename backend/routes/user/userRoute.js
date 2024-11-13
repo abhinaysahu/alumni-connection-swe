@@ -2,7 +2,7 @@ const express = require('express');
 
 const{ addNewUser, getUserDetailsByID, getAllUsersDetails, updateUserDetails, getUserRequests, acceptUserRequest,
     declineUserRequest,
-    verifyPassword
+    verifyPassword, getAcceptedUsersDetails
 } = require('../../controllers/users/userController');
 const { login, checkToken, logout, getUserId} = require('../../controllers/users/authentication');
 const {authenticate} = require("../../middlewares/auth");
@@ -15,6 +15,7 @@ const router = express.Router();
 router.post('/addUser', upload.single('profilePhoto'), addNewUser);
 router.get('/getUser/:userId', authenticate, getUserDetailsByID);
 router.get('/getAllUsers/', getAllUsersDetails);
+router.get('/getAcceptedUsers/', getAcceptedUsersDetails);
 router.post('/updateUser/:userId',upload.single('profilePhoto'), updateUserDetails);
 router.post('/userRequests', getUserRequests);
 router.post('/login', login)
